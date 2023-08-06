@@ -4,11 +4,18 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:TreinoSport"
-    Shell.FlyoutBehavior="Disabled">
-
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    xmlns:views="clr-namespace:TreinoSport.XMLPages"
+    Shell.FlyoutBehavior="Flyout">
+    <Shell.FlyoutHeader>
+        <Grid HeightRequest="200" BackgroundColor="White">
+            <Image Source="treinosporticone.png"/>
+        </Grid>
+    </Shell.FlyoutHeader>
+    
+    <FlyoutItem Title="Home" Icon="iconshome.png">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate views:MainPage}"/>
+        </Tab>
+    </FlyoutItem>
 
 </Shell>

@@ -1,4 +1,6 @@
-﻿namespace TreinoSport;
+﻿using TreinoSport.XMLPages;
+
+namespace TreinoSport;
 
 public partial class App : Application
 {

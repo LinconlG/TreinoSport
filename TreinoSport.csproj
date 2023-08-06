@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net6.0-windows10.0.19041.0</TargetFrameworks>
+		<TargetFrameworks>net7.0-maccatalyst;net7.0-android;net7.0-ios</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
@@ -47,5 +47,35 @@
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-android'">
+	  <PackageReference Include="CommunityToolkit.Maui">
+	    <Version>5.2.0</Version>
+	  </PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-ios'">
+	  <PackageReference Include="CommunityToolkit.Maui">
+	    <Version>5.2.0</Version>
+	  </PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-windows10.0.19041.0'">
+	  <PackageReference Include="CommunityToolkit.Maui">
+	    <Version>5.2.0</Version>
+	  </PackageReference>
+	</ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net7.0-maccatalyst'">
+    <PackageReference Include="CommunityToolkit.Maui">
+      <Version>5.2.0</Version>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <MauiXaml Update="XMLPages\CadastroPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+  </ItemGroup>
 
 </Project>

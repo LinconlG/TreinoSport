@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TreinoSport.XMLPages.MainPage"
+             xmlns:views="clr-namespace:TreinoSport.XMLPages"
+             Title="Home"
+    xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui">
+    <ContentPage.Behaviors>
+        <mct:StatusBarBehavior StatusBarColor="{StaticResource Yellow100Accent}" />
+    </ContentPage.Behaviors>
+
+    <ContentPage.Resources>
+        <x:Double x:Key="LarguraGridLogin">200</x:Double>
+        <Color x:Key="LabelClicavel">Blue</Color>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="150">
+
+            <Grid VerticalOptions="Start" WidthRequest="{StaticResource LarguraGridLogin}">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Login" HorizontalOptions="Center" FontSize="20"/>
+                    <Entry x:Name="LoginEmail" Placeholder="E-mail" PlaceholderColor="Gray" WidthRequest="{StaticResource LarguraGridLogin}" BackgroundColor="#EAEADA"/>
+                    <Entry x:Name="LoginSenha" Placeholder="Senha" PlaceholderColor="Gray" WidthRequest="{StaticResource LarguraGridLogin}" BackgroundColor="#EAEADA"/>
+                </VerticalStackLayout>
+            </Grid>
+            <Grid WidthRequest="150">
+                <Label x:Name="CadastroLabel" Text="Não tenho cadastro" TextColor="{StaticResource LabelClicavel}" TextDecorations="Underline"/>
+                <Button x:Name="CadastroBtn" BackgroundColor="Transparent" Clicked="ClickCadastroBtn"/>
+            </Grid>
+
+            <Grid>
+                <Image Source="treinosporticone.png" HeightRequest="250" WidthRequest="250"/>
+            </Grid>
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

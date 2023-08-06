@@ -1,4 +1,6 @@
-﻿namespace TreinoSport;
+﻿using Microsoft.Maui.Controls.PlatformConfiguration;
+
+namespace TreinoSport;
 
 public partial class AppShell : Shell
 {
