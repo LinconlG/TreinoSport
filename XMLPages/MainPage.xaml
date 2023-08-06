@@ -4,7 +4,8 @@
              x:Class="TreinoSport.XMLPages.MainPage"
              xmlns:views="clr-namespace:TreinoSport.XMLPages"
              Title="Home"
-    xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui">
+            xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             Shell.FlyoutBehavior="Disabled">
     <ContentPage.Behaviors>
         <mct:StatusBarBehavior StatusBarColor="{StaticResource Yellow100Accent}" />
     </ContentPage.Behaviors>
@@ -14,7 +15,6 @@
         <Color x:Key="LabelClicavel">Blue</Color>
     </ContentPage.Resources>
 
-    <ScrollView>
         <VerticalStackLayout
             Spacing="25"
             Padding="150">
@@ -23,20 +23,23 @@
                 <VerticalStackLayout Spacing="10">
                     <Label Text="Login" HorizontalOptions="Center" FontSize="20"/>
                     <Entry x:Name="LoginEmail" Placeholder="E-mail" PlaceholderColor="Gray" WidthRequest="{StaticResource LarguraGridLogin}" BackgroundColor="#EAEADA"/>
-                    <Entry x:Name="LoginSenha" Placeholder="Senha" PlaceholderColor="Gray" WidthRequest="{StaticResource LarguraGridLogin}" BackgroundColor="#EAEADA"/>
+                    <Entry x:Name="LoginSenha" Placeholder="Senha" IsPassword="True" PlaceholderColor="Gray" WidthRequest="{StaticResource LarguraGridLogin}" BackgroundColor="#EAEADA"/>
                 </VerticalStackLayout>
             </Grid>
             <Grid WidthRequest="150">
                 <Label x:Name="CadastroLabel" Text="Não tenho cadastro" TextColor="{StaticResource LabelClicavel}" TextDecorations="Underline"/>
-                <Button x:Name="CadastroBtn" BackgroundColor="Transparent" Clicked="ClickCadastroBtn"/>
+                <Button x:Name="CadastroBtn" BackgroundColor="Transparent" Clicked="ClickCadastroBtn" HeightRequest="20"/>
             </Grid>
+        <Grid>
+            <Button x:Name="LoginBtn" Clicked="ClickLoginBtn" Text="Login" FontAttributes="Bold" FontSize="16" WidthRequest="150" HeightRequest="50"/>
+        </Grid>
 
             <Grid>
-                <Image Source="treinosporticone.png" HeightRequest="250" WidthRequest="250"/>
+                <Image HorizontalOptions="Center" Source="treinosporticone.png" HeightRequest="230" WidthRequest="250"/>
             </Grid>
 
 
         </VerticalStackLayout>
-    </ScrollView>
+
 
 </ContentPage>
