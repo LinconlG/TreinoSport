@@ -21,7 +21,7 @@
 
             <Grid VerticalOptions="Start" WidthRequest="{StaticResource LarguraGridLogin}">
                 <VerticalStackLayout Spacing="10">
-                    <Label Text="Login" HorizontalOptions="Center" FontSize="20"/>
+                    <Label Text="Bem vindo(a)" HorizontalOptions="Center" FontSize="20"/>
                     <Entry x:Name="LoginEmail" Placeholder="E-mail" PlaceholderColor="Gray" WidthRequest="{StaticResource LarguraGridLogin}" BackgroundColor="#EAEADA"/>
                     <Entry x:Name="LoginSenha" Placeholder="Senha" IsPassword="True" PlaceholderColor="Gray" WidthRequest="{StaticResource LarguraGridLogin}" BackgroundColor="#EAEADA"/>
                 </VerticalStackLayout>

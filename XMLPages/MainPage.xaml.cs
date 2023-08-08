@@ -18,5 +18,9 @@ public partial class MainPage : ContentPage
             Navigation.PushAsync(new CadastroPage());
         }
     }
+
+    private void ClickLoginBtn(object sender, EventArgs e) {
+
+    }
 }
 
