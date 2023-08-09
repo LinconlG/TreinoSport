@@ -3,10 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TreinoSport.XMLPages.CadastroPage"
              Title="CadastroPage">
+    <ContentPage.Resources>
+        <x:Double x:Key="TamFonteCadastro">18</x:Double>
+        <x:Double x:Key="TamWidthEntry">270</x:Double>
+        <x:Double x:Key="FonteAviso">14</x:Double>
+        <Color x:Key="CorAviso">red</Color>
+    </ContentPage.Resources>
+    
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Grid x:Name="GridPrincipal" Padding="10,50,10,10">
+            <VerticalStackLayout Spacing="10">
+                <Label Text="Nome completo" FontSize="{StaticResource TamFonteCadastro}"/>
+                <Entry x:Name="nomeCompletoEntry" WidthRequest="{StaticResource TamWidthEntry}" FontSize="{StaticResource TamFonteCadastro}" HorizontalOptions="Start" />
+                <Label x:Name="avisoNomeLabel" Text="Este campo é obrigatório." FontSize="{StaticResource FonteAviso}" TextColor="{StaticResource CorAviso}" IsVisible="false"/>
+
+                <Label Text="Email" FontSize="{StaticResource TamFonteCadastro}"/>
+                <Entry x:Name="emailEntry" WidthRequest="{StaticResource TamWidthEntry}" FontSize="{StaticResource TamFonteCadastro}" HorizontalOptions="Start"/>
+                <Label x:Name="avisoEmailLabel" Text="Digite um email válido." FontSize="{StaticResource FonteAviso}" TextColor="{StaticResource CorAviso}" IsVisible="false"/>
+
+                <Label Text="Senha" FontSize="{StaticResource TamFonteCadastro}"/>
+                <Entry x:Name="senhaEntry" WidthRequest="{StaticResource TamWidthEntry}" FontSize="{StaticResource TamFonteCadastro}" IsPassword="True" HorizontalOptions="Start"/>
+                <Label x:Name="avisoSenhaLabel" Text="Verifique a senha." FontSize="{StaticResource FonteAviso}" TextColor="{StaticResource CorAviso}" IsVisible="false"/>
+
+                <Label Text="Confirmar senha" FontSize="{StaticResource TamFonteCadastro}"/>
+                <Entry x:Name="senhaConfirmacaoEntry" WidthRequest="{StaticResource TamWidthEntry}" FontSize="{StaticResource TamFonteCadastro}" IsPassword="True" HorizontalOptions="Start"/>
+
+                <Button x:Name="CadastrarBtn" Clicked="ClickCadastrarBtn" Text="Cadastrar" WidthRequest="120" HeightRequest="50" FontSize="{StaticResource TamFonteCadastro}" TranslationY="100"/>
+
+            </VerticalStackLayout>
+        </Grid>
     </VerticalStackLayout>
+
 </ContentPage>
