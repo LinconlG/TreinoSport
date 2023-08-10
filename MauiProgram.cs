@@ -1,4 +1,9 @@
 ﻿using CommunityToolkit.Maui;
+using Microsoft.Extensions.Configuration;
+using System.Runtime.CompilerServices;
+using TreinoSport.Contexts;
+using TreinoSport.Contexts.Base;
+
 namespace TreinoSport;
 
 public static class MauiProgram
@@ -8,6 +13,7 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+			.DependenciesInjection()
 			.UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
 			{
@@ -15,6 +21,12 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-		return builder.Build();
+        return builder.Build();
 	}
+
+    public static MauiAppBuilder DependenciesInjection(this MauiAppBuilder mauiAppBuilder) {
+        mauiAppBuilder.Services.AddSingleton<UsuarioContext>();
+
+        return mauiAppBuilder;
+    }
 }

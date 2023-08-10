@@ -11,7 +11,7 @@
     </ContentPage.Resources>
     
     <VerticalStackLayout>
-        <Grid x:Name="GridPrincipal" Padding="10,50,10,10">
+        <Grid x:Name="GridPrincipal" Padding="10,50,10,10" HeightRequest="800">
             <VerticalStackLayout Spacing="10">
                 <Label Text="Nome completo" FontSize="{StaticResource TamFonteCadastro}"/>
                 <Entry x:Name="nomeCompletoEntry" WidthRequest="{StaticResource TamWidthEntry}" FontSize="{StaticResource TamFonteCadastro}" HorizontalOptions="Start" />
