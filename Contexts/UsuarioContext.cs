@@ -1,7 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections;
 using System.Net.Http.Json;
+using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using TreinoSport.Contexts.Base;
 using TreinoSport.Models;
 
@@ -14,21 +17,29 @@ namespace TreinoSport.Contexts {
 
         public UsuarioContext() {
             _httpClient = new HttpClient();
-            _treinoSportApiUrl = "http://192.168.1.109:5050/api";
+            _treinoSportApiUrl = "http://10.0.2.2:5050/api";
         }
 
         public async Task CadastrarUsuario(Usuario usuario) {
-
-            var msg = HttpUtilities.Put(_treinoSportApiUrl + "/usuario/cadastrar", JsonSerializer.Serialize(usuario));
-
-            var uri = _treinoSportApiUrl + "/usuario/cadastrar";
             try {
-                var response = await _httpClient.SendAsync(msg);
-            }
-            catch (Exception e) {
 
-                throw new Exception(e.Message);
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Add("Accept", "application/json;charset=UTF-8");
+
+                HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Put, _treinoSportApiUrl + "/usuario/cadastrar");
+
+                message.Content = JsonContent.Create(usuario);
+
+                HttpResponseMessage response = await client.SendAsync(message);
+                response.EnsureSuccessStatusCode(); // Check that the status code is in the 200 range. Throw an HttpRequestException if not
+
+                string responseBody = await response.Content.ReadAsStringAsync();
             }
+            catch (HttpRequestException e) {
+
+                throw new HttpRequestException($"{e.StatusCode} \n`{e.Message}");
+            }
+
         }
 
         public string ParamsToString(Dictionary<string, object> queryParams) {

@@ -13,14 +13,10 @@ public partial class CadastroPage : ContentPage
 	{
         InitializeComponent();
         _usuarioContext = usuarioContext;
-
-        CadastrarBtn.Clicked += ClickCadastrarBtn;
 	}
 
 	private async void ClickCadastrarBtn(object sender, EventArgs e) {
 
-        var b = (Button)sender;
-        b.IsEnabled = false;
 		if (CheckCampos()) {
 			return;
 		}
@@ -28,32 +24,28 @@ public partial class CadastroPage : ContentPage
 		usuario.Nome = nomeCompletoEntry.Text;
         usuario.Email = emailEntry.Text;
         usuario.Senha = senhaEntry.Text;
-        //try {
-            await _usuarioContext.CadastrarUsuario(usuario);
-            await DisplayAlert("Sucesso", "Você foi cadastrado!", "OK");
-        //}
-        //catch (Exception exc) {
-          //  await DisplayAlert("Falha", $"Você não foi cadastrado, tente novamente \n{exc.Message}", "OK");
-        //}
+        await _usuarioContext.CadastrarUsuario(usuario);
+        await DisplayAlert("Sucesso", "Você foi cadastrado!", "OK");
+
 
     }
 	private bool CheckCampos() {
 		var flag = false;
-		if (nomeCompletoEntry.Text == String.Empty) {
+		if (nomeCompletoEntry.Text == String.Empty || nomeCompletoEntry.Text == null) {
 			avisoNomeLabel.IsVisible = true;
 			flag = true;
 		}
 		else {
             avisoNomeLabel.IsVisible = false;
         }
-        if (emailEntry.Text == String.Empty) {
+        if (emailEntry.Text == String.Empty || emailEntry.Text == null) {
             avisoEmailLabel.IsVisible = true;
             flag = true;
         }
         else {
             avisoEmailLabel.IsVisible = false;
         }
-        if (senhaEntry.Text == String.Empty) {
+        if (senhaEntry.Text == String.Empty || senhaEntry.Text == null) {
             avisoSenhaLabel.IsVisible = true;
             flag = true;
         }

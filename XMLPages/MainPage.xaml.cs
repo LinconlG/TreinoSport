@@ -11,8 +11,6 @@ public partial class MainPage : ContentPage
     public MainPage()
 	{
         InitializeComponent();
-        CadastroBtn.Clicked += ClickCadastroBtn;
-        
     }
 
     private void ClickCadastroBtn(object sender, EventArgs e) {
