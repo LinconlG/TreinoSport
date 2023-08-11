@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Input;
 using TreinoSport.Contexts;
+using TreinoSport.Services;
 
 namespace TreinoSport.XMLPages;
 
@@ -15,7 +16,7 @@ public partial class MainPage : ContentPage
 
     private void ClickCadastroBtn(object sender, EventArgs e) {
         if (Navigation.NavigationStack.Count == 1) {
-            Navigation.PushAsync(new CadastroPage(new UsuarioContext()));
+            Navigation.PushAsync(new CadastroPage());
         }
     }
 

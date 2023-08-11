@@ -2,17 +2,18 @@ using Microsoft.Maui.Controls;
 using Microsoft.Maui.Devices;
 using TreinoSport.Contexts;
 using TreinoSport.Models;
+using TreinoSport.Services;
 
 namespace TreinoSport.XMLPages;
 
 public partial class CadastroPage : ContentPage
 {
-    private readonly UsuarioContext _usuarioContext;
+    private readonly UsuarioService _usuarioService;
 
-	public CadastroPage(UsuarioContext usuarioContext)
+	public CadastroPage()
 	{
         InitializeComponent();
-        _usuarioContext = usuarioContext;
+        _usuarioService = new UsuarioService();
 	}
 
 	private async void ClickCadastrarBtn(object sender, EventArgs e) {
@@ -24,10 +25,13 @@ public partial class CadastroPage : ContentPage
 		usuario.Nome = nomeCompletoEntry.Text;
         usuario.Email = emailEntry.Text;
         usuario.Senha = senhaEntry.Text;
-        await _usuarioContext.CadastrarUsuario(usuario);
-        await DisplayAlert("Sucesso", "Você foi cadastrado!", "OK");
-
-
+        try {
+            await _usuarioService.CadastrarUsuario(usuario);
+            await DisplayAlert("Sucesso", "Você foi cadastrado!", "OK");
+        }
+        catch (Exception ex) {
+            await DisplayAlert("Falha", $"{(ex.Message.Contains('@') ? ex.Message.Substring(ex.Message.IndexOf('@')+1, ex.Message.LastIndexOf('@')-1) : "Ocorreu uma erro, tente novamente")}", "OK");
+        }
     }
 	private bool CheckCampos() {
 		var flag = false;
