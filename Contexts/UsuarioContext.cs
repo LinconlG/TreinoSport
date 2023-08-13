@@ -66,7 +66,30 @@ namespace TreinoSport.Contexts {
             }
         }
 
+        public async Task<bool> Login(string email, string senha) {
+            try {
 
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Add("Accept", "application/json;charset=UTF-8");
+
+                var queryParams = new Dictionary<string, object>() {
+                    { "email", email},
+                    { "senha", senha}
+                };
+
+                HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Get, _treinoSportApiUrl + "/login" + ParamsToString(queryParams));
+
+                HttpResponseMessage response = await client.SendAsync(message);
+                await response.HandleResponse();
+
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                return await HttpUtilities.GetBody<bool>(response);
+            }
+            catch (Exception e) {
+                throw new Exception($"{e.Message}");
+            }
+        }
 
         public string ParamsToString(Dictionary<string, object> queryParams) {
             if (queryParams == null || queryParams.Count == 0) {
