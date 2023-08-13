@@ -40,6 +40,7 @@ public partial class CadastroPage : ContentPage
             btn.IsEnabled = true;
         }
     }
+
 	private bool CheckCampos() {
 		var flag = false;
 		if (String.IsNullOrWhiteSpace(nomeCompletoEntry.Text)) {

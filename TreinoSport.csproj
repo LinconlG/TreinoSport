@@ -86,7 +86,11 @@
     <MauiXaml Update="XMLPages\CadastroPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+    <MauiXaml Update="XMLPages\PaginaInicial.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
   </ItemGroup>
+  
 
   <ItemGroup>
     <None Update="appsettings.json">

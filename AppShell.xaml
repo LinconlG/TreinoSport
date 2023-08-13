@@ -11,10 +11,14 @@
             <Image Source="treinosporticone.png"/>
         </Grid>
     </Shell.FlyoutHeader>
-    
-    <FlyoutItem Title="Home" Icon="iconshome.png">
+
+    <ShellContent Title="Home"
+                  ContentTemplate="{DataTemplate local:MainPage}"
+                  Route="MainPage" Shell.FlyoutBehavior="Disabled" FlyoutItemIsVisible="False"/>
+
+    <FlyoutItem Route="PaginaInicial" Title="Home" Icon="iconshome.png">
         <Tab>
-            <ShellContent ContentTemplate="{DataTemplate views:MainPage}"/>
+            <ShellContent ContentTemplate="{DataTemplate views:PaginaInicial}"/>
         </Tab>
     </FlyoutItem>
 

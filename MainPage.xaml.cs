@@ -1,6 +1,8 @@
-﻿using TreinoSport.Services;
+﻿using Microsoft.Maui.Controls.Xaml;
+using TreinoSport.Services;
+using TreinoSport.XMLPages;
 
-namespace TreinoSport.XMLPages;
+namespace TreinoSport;
 
 public partial class MainPage : ContentPage
 {
@@ -11,10 +13,8 @@ public partial class MainPage : ContentPage
         _usuarioService = new UsuarioService();
     }
 
-    private void ClickCadastroBtn(object sender, EventArgs e) {
-        if (Navigation.NavigationStack.Count == 1) {
-            Navigation.PushAsync(new CadastroPage());
-        }
+    private async void ClickCadastroBtn(object sender, EventArgs e) {
+        await Navigation.PushAsync(new CadastroPage());
     }
 
     private async void ClickLoginBtn(object sender, EventArgs e) {
@@ -30,7 +30,7 @@ public partial class MainPage : ContentPage
             avisoLogin.IsVisible = true;
             return;
         }
-        await DisplayAlert("aa", "logou", "ok");
+        await Shell.Current.GoToAsync($"//{nameof(PaginaInicial)}");
     }
 
     private bool CheckCampos() {
