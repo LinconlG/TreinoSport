@@ -49,7 +49,7 @@ public partial class CadastroPage : ContentPage
 		else {
             avisoNomeLabel.IsVisible = false;
         }
-        if (String.IsNullOrWhiteSpace(emailEntry.Text)) {
+        if (String.IsNullOrWhiteSpace(emailEntry.Text) || !Criptografia.ValidarEmail(emailEntry.Text)) {
             avisoEmailLabel.IsVisible = true;
             flag = true;
         }

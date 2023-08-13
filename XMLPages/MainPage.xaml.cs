@@ -35,7 +35,7 @@ public partial class MainPage : ContentPage
 
     private bool CheckCampos() {
         var flag = false;
-        if (String.IsNullOrWhiteSpace(LoginEmail.Text) || String.IsNullOrWhiteSpace(LoginSenha.Text) || LoginSenha.Text.Length < 8) {
+        if (String.IsNullOrWhiteSpace(LoginEmail.Text) || !Criptografia.ValidarEmail(LoginEmail.Text) || String.IsNullOrWhiteSpace(LoginSenha.Text) || LoginSenha.Text.Length < 8) {
             avisoLogin.IsVisible = true;
             flag = true;
         }
