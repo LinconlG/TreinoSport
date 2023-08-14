@@ -14,14 +14,11 @@ namespace TreinoSport.Contexts {
         public async Task CadastrarUsuario(Usuario usuario) {
             try {
 
-                HttpClient client = new HttpClient();
-                client.DefaultRequestHeaders.Add("Accept", "application/json;charset=UTF-8");
-
                 HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Put, _treinoSportApiUrl + "/usuario/cadastrar");
 
                 message.Content = JsonContent.Create(usuario);
 
-                HttpResponseMessage response = await client.SendAsync(message);
+                HttpResponseMessage response = await httpClient.SendAsync(message);
                 await response.HandleResponse();
                 //response.EnsureSuccessStatusCode(); // Check that the status code is in the 200 range. Throw an HttpRequestException if not
 
@@ -36,16 +33,13 @@ namespace TreinoSport.Contexts {
         public async Task<bool> ChecarEmail(string email) {
             try {
 
-                HttpClient client = new HttpClient();
-                client.DefaultRequestHeaders.Add("Accept", "application/json;charset=UTF-8");
-
                 var queryParams = new Dictionary<string, object>() {
                     { "email", email}
                 };
 
                 HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Get, _treinoSportApiUrl + "/usuario/email" + ParamsToString(queryParams));
 
-                HttpResponseMessage response = await client.SendAsync(message);
+                HttpResponseMessage response = await httpClient.SendAsync(message);
                 await response.HandleResponse();
 
                 string responseBody = await response.Content.ReadAsStringAsync();
@@ -58,10 +52,7 @@ namespace TreinoSport.Contexts {
         }
 
         public async Task<int> Login(string email, string senha) {
-            try {
-
-                HttpClient client = new HttpClient();
-                client.DefaultRequestHeaders.Add("Accept", "application/json;charset=UTF-8");
+            try {                
 
                 var queryParams = new Dictionary<string, object>() {
                     { "email", email},
@@ -70,7 +61,7 @@ namespace TreinoSport.Contexts {
 
                 HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Get, _treinoSportApiUrl + "/login" + ParamsToString(queryParams));
 
-                HttpResponseMessage response = await client.SendAsync(message);
+                HttpResponseMessage response = await httpClient.SendAsync(message);
                 await response.HandleResponse();
 
                 string responseBody = await response.Content.ReadAsStringAsync();

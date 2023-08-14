@@ -7,6 +7,6 @@ using TreinoSport.Models;
 
 namespace TreinoSport.Services.TreinoService {
     public interface ITreinoRepository {
-        Task<IEnumerable<Treino>> GetTreinoAsync();
+        Task<IEnumerable<Treino>> GetTreinosAluno(int codigoUsuario);
     }
 }

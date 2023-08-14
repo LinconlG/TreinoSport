@@ -12,7 +12,7 @@ namespace TreinoSport.Models {
         public List<Usuario> Alunos { get; set; }
         public DateTime DataCriacao { get; set; }
         public int CodigoCriador { get; set; }
-        public List<DayOfWeek> DatasTreinos { get; set; }
+        public List<DiaDaSemana> DatasTreinos { get; set; }
         public DateTime DataVencimento { get; set; }
         //imagem
     }

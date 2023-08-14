@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,13 +7,13 @@ using TreinoSport.Contexts;
 using TreinoSport.Models;
 
 namespace TreinoSport.Services.TreinoService {
-    public class TreinoService : ITreinoRepository {
+    public class TreinoService : ObservableObject {
         private TreinoContext _treinoContext;
         public TreinoService() {
             _treinoContext = new();
         }
-        public Task<IEnumerable<Treino>> GetTreinoAsync() {
-            throw new NotImplementedException();
+        public async Task<IEnumerable<Treino>> GetTreinosAluno(int codigoUsuario) {
+            return await _treinoContext.GetTreinosAluno(codigoUsuario);
         }
     }
 }

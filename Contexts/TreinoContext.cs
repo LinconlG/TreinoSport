@@ -11,7 +11,23 @@ namespace TreinoSport.Contexts {
         public TreinoContext() { }
 
         public async Task<IEnumerable<Treino>> GetTreinosAluno(int codigoUsuario) {
+            try {
+                var queryParams = new Dictionary<string, object>() {
+                    { "codigoUsuario", codigoUsuario}
+                };
 
+                HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Get, _treinoSportApiUrl + "/treino/todos" + ParamsToString(queryParams));
+
+                HttpResponseMessage response = await httpClient.SendAsync(message);
+                await response.HandleResponse();
+
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                return await HttpUtilities.GetBody<IEnumerable<Treino>>(response);
+            }
+            catch (Exception e) {
+                throw new Exception($"{e.Message}");
+            }
         }
     }
 }

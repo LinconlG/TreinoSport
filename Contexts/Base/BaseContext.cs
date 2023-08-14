@@ -12,11 +12,12 @@ using System.Threading.Tasks;
 namespace TreinoSport.Contexts.Base {
     public class BaseContext {
 
-        protected readonly HttpClient _httpClient;
+        protected readonly HttpClient httpClient;
         protected readonly string _treinoSportApiUrl;
 
         public BaseContext() {
-            _httpClient = new HttpClient();
+            httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Add("Accept", "application/json;charset=UTF-8");
             _treinoSportApiUrl = "http://10.0.2.2:5050/api";
         }
 
