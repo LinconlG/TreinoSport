@@ -10,16 +10,35 @@ using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace TreinoSport.Contexts.Base {
-    public abstract class BaseContext {
+    public class BaseContext {
 
         protected readonly HttpClient _httpClient;
-        protected readonly IConfiguration _configuration;
         protected readonly string _treinoSportApiUrl;
 
-        public BaseContext(IConfiguration configuration) {
+        public BaseContext() {
             _httpClient = new HttpClient();
-            _configuration = configuration;
-            _treinoSportApiUrl = _configuration.GetConnectionString("treinoSportApi");
+            _treinoSportApiUrl = "http://10.0.2.2:5050/api";
+        }
+
+        public string ParamsToString(Dictionary<string, object> queryParams) {
+            if (queryParams == null || queryParams.Count == 0) {
+                return "";
+            }
+            string stringParams = "?";
+            foreach (var param in queryParams) {
+                if (param.Value != null && param.Value != "") {
+
+                    if (param.Value is IList) {
+                        foreach (object item in param.Value as IList) {
+                            stringParams += $"{param.Key}={item}&";
+                        }
+                    }
+                    else {
+                        stringParams += param.Key + "=" + param.Value + "&";
+                    }
+                }
+            }
+            return stringParams;
         }
     }
 }

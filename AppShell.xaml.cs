@@ -9,4 +9,11 @@ public partial class AppShell : Shell
 		InitializeComponent();
 		
 	}
+
+	private async void ClickSair(object sender, EventArgs e) {
+		Preferences.Remove("email");
+        Preferences.Remove("senha");
+		Preferences.Remove("codigoUsuario");
+        await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+    }
 }

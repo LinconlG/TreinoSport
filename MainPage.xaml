@@ -24,6 +24,13 @@
                     <Entry x:Name="LoginEmail" Placeholder="E-mail" PlaceholderColor="Gray" WidthRequest="{StaticResource LarguraGridLogin}" BackgroundColor="#EAEADA"/>
                     <Entry x:Name="LoginSenha" Placeholder="Senha" IsPassword="True" PlaceholderColor="Gray" WidthRequest="{StaticResource LarguraGridLogin}" BackgroundColor="#EAEADA"/>
                     <Label x:Name="avisoLogin" Text="Verifique o email e a senha." FontSize="{StaticResource FonteAviso}" TextColor="{StaticResource CorAviso}" IsVisible="false"/>
+                <Grid>
+                    <HorizontalStackLayout>
+                        <CheckBox x:Name="LembreLogin" HorizontalOptions="Start" HeightRequest="18"/>
+                        <Label Text="Logar automaticamente"/>
+                    </HorizontalStackLayout>
+                </Grid>
+
             </VerticalStackLayout>
             </Grid>
             <Grid WidthRequest="150">

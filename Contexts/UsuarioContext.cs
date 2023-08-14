@@ -9,17 +9,8 @@ using TreinoSport.Contexts.Base;
 using TreinoSport.Models;
 
 namespace TreinoSport.Contexts {
-    public class UsuarioContext {
-
-        protected readonly HttpClient _httpClient;
-        protected readonly IConfiguration _configuration;
-        protected readonly string _treinoSportApiUrl;
-
-        public UsuarioContext() {
-            _httpClient = new HttpClient();
-            _treinoSportApiUrl = "http://10.0.2.2:5050/api";
-        }
-
+    public class UsuarioContext : BaseContext{
+        
         public async Task CadastrarUsuario(Usuario usuario) {
             try {
 
@@ -66,7 +57,7 @@ namespace TreinoSport.Contexts {
             }
         }
 
-        public async Task<bool> Login(string email, string senha) {
+        public async Task<int> Login(string email, string senha) {
             try {
 
                 HttpClient client = new HttpClient();
@@ -84,32 +75,11 @@ namespace TreinoSport.Contexts {
 
                 string responseBody = await response.Content.ReadAsStringAsync();
 
-                return await HttpUtilities.GetBody<bool>(response);
+                return await HttpUtilities.GetBody<int>(response);
             }
             catch (Exception e) {
                 throw new Exception($"{e.Message}");
             }
-        }
-
-        public string ParamsToString(Dictionary<string, object> queryParams) {
-            if (queryParams == null || queryParams.Count == 0) {
-                return "";
-            }
-            string stringParams = "?";
-            foreach (var param in queryParams) {
-                if (param.Value != null && param.Value != "") {
-
-                    if (param.Value is IList) {
-                        foreach (object item in param.Value as IList) {
-                            stringParams += $"{param.Key}={item}&";
-                        }
-                    }
-                    else {
-                        stringParams += param.Key + "=" + param.Value + "&";
-                    }
-                }
-            }
-            return stringParams;
         }
     }
 }

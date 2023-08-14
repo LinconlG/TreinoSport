@@ -12,6 +12,10 @@
         </Grid>
     </Shell.FlyoutHeader>
 
+    <Shell.ToolbarItems>
+        <ToolbarItem Text="Sair" Clicked="ClickSair"/>
+    </Shell.ToolbarItems>
+
     <ShellContent Title="Home"
                   ContentTemplate="{DataTemplate local:MainPage}"
                   Route="MainPage" Shell.FlyoutBehavior="Disabled" FlyoutItemIsVisible="False"/>

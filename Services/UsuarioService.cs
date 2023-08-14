@@ -1,4 +1,6 @@
-﻿using TreinoSport.Contexts;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Maui.Hosting;
+using TreinoSport.Contexts;
 using TreinoSport.Models;
 
 namespace TreinoSport.Services {
@@ -6,7 +8,7 @@ namespace TreinoSport.Services {
 
         private readonly UsuarioContext _usuarioContext;
 
-        public UsuarioService() { 
+        public UsuarioService() {
             _usuarioContext = new UsuarioContext();
         }
 
@@ -19,7 +21,8 @@ namespace TreinoSport.Services {
         }
 
         public async Task Login(string email, string senha) {
-            await _usuarioContext.Login(email, senha);
+            var codigoUsuario = await _usuarioContext.Login(email, senha);
+            Preferences.Set("codigoUsuario", codigoUsuario);
         }
 
         private async Task<bool> ChecarEmail(string email) {
