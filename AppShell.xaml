@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:TreinoSport"
     xmlns:views="clr-namespace:TreinoSport.XMLPages"
     Shell.FlyoutBehavior="Flyout">
+
     <Shell.FlyoutHeader>
         <Grid HeightRequest="200" BackgroundColor="White">
             <Image Source="treinosporticone.png"/>
@@ -20,7 +21,7 @@
                   ContentTemplate="{DataTemplate local:MainPage}"
                   Route="MainPage" Shell.FlyoutBehavior="Disabled" FlyoutItemIsVisible="False"/>
 
-    <FlyoutItem Route="PaginaInicial" Title="Home" Icon="iconshome.png">
+    <FlyoutItem Route="PaginaInicial" Title="Pagina inicial" Icon="iconshome.png">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate views:PaginaInicial}"/>
         </Tab>

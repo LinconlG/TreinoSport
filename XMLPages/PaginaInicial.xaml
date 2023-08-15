@@ -5,15 +5,24 @@
              xmlns:models="clr-namespace:TreinoSport.Models"
              xmlns:services="clr-namespace:TreinoSport.Services"
              xmlns:local="clr-namespace:TreinoSport.ViewModels"
-             Title="PaginaInicial">
+             Title="Pagina Inicial">
     <VerticalStackLayout>
-        <StackLayout Padding="8">
+        <StackLayout Padding="8" Spacing="8">
             <Border Stroke="#C49B33" StrokeThickness="3" StrokeShape="RoundRectangle 40,0,0,40" Background="#e8e8e6" Padding="15">
                 <Grid>
-                    <Button />
+                    <Button BackgroundColor="Transparent"/>
                     <StackLayout Spacing="5">
-                        <Label Text="Treino de futevolei" FontSize="20" FontAttributes="Bold"/>
-                        <Label Text="Aqui sera descricao, sera um texto grande mas talvez nao muito" FontSize="15"/>
+                        <Label Text="Treino de futevolei" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center"/>
+                        <Label Text="Criado por BeachTreinos" FontSize="18" HorizontalOptions="Center"/>
+                    </StackLayout>
+                </Grid>
+            </Border>
+            <Border Stroke="#C49B33" StrokeThickness="3" StrokeShape="RoundRectangle 40,0,0,40" Background="#e8e8e6" Padding="15">
+                <Grid>
+                    <Button BackgroundColor="Transparent"/>
+                    <StackLayout Spacing="5">
+                        <Label Text="Treino de futevolei" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center"/>
+                        <Label Text="Criado por BeachTreinos" FontSize="18" HorizontalOptions="Center"/>
                     </StackLayout>
                 </Grid>
             </Border>
@@ -23,8 +32,16 @@
             <CollectionView ItemsSource="{Binding Treinos}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Treino">
-                        <StackLayout Padding="5">
-                            
+                        <StackLayout Padding="8">
+                            <Border Stroke="#C49B33" StrokeThickness="3" StrokeShape="RoundRectangle 40,0,0,40" Background="#e8e8e6" Padding="15">
+                                <Grid>
+                                    <Button x:Name="SelecionarTreinoBtn" BackgroundColor="Transparent"/>
+                                    <StackLayout Spacing="5">
+                                        <Label Text="{Binding Nome}" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center"/>
+                                        <Label Text="Criado por {Binding NomeCT}" FontSize="18" HorizontalOptions="Center"/>
+                                    </StackLayout>
+                                </Grid>
+                            </Border>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

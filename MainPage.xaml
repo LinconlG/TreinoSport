@@ -10,7 +10,8 @@
     </ContentPage.Behaviors>
 
     <ContentPage.Resources>
-        <x:Double x:Key="LarguraGridLogin">200</x:Double>
+        <x:Double x:Key="LarguraGridLogin">250</x:Double>
+        <x:Double x:Key="AlturaGridLogin">50</x:Double>
         <Color x:Key="LabelClicavel">Blue</Color>
     </ContentPage.Resources>
 
@@ -20,21 +21,21 @@
 
             <Grid VerticalOptions="Start" WidthRequest="{StaticResource LarguraGridLogin}">
                 <VerticalStackLayout Spacing="10">
-                    <Label Text="Bem vindo(a)" HorizontalOptions="Center" FontSize="20"/>
-                    <Entry x:Name="LoginEmail" Placeholder="E-mail" PlaceholderColor="Gray" WidthRequest="{StaticResource LarguraGridLogin}" BackgroundColor="#EAEADA"/>
-                    <Entry x:Name="LoginSenha" Placeholder="Senha" IsPassword="True" PlaceholderColor="Gray" WidthRequest="{StaticResource LarguraGridLogin}" BackgroundColor="#EAEADA"/>
+                    <Label Text="Bem vindo(a)" HorizontalOptions="Center" FontSize="25"/>
+                    <Entry x:Name="LoginEmail" FontSize="18" Placeholder="E-mail" PlaceholderColor="Gray" WidthRequest="{StaticResource LarguraGridLogin}" HeightRequest="{StaticResource AlturaGridLogin}" BackgroundColor="#EAEADA"/>
+                    <Entry x:Name="LoginSenha" FontSize="18" Placeholder="Senha" IsPassword="True" PlaceholderColor="Gray" WidthRequest="{StaticResource LarguraGridLogin}" HeightRequest="{StaticResource AlturaGridLogin}" BackgroundColor="#EAEADA"/>
                     <Label x:Name="avisoLogin" Text="Verifique o email e a senha." FontSize="{StaticResource FonteAviso}" TextColor="{StaticResource CorAviso}" IsVisible="false"/>
                 <Grid>
                     <HorizontalStackLayout>
                         <CheckBox x:Name="LembreLogin" HorizontalOptions="Start" HeightRequest="18"/>
-                        <Label Text="Logar automaticamente"/>
+                        <Label Text="Lembrar login" FontSize="16" FontAttributes="Bold"/>
                     </HorizontalStackLayout>
                 </Grid>
 
             </VerticalStackLayout>
             </Grid>
             <Grid WidthRequest="150">
-                <Label x:Name="CadastroLabel" Text="Não tenho cadastro" TextColor="{StaticResource LabelClicavel}" TextDecorations="Underline"/>
+                <Label x:Name="CadastroLabel" Text="Não tenho cadastro" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource LabelClicavel}" TextDecorations="Underline"/>
                 <Button x:Name="CadastroBtn" BackgroundColor="Transparent" Clicked="ClickCadastroBtn" HeightRequest="20"/>
             </Grid>
         <Grid>
