@@ -11,10 +11,10 @@ using TreinoSport.Models;
 namespace TreinoSport.Contexts {
     public class UsuarioContext : BaseContext{
         
-        public async Task CadastrarUsuario(Usuario usuario) {
+        public async Task CadastrarUsuario(Conta usuario) {
             try {
 
-                HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Put, _treinoSportApiUrl + "/usuario/cadastrar");
+                HttpRequestMessage message = new(HttpMethod.Put, _treinoSportApiUrl + "/usuario/cadastrar");
 
                 message.Content = JsonContent.Create(usuario);
 
@@ -37,7 +37,7 @@ namespace TreinoSport.Contexts {
                     { "email", email}
                 };
 
-                HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Get, _treinoSportApiUrl + "/usuario/email" + ParamsToString(queryParams));
+                HttpRequestMessage message = new(HttpMethod.Get, _treinoSportApiUrl + "/usuario/email" + ParamsToString(queryParams));
 
                 HttpResponseMessage response = await httpClient.SendAsync(message);
                 await response.HandleResponse();
@@ -51,7 +51,7 @@ namespace TreinoSport.Contexts {
             }
         }
 
-        public async Task<int> Login(string email, string senha) {
+        public async Task<Conta> Login(string email, string senha) {
             try {                
 
                 var queryParams = new Dictionary<string, object>() {
@@ -59,14 +59,14 @@ namespace TreinoSport.Contexts {
                     { "senha", senha}
                 };
 
-                HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Get, _treinoSportApiUrl + "/login" + ParamsToString(queryParams));
+                HttpRequestMessage message = new(HttpMethod.Get, _treinoSportApiUrl + "/login" + ParamsToString(queryParams));
 
                 HttpResponseMessage response = await httpClient.SendAsync(message);
                 await response.HandleResponse();
 
                 string responseBody = await response.Content.ReadAsStringAsync();
 
-                return await HttpUtilities.GetBody<int>(response);
+                return await HttpUtilities.GetBody<Conta>(response);
             }
             catch (Exception e) {
                 throw new Exception($"{e.Message}");

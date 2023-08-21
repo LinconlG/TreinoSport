@@ -5,15 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TreinoSport.Models {
-    public class Usuario {
+    public class Conta {
         public int Codigo { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
         public string Senha { get; set; }
-        //tipo de usuario
-        //
+        public string Descricao { get; set; }
+        public bool IsCentroTreinamento { get; set; } = false;
 
 
-        public Usuario() { }
+        public Conta() { }
     }
 }

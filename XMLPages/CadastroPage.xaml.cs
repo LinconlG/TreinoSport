@@ -25,10 +25,13 @@ public partial class CadastroPage : ContentPage
         btn = sender as Button;
         btn.IsEnabled = false;
 
-		var usuario = new Usuario();
+		var usuario = new Conta();
 		usuario.Nome = nomeCompletoEntry.Text;
         usuario.Email = emailEntry.Text;
         usuario.Senha = Criptografia.sha256_hash(senhaEntry.Text);
+        if (tipoConta.SelectedIndex == 1) {
+            usuario.IsCentroTreinamento = true;
+        }
         try {
             await _usuarioService.CadastrarUsuario(usuario);
             await DisplayAlert("Sucesso", "Você foi cadastrado!", "OK");
@@ -41,7 +44,21 @@ public partial class CadastroPage : ContentPage
         }
     }
 
-	private bool CheckCampos() {
+    private void OnPickerSelectedIndexChanged(object sender, EventArgs e) {
+        var picker = (Picker)sender;
+        int selectedIndex = picker.SelectedIndex;
+
+        if (selectedIndex == 1) {
+            labelDescricao.IsVisible = true;
+            editorDescricao.IsVisible = true;
+        }
+        else {
+            labelDescricao.IsVisible = false;
+            editorDescricao.IsVisible = false;
+        }
+    }
+
+    private bool CheckCampos() {
 		var flag = false;
 		if (String.IsNullOrWhiteSpace(nomeCompletoEntry.Text)) {
 			avisoNomeLabel.IsVisible = true;

@@ -12,17 +12,18 @@ namespace TreinoSport.Services {
             _usuarioContext = new UsuarioContext();
         }
 
-        public async Task CadastrarUsuario(Usuario usuario) {
-            var a = await ChecarEmail(usuario.Email);
-            if (a) {
+        public async Task CadastrarUsuario(Conta usuario) {
+            var emailExiste = await ChecarEmail(usuario.Email);
+            if (emailExiste) {
                 throw new Exception("@O email inserido já existe.@");
             }
             await _usuarioContext.CadastrarUsuario(usuario);
         }
 
         public async Task Login(string email, string senha) {
-            var codigoUsuario = await _usuarioContext.Login(email, senha);
-            Preferences.Set("codigoUsuario", codigoUsuario);
+            var conta = await _usuarioContext.Login(email, senha);
+            Preferences.Set("codigoUsuario", conta.Codigo);
+            Preferences.Set("isCT", conta.IsCentroTreinamento);
         }
 
         private async Task<bool> ChecarEmail(string email) {
