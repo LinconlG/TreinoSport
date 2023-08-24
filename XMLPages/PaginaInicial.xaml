@@ -6,6 +6,7 @@
              xmlns:services="clr-namespace:TreinoSport.Services"
              xmlns:local="clr-namespace:TreinoSport.ViewModels"
              Title="Pagina Inicial">
+    
     <VerticalStackLayout>
         <StackLayout Padding="8" Spacing="8">
             <Border Stroke="#C49B33" StrokeThickness="3" StrokeShape="RoundRectangle 40,0,0,40" Background="#e8e8e6" Padding="15">
@@ -13,7 +14,12 @@
                     <Button BackgroundColor="Transparent"/>
                     <StackLayout Spacing="5">
                         <Label Text="Treino de futevolei" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center"/>
-                        <Label Text="Criado por BeachTreinos" FontSize="18" HorizontalOptions="Center"/>
+                        <Grid>
+                            <HorizontalStackLayout HorizontalOptions="Center">
+                                <Label Text="Criado por " FontSize="18"/>
+                                <Label Text="BeachTreinos" FontSize="18"/>
+                            </HorizontalStackLayout>
+                        </Grid>
                     </StackLayout>
                 </Grid>
             </Border>
@@ -21,14 +27,14 @@
                 <Grid>
                     <Button BackgroundColor="Transparent"/>
                     <StackLayout Spacing="5">
-                        <Label Text="Treino de futevolei" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center"/>
+                        <Label Text="Treino de futvolei" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center"/>
                         <Label Text="Criado por BeachTreinos" FontSize="18" HorizontalOptions="Center"/>
                     </StackLayout>
                 </Grid>
             </Border>
         </StackLayout>
         
-        <RefreshView x:DataType="local:TreinoViewModel" Command="{Binding GetTreinosAlunoCommand}" IsRefreshing="{Binding IsBusy}">
+        <RefreshView x:DataType="local:TreinoViewModel" Command="{Binding GetTreinosComoAlunoCommand}" IsRefreshing="{Binding IsBusy}">
             <CollectionView ItemsSource="{Binding Treinos}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Treino">
@@ -38,7 +44,12 @@
                                     <Button x:Name="SelecionarTreinoBtn" BackgroundColor="Transparent"/>
                                     <StackLayout Spacing="5">
                                         <Label Text="{Binding Nome}" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center"/>
-                                        <Label Text="Criado por {Binding NomeCT}" FontSize="18" HorizontalOptions="Center"/>
+                                        <Grid>
+                                            <HorizontalStackLayout HorizontalOptions="Center">
+                                                <Label Text="Criado por " FontSize="18"/>
+                                                <Label Text="{Binding Criador.Nome}" FontSize="18"/>
+                                            </HorizontalStackLayout>
+                                        </Grid>
                                     </StackLayout>
                                 </Grid>
                             </Border>
@@ -48,4 +59,5 @@
             </CollectionView>
         </RefreshView>
     </VerticalStackLayout>
+    
 </ContentPage>

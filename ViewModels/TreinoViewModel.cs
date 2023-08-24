@@ -25,11 +25,11 @@ namespace TreinoSport.ViewModels {
         }
 
         [ICommand]
-        private async Task GetTreinosAluno() {
+        private async Task GetTreinosComoAluno() {
             try {
                 IsBusy = true;
                 Treinos.Clear();
-                var lista = await _treinoContext.GetTreinosAluno(Preferences.Get("codigoUsuario", 0));
+                var lista = await _treinoContext.GetTreinosComoAluno(Preferences.Get("codigoConta", 0));
                 foreach (var item in lista) {
                     Treinos.Add(item);
                 }

@@ -4,28 +4,28 @@ namespace TreinoSport;
 
 public partial class AppShell : Shell
 {
-	//private static FlyoutItem _flyoutItem;
+	private static FlyoutItem _paginaCT;
 	public AppShell()
 	{
 		InitializeComponent();
-		//_flyoutItem = PaginaInicialCT;
+		_paginaCT = PaginaInicialCT;
 	}
 
 	private async void ClickSair(object sender, EventArgs e) {
 		Preferences.Remove("email");
         Preferences.Remove("senha");
-		Preferences.Remove("codigoUsuario");
+		Preferences.Remove("codigoConta");
 		Preferences.Remove("isCT");
         await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
 		
     }
 
-/*	public static void VisibilidadePaginaInicialCT(bool isCT) {
+	public static void VisibilidadePaginaInicialCT(bool isCT) {
 		if (isCT) {
-            _flyoutItem.IsVisible = true;
+            _paginaCT.IsVisible = true;
 		}
 		else {
-			_flyoutItem.IsVisible = false;
+			_paginaCT.IsVisible = false;
 		}
-	}*/
+	}
 }

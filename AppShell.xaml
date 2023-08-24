@@ -27,4 +27,10 @@
         </Tab>
     </FlyoutItem>
 
+    <FlyoutItem x:Name="PaginaInicialAluno" Route="PaginaInicialAluno" Title="Pagina inicial" Icon="iconshome.png">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate views:PaginaInicialAluno}"/>
+        </Tab>
+    </FlyoutItem>
+
 </Shell>

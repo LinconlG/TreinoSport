@@ -8,6 +8,7 @@ namespace TreinoSport;
 public partial class MainPage : ContentPage
 {
     private readonly UsuarioService _usuarioService;
+    private Button btn;
     public MainPage()
 	{
         InitializeComponent();
@@ -20,9 +21,11 @@ public partial class MainPage : ContentPage
     }
 
     private void ClickLoginBtn(object sender, EventArgs e) {
+        btn = sender as Button;
         if (CheckCampos()) {
             return;
         }
+        btn.IsEnabled = false;
         string email = LoginEmail.Text;
         string senha = Criptografia.sha256_hash(LoginSenha.Text);
         if (LembreLogin.IsChecked) {
@@ -33,7 +36,7 @@ public partial class MainPage : ContentPage
     }
 
     private async void Login(string email, string senha) {
-
+        
         try {
             await _usuarioService.Login(email, senha);
         }
@@ -41,6 +44,10 @@ public partial class MainPage : ContentPage
             avisoLogin.IsVisible = true;
             return;
         }
+        if (btn is not null) {
+            btn.IsEnabled = true;
+        }  
+        
         await Shell.Current.GoToAsync($"//{nameof(PaginaInicial)}");
     }
 

@@ -10,7 +10,7 @@ namespace TreinoSport.Contexts {
     public class TreinoContext : BaseContext{
         public TreinoContext() { }
 
-        public async Task<IEnumerable<Treino>> GetTreinosAluno(int codigoUsuario) {
+        public async Task<IEnumerable<Treino>> GetTreinosComoAluno(int codigoUsuario) {
             try {
                 var queryParams = new Dictionary<string, object>() {
                     { "codigoUsuario", codigoUsuario}
