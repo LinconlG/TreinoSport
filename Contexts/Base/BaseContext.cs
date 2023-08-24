@@ -21,6 +21,17 @@ namespace TreinoSport.Contexts.Base {
             _treinoSportApiUrl = "http://10.0.2.2:5050/api";
         }
 
+        public HttpClientHandler GetInsecureHandler() {
+            HttpClientHandler handler = new();
+            handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
+            {
+                if (cert.Issuer.Equals("CN=localhost"))
+                    return true;
+                return errors == System.Net.Security.SslPolicyErrors.None;
+            };
+            return handler;
+        }
+
         public string ParamsToString(Dictionary<string, object> queryParams) {
             if (queryParams == null || queryParams.Count == 0) {
                 return "";

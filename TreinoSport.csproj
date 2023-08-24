@@ -35,7 +35,7 @@
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\treinosporticonebranco.png" Color="#f7fafc" BaseSize="128,128" Resize="true" />
+		<MauiSplashScreen Include="Resources\Splash\treinosporticonebranco.svg" Color="#f7fafc" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />

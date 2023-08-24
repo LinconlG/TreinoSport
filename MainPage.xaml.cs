@@ -33,6 +33,7 @@ public partial class MainPage : ContentPage
     }
 
     private async void Login(string email, string senha) {
+
         try {
             await _usuarioService.Login(email, senha);
         }

@@ -31,6 +31,7 @@ public partial class CadastroPage : ContentPage
         usuario.Senha = Criptografia.sha256_hash(senhaEntry.Text);
         if (tipoConta.SelectedIndex == 1) {
             usuario.IsCentroTreinamento = true;
+            usuario.Descricao = editorDescricao.Text;
         }
         try {
             await _usuarioService.CadastrarUsuario(usuario);

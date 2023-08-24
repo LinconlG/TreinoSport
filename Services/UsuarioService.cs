@@ -22,7 +22,7 @@ namespace TreinoSport.Services {
 
         public async Task Login(string email, string senha) {
             var conta = await _usuarioContext.Login(email, senha);
-            Preferences.Set("codigoUsuario", conta.Codigo);
+            Preferences.Set("codigoConta", conta.Codigo);
             Preferences.Set("isCT", conta.IsCentroTreinamento);
         }
 
