@@ -6,9 +6,13 @@
              xmlns:services="clr-namespace:TreinoSport.Services"
              xmlns:local="clr-namespace:TreinoSport.ViewModels"
              Title="Treinos">
+    <ContentPage.Resources>
+        <x:Double x:Key="fonteTamanho1">20</x:Double>
+        <x:Double x:Key="fonteTamanho2">18</x:Double>
+    </ContentPage.Resources>
 
     <StackLayout>
-        <RefreshView x:DataType="local:TreinoViewModel" Command="{Binding GetTreinosComoAlunoCommand}" IsRefreshing="{Binding IsBusy}">
+        <RefreshView x:Name="RefreshLista" x:DataType="local:TreinoViewModel" Command="{Binding GetTreinosComoAlunoCommand}" IsRefreshing="{Binding IsBusy}">
             <CollectionView ItemsSource="{Binding Treinos}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Treino">
@@ -17,11 +21,11 @@
                                 <Grid>
                                     <Button BackgroundColor="Transparent"/>
                                     <StackLayout Spacing="5">
-                                        <Label Text="{Binding Nome}" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center"/>
+                                        <Label Text="{Binding Nome}" FontSize="{StaticResource fonteTamanho1}" FontAttributes="Bold" HorizontalOptions="Center"/>
                                         <Grid>
                                             <HorizontalStackLayout HorizontalOptions="Center">
-                                                <Label Text="Criado por " FontSize="18"/>
-                                                <Label Text="{Binding Criador.Nome}" FontSize="18"/>
+                                                <Label Text="Criado por " FontSize="{StaticResource fonteTamanho2}"/>
+                                                <Label Text="{Binding Criador.Nome}" FontSize="{StaticResource fonteTamanho2}"/>
                                             </HorizontalStackLayout>
                                         </Grid>
                                     </StackLayout>
@@ -32,6 +36,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </RefreshView>
+        <Label Padding="25" x:Name="avisoTreinosVazio" Text="Você ainda não está em nenhum treino!" FontAttributes="Bold" FontSize="{StaticResource fonteTamanho2}" HorizontalOptions="Center"/>
     </StackLayout>
     
 </ContentPage>

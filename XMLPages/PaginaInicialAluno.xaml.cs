@@ -7,7 +7,6 @@ namespace TreinoSport.XMLPages;
 
 public partial class PaginaInicialAluno : ContentPage
 {
-
     TreinoViewModel treinoViewModel;
 	public PaginaInicialAluno()
 	{
@@ -17,6 +16,6 @@ public partial class PaginaInicialAluno : ContentPage
 
     protected override void OnAppearing() {
         base.OnAppearing();
-        treinoViewModel.OnAppearing();
+        treinoViewModel.OnAppearing(RefreshLista, avisoTreinosVazio);
     }
 }
