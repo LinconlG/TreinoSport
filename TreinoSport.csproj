@@ -86,10 +86,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="XMLPages\PaginaInicialAluno.xaml.cs">
+      <DependentUpon>PaginaInicialAluno.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <MauiXaml Update="XMLPages\CadastroPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </MauiXaml>
-    <MauiXaml Update="XMLPages\PaginaInicial.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
     <MauiXaml Update="XMLPages\PaginaInicialAluno.xaml">

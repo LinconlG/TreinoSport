@@ -1,17 +1,22 @@
+using System.Collections.ObjectModel;
+using TreinoSport.Models;
+using TreinoSport.Services;
+using TreinoSport.ViewModels;
+
 namespace TreinoSport.XMLPages;
 
 public partial class PaginaInicialAluno : ContentPage
 {
+
+    TreinoViewModel treinoViewModel;
 	public PaginaInicialAluno()
 	{
-		InitializeComponent();
+        InitializeComponent();
+        this.BindingContext = treinoViewModel = new TreinoViewModel();
 	}
 
-    private void ClickedBotao1(object sender, EventArgs e) {
-        AppShell.VisibilidadePaginaInicialCT(true);
+    protected override void OnAppearing() {
+        base.OnAppearing();
+        treinoViewModel.OnAppearing();
     }
-    private void ClickedBotao2(object sender, EventArgs e) {
-        AppShell.VisibilidadePaginaInicialCT(false);
-    }
-
 }

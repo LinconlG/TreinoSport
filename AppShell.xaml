@@ -21,15 +21,9 @@
                   ContentTemplate="{DataTemplate local:MainPage}"
                   Route="MainPage" Shell.FlyoutBehavior="Disabled" FlyoutItemIsVisible="False"/>
 
-    <FlyoutItem x:Name="PaginaInicialCT" Route="PaginaInicial" Title="Pagina inicial" Icon="iconshome.png">
+    <FlyoutItem x:Name="PaginaInicialAluno" Route="PaginaInicialAluno" Title="Treinos" Icon="iconshome.png">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate views:PaginaInicial}"/>
-        </Tab>
-    </FlyoutItem>
-
-    <FlyoutItem x:Name="PaginaInicialAluno" Route="PaginaInicialAluno" Title="Pagina inicial" Icon="iconshome.png">
-        <Tab>
-            <ShellContent ContentTemplate="{DataTemplate views:PaginaInicialAluno}"/>
         </Tab>
     </FlyoutItem>
 

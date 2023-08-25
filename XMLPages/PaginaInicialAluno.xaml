@@ -2,15 +2,36 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TreinoSport.XMLPages.PaginaInicialAluno"
-             Title="PaginaInicialAluno">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+             xmlns:models="clr-namespace:TreinoSport.Models"
+             xmlns:services="clr-namespace:TreinoSport.Services"
+             xmlns:local="clr-namespace:TreinoSport.ViewModels"
+             Title="Pagina Inicial">
 
-        <Button x:Name="Aparecer" Text="Aparecer" Clicked="ClickedBotao1"/>
-        <Button x:Name="Sumir" Text="Sumir" Clicked="ClickedBotao2"/>
-
-    </VerticalStackLayout>
+    <StackLayout>
+        <RefreshView x:DataType="local:TreinoViewModel" Command="{Binding GetTreinosComoAlunoCommand}" IsRefreshing="{Binding IsBusy}">
+            <CollectionView ItemsSource="{Binding Treinos}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Treino">
+                        <StackLayout Padding="8">
+                            <Border Stroke="#C49B33" StrokeThickness="3" StrokeShape="RoundRectangle 40,0,0,40" Background="#e8e8e6" Padding="15">
+                                <Grid>
+                                    <Button BackgroundColor="Transparent"/>
+                                    <StackLayout Spacing="5">
+                                        <Label Text="{Binding Nome}" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center"/>
+                                        <Grid>
+                                            <HorizontalStackLayout HorizontalOptions="Center">
+                                                <Label Text="Criado por " FontSize="18"/>
+                                                <Label Text="{Binding Criador.Nome}" FontSize="18"/>
+                                            </HorizontalStackLayout>
+                                        </Grid>
+                                    </StackLayout>
+                                </Grid>
+                            </Border>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </StackLayout>
+    
 </ContentPage>
