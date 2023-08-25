@@ -98,6 +98,9 @@
     <MauiXaml Update="XMLPages\PaginaInicialAluno.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+    <MauiXaml Update="XMLPages\PaginaInicialCT.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
   </ItemGroup>
   
 

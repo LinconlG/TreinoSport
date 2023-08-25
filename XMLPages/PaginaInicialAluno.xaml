@@ -5,7 +5,7 @@
              xmlns:models="clr-namespace:TreinoSport.Models"
              xmlns:services="clr-namespace:TreinoSport.Services"
              xmlns:local="clr-namespace:TreinoSport.ViewModels"
-             Title="Pagina Inicial">
+             Title="Treinos">
 
     <StackLayout>
         <RefreshView x:DataType="local:TreinoViewModel" Command="{Binding GetTreinosComoAlunoCommand}" IsRefreshing="{Binding IsBusy}">

@@ -1,18 +1,23 @@
 ﻿using Microsoft.Maui.Controls.Xaml;
 using Microsoft.Maui.Storage;
 using TreinoSport.Services;
+using TreinoSport.ViewModels;
 using TreinoSport.XMLPages;
 
 namespace TreinoSport;
 
 public partial class MainPage : ContentPage
 {
+    MainPageViewModel mainPageViewModel;
+
     private readonly UsuarioService _usuarioService;
     private Button btn;
+
     public MainPage()
 	{
         InitializeComponent();
         _usuarioService = new UsuarioService();
+        this.BindingContext = mainPageViewModel = new MainPageViewModel(); //refatorar metodos para o viewmodel
         LembrarLogin();
     }
 
@@ -46,9 +51,16 @@ public partial class MainPage : ContentPage
         }
         if (btn is not null) {
             btn.IsEnabled = true;
-        }  
-        
-        await Shell.Current.GoToAsync($"//{nameof(PaginaInicial)}");
+        }
+
+        if (Preferences.Get("isCT", false)) {
+            AppShell.VisibilidadeFlyoutCT(true);
+            await Shell.Current.GoToAsync($"//{nameof(PaginaInicialCT)}");
+        }
+        else {
+            AppShell.VisibilidadeFlyoutCT(false);
+            await Shell.Current.GoToAsync($"//{nameof(PaginaInicialAluno)}");
+        }
     }
 
     private void LembrarLogin() {
