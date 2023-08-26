@@ -95,6 +95,12 @@
     <MauiXaml Update="XMLPages\CadastroPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+    <MauiXaml Update="XMLPages\CriacaoTreino.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
+    <MauiXaml Update="XMLPages\GerenciamentoTreino.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="XMLPages\PaginaInicialAluno.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>

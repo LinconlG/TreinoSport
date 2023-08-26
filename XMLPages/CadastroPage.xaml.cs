@@ -36,6 +36,7 @@ public partial class CadastroPage : ContentPage
         try {
             await _usuarioService.CadastrarUsuario(usuario);
             await DisplayAlert("Sucesso", "Você foi cadastrado!", "OK");
+            await Navigation.PopAsync();
         }
         catch (Exception ex) {
             await DisplayAlert("Falha", $"{(ex.Message.Contains('@') ? MensagemPublicaError(ex.Message) : "Ocorreu um erro, tente novamente")}", "OK");

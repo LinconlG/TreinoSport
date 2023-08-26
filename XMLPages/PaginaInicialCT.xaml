@@ -5,6 +5,10 @@
              xmlns:local="clr-namespace:TreinoSport.ViewModels"
              xmlns:models="clr-namespace:TreinoSport.Models"
              Title="Treinos">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Adicionar" Clicked="ClickAdicionar"/>
+    </ContentPage.ToolbarItems>
+    
     <StackLayout>
         <RefreshView x:Name="refreshLista" x:DataType="local:TreinoViewModel" Command="{Binding GetTreinosComoCTCommand}" IsRefreshing="{Binding IsBusy}">
             <CollectionView ItemsSource="{Binding Treinos}">
@@ -13,10 +17,10 @@
                         <StackLayout Padding="8">
                             <Border Stroke="#C49B33" StrokeThickness="3" StrokeShape="RoundRectangle 40,0,0,40" Background="#e8e8e6" Padding="15">
                                 <Grid>
-                                    <Button x:Name="{Binding Codigo}" BackgroundColor="Transparent"/>
+                                    <Button Text="{Binding Codigo}" TextColor="Transparent" BackgroundColor="Transparent"/>
                                     <StackLayout Spacing="5">
                                         <Label Text="{Binding Nome}" FontSize="{StaticResource fonteTamanho1}" FontAttributes="Bold" HorizontalOptions="Center"/>
-                                        <Label Text="Selecione para editar" FontSize="{StaticResource fonteTamanho2}" HorizontalOptions="Center"/>
+                                        <Label Text="Selecione para gerenciar" FontSize="{StaticResource fonteTamanho2}" HorizontalOptions="Center"/>
                                     </StackLayout>
                                 </Grid>
                             </Border>
@@ -29,7 +33,7 @@
         <Grid x:Name="avisoTreinosVazio" Padding="15">
             <StackLayout>
                 <Label Text="Você ainda não criou nenhum treino." FontAttributes="Bold" FontSize="{StaticResource fonteTamanho2}" HorizontalOptions="Center"/>
-                <Label Text="Crie um treino no menu de opções!" FontAttributes="Bold" FontSize="{StaticResource fonteTamanho2}" HorizontalOptions="Center"/>
+                <Label Text="Crie um treino na opção 'Adicionar' acima!" FontAttributes="Bold" FontSize="{StaticResource fonteTamanho2}" HorizontalOptions="Center"/>
             </StackLayout>
         </Grid>
         
