@@ -10,10 +10,8 @@ public partial class PaginaInicialCT : ContentPage
 		InitializeComponent();
         this.BindingContext = treinoViewModel = new TreinoViewModel();
     }
-
-	private void Teste(bool flag) {
-		if (flag) {
-			
-		}
-	}
+    protected override void OnAppearing() {
+        base.OnAppearing();
+        treinoViewModel.OnAppearing(refreshLista, avisoTreinosVazio);
+    }
 }

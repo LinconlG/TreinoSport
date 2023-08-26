@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TreinoSport.XMLPages.CadastroPage"
-             Title="CadastroPage">
+             Title="Cadastro">
 
     <VerticalStackLayout>
         <Grid x:Name="GridPrincipal" Padding="10,50,10,10" HeightRequest="800">

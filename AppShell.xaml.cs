@@ -18,6 +18,7 @@ public partial class AppShell : Shell
         Preferences.Remove("senha");
 		Preferences.Remove("codigoConta");
 		Preferences.Remove("isCT");
+		
         await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
     }
 

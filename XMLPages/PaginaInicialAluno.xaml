@@ -36,7 +36,13 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </RefreshView>
-        <Label Padding="25" x:Name="avisoTreinosVazio" Text="Você ainda não está em nenhum treino!" FontAttributes="Bold" FontSize="{StaticResource fonteTamanho2}" HorizontalOptions="Center"/>
+        
+        <Grid x:Name="avisoTreinosVazio" Padding="15">
+            <StackLayout>
+                <Label Text="Você ainda não está em nenhum treino." FontAttributes="Bold" FontSize="{StaticResource fonteTamanho2}" HorizontalOptions="Center"/>
+            </StackLayout>
+        </Grid>
+        
     </StackLayout>
     
 </ContentPage>

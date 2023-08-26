@@ -14,7 +14,8 @@ namespace TreinoSport.ViewModels {
     public partial class TreinoViewModel : ObservableObject {
 
         RefreshView refreshLista;
-        Label avisoTreinoVazio;
+        Grid avisoTreinoVazio;
+
 
         private TreinoContext _treinoContext;
         public ObservableCollection<Treino> Treinos { get; set; }
@@ -47,11 +48,17 @@ namespace TreinoSport.ViewModels {
             }
 
         }
+
+        [ICommand]
         private async Task GetTreinosComoCT() {
             try {
                 IsBusy = true;
                 Treinos.Clear();
-
+                var lista = await _treinoContext.GetTreinosComoCT(Preferences.Get("codigoConta", 0));
+                ChecarTreinos(lista);
+                foreach (var item in lista) {
+                    Treinos.Add(item);
+                }
             }
             catch (Exception e) {
                 throw new Exception(e.Message);
@@ -60,7 +67,11 @@ namespace TreinoSport.ViewModels {
                 IsBusy = false;
             }
         }
+
         private void ChecarTreinos(IEnumerable<Treino> treinos) {
+            if (refreshLista is null || avisoTreinoVazio is null) {
+                return;
+            }
             if (!treinos.Any()) {
                 refreshLista.IsVisible = false;
                 avisoTreinoVazio.IsVisible = true;
@@ -70,10 +81,11 @@ namespace TreinoSport.ViewModels {
                 avisoTreinoVazio.IsVisible = false;
             }
         }
-        public void OnAppearing(RefreshView refreshView = null, Label avisoTreinoVazio = null) {
+        public void OnAppearing(RefreshView refreshView = null, Grid avisoTreinoVazio = null) {
             IsBusy = true;
             refreshLista = refreshView;
             this.avisoTreinoVazio = avisoTreinoVazio;
         }
+
     }
 }

@@ -13,6 +13,8 @@
             <x:Double x:Key="TamWidthEntry">270</x:Double>
             <x:Double x:Key="FonteAviso">16</x:Double>
             <Color x:Key="CorAviso">red</Color>
+            <x:Double x:Key="fonteTamanho1">20</x:Double>
+            <x:Double x:Key="fonteTamanho2">18</x:Double>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
