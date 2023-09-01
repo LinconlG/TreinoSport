@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections;
+using System.Net;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
@@ -14,16 +15,9 @@ namespace TreinoSport.Contexts {
 
         public async Task CadastrarUsuario(Conta usuario) {
             try {
-
-                HttpRequestMessage message = new(HttpMethod.Put, _treinoSportApiUrl + "/usuario/cadastrar");
-
-                message.Content = JsonContent.Create(usuario);
-
-                HttpResponseMessage response = await httpClient.SendAsync(message);
+                var endpoint = "/usuario/cadastrar";
+                HttpResponseMessage response = await HttpResquest(HttpMethod.Put, _treinoSportApiUrl, endpoint, body: usuario);
                 await response.HandleResponse();
-                //response.EnsureSuccessStatusCode(); // Check that the status code is in the 200 range. Throw an HttpRequestException if not
-
-                string responseBody = await response.Content.ReadAsStringAsync();
             }
             catch (Exception e) {
 
@@ -33,7 +27,10 @@ namespace TreinoSport.Contexts {
 
         public async Task<bool> ChecarEmail(string email) {
             try {
-
+                var api = await CheckAPI();
+                if (api.StatusCode != HttpStatusCode.OK) {
+                    throw new Exception("Falha na conexão com a API");
+                }
                 var queryParams = new Dictionary<string, object>() {
                     { "email", email}
                 };

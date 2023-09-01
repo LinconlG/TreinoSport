@@ -5,9 +5,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using TreinoSport.Extensions;
 
 namespace TreinoSport.Contexts.Base {
     public class BaseContext {
@@ -21,6 +23,39 @@ namespace TreinoSport.Contexts.Base {
             _treinoSportApiUrl = _configuration.GetConnectionString("treinoSportApi");
             httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Add("Accept", "application/json;charset=UTF-8");
+        }
+
+        protected async Task<HttpResponseMessage> HttpResquest(HttpMethod verbo, string urlApi, string endpoint, Dictionary<string, object> queryParams = null, object body = null) {
+            var api = await CheckAPI();
+            if (api.StatusCode != HttpStatusCode.OK) {
+                throw new Exception("Falha na conexão com a API");
+            }
+
+            HttpRequestMessage message = new(verbo, urlApi + endpoint + ParamsToString(queryParams));
+
+            message.Content = body is null ? null : JsonContent.Create(body);
+
+            HttpResponseMessage response = await httpClient.SendAsync(message);
+
+            return response;
+        }
+
+        public async Task<HttpResponseMessage> CheckAPI() {
+            try {
+                HttpRequestMessage message = new(HttpMethod.Get, _treinoSportApiUrl + "/check");
+
+
+                var task = httpClient.SendAsync(message);
+
+                var response = await task.TimeoutAfter(4000);
+
+                return response;
+            }
+            catch (Exception e) {
+
+                throw new Exception(e.Message);
+            }
+
         }
 
         public HttpClientHandler GetInsecureHandler() {

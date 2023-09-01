@@ -13,10 +13,10 @@ namespace TreinoSport.Services {
         }
 
         public async Task CadastrarUsuario(Conta usuario) {
-            var emailExiste = await ChecarEmail(usuario.Email);
+/*            var emailExiste = await ChecarEmail(usuario.Email);
             if (emailExiste) {
                 throw new Exception("@O email inserido já existe.@");
-            }
+            }*/
             await _usuarioContext.CadastrarUsuario(usuario);
         }
 

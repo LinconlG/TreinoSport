@@ -23,7 +23,7 @@ public partial class MainPage : ContentPage
         await Navigation.PushAsync(_cadastroPage);
     }
 
-    private void ClickLoginBtn(object sender, EventArgs e) {
+    private async void ClickLoginBtn(object sender, EventArgs e) {
         if (CheckCampos())
             return;
 
