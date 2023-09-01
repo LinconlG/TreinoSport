@@ -3,7 +3,7 @@ using TreinoSport.Models;
 using TreinoSport.Services;
 using TreinoSport.ViewModels;
 
-namespace TreinoSport.XMLPages;
+namespace TreinoSport.Views;
 
 public partial class PaginaInicialAluno : ContentPage
 {

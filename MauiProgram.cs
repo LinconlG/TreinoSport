@@ -46,7 +46,7 @@ public static class MauiProgram
         mauiAppBuilder.Services.AddSingleton<CadastroPage>();
         mauiAppBuilder.Services.AddSingleton<TreinoContext>();
         mauiAppBuilder.Services.AddSingleton<PaginaInicialAluno>();
-
+        #endregion
 
         return mauiAppBuilder;
     }

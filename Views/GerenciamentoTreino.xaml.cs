@@ -1,4 +1,4 @@
-namespace TreinoSport.XMLPages;
+namespace TreinoSport.Views;
 
 public partial class GerenciamentoTreino : ContentPage
 {
