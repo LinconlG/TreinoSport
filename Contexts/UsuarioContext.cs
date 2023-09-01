@@ -10,7 +10,8 @@ using TreinoSport.Models;
 
 namespace TreinoSport.Contexts {
     public class UsuarioContext : BaseContext{
-        
+        public UsuarioContext(IConfiguration configuration) : base(configuration) { }
+
         public async Task CadastrarUsuario(Conta usuario) {
             try {
 

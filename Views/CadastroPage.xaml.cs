@@ -4,17 +4,17 @@ using TreinoSport.Contexts;
 using TreinoSport.Models;
 using TreinoSport.Services;
 
-namespace TreinoSport.XMLPages;
+namespace TreinoSport.Views;
 
 public partial class CadastroPage : ContentPage
 {
     private readonly UsuarioService _usuarioService;
     private Button btn;
 
-	public CadastroPage()
+	public CadastroPage(UsuarioService usuarioService)
 	{
         InitializeComponent();
-        _usuarioService = new UsuarioService();
+        _usuarioService = usuarioService;
 	}
 
 	private async void ClickCadastrarBtn(object sender, EventArgs e) {
@@ -36,6 +36,7 @@ public partial class CadastroPage : ContentPage
         try {
             await _usuarioService.CadastrarUsuario(usuario);
             await DisplayAlert("Sucesso", "Você foi cadastrado!", "OK");
+            LimparCampos();
             await Navigation.PopAsync();
         }
         catch (Exception ex) {
@@ -91,6 +92,15 @@ public partial class CadastroPage : ContentPage
             avisoSenhasLabel.IsVisible = false;
         }
         return flag;
+    }
+
+    private void LimparCampos() {
+        tipoConta.SelectedItem = null;
+        nomeCompletoEntry.Text = string.Empty;
+        editorDescricao.Text = string.Empty;
+        emailEntry.Text = string.Empty;
+        senhaEntry.Text = string.Empty;
+        senhaConfirmacaoEntry.Text = string.Empty;
     }
 
     private string MensagemPublicaError(string mensagem) {

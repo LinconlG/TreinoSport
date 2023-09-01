@@ -14,11 +14,13 @@ namespace TreinoSport.Contexts.Base {
 
         protected readonly HttpClient httpClient;
         protected readonly string _treinoSportApiUrl;
+        protected readonly IConfiguration _configuration;
 
-        public BaseContext() {
+        public BaseContext(IConfiguration configuration) {
+            _configuration = configuration;
+            _treinoSportApiUrl = _configuration.GetConnectionString("treinoSportApi");
             httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Add("Accept", "application/json;charset=UTF-8");
-            _treinoSportApiUrl = "http://10.0.2.2:5050/api";
         }
 
         public HttpClientHandler GetInsecureHandler() {

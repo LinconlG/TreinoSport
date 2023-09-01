@@ -8,8 +8,8 @@ namespace TreinoSport.Services {
 
         private readonly UsuarioContext _usuarioContext;
 
-        public UsuarioService() {
-            _usuarioContext = new UsuarioContext();
+        public UsuarioService(UsuarioContext usuarioContext) {
+            _usuarioContext = usuarioContext;
         }
 
         public async Task CadastrarUsuario(Conta usuario) {

@@ -73,47 +73,51 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ApplicationDefinition Include="appsettings.json">
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </ApplicationDefinition>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
     <PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.2" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
     <PackageReference Include="System.ObjectModel" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="XMLPages\PaginaInicialAluno.xaml.cs">
+    <Compile Update="Views\PaginaInicialAluno.xaml.cs">
       <DependentUpon>PaginaInicialAluno.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <MauiXaml Update="XMLPages\CadastroPage.xaml">
+    <MauiXaml Update="Views\CadastroPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="XMLPages\CriacaoTreino.xaml">
+    <MauiXaml Update="Views\CriacaoTreino.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="XMLPages\GerenciamentoTreino.xaml">
+    <MauiXaml Update="Views\GerenciamentoTreino.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="XMLPages\PaginaInicialAluno.xaml">
+    <MauiXaml Update="Views\PaginaInicialAluno.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-    <MauiXaml Update="XMLPages\PaginaInicialCT.xaml">
+    <MauiXaml Update="Views\PaginaInicialCT.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
-  </ItemGroup>
-  
-
-  <ItemGroup>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

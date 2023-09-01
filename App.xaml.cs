@@ -1,4 +1,4 @@
-﻿using TreinoSport.XMLPages;
+﻿using TreinoSport.Views;
 
 namespace TreinoSport;
 

@@ -7,15 +7,15 @@ namespace TreinoSport.XMLPages;
 
 public partial class PaginaInicialAluno : ContentPage
 {
-    TreinoViewModel treinoViewModel;
-	public PaginaInicialAluno()
+    TreinoViewModel _treinoViewModel;
+	public PaginaInicialAluno(TreinoViewModel treinoViewModel)
 	{
         InitializeComponent();
-        this.BindingContext = treinoViewModel = new TreinoViewModel();
+        this.BindingContext = _treinoViewModel = treinoViewModel;
 	}
 
     protected override void OnAppearing() {
         base.OnAppearing();
-        treinoViewModel.OnAppearing(RefreshLista, avisoTreinosVazio);
+        _treinoViewModel.OnAppearing(RefreshLista, avisoTreinosVazio);
     }
 }

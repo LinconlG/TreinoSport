@@ -24,8 +24,8 @@ namespace TreinoSport.ViewModels {
         [ObservableProperty]
         private bool _isBusy;
 
-        public TreinoViewModel() {
-            _treinoContext = new();
+        public TreinoViewModel(TreinoContext treinoContext) {
+            _treinoContext = treinoContext;
             Treinos = new();
         }
 

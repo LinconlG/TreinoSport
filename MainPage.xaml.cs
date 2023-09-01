@@ -2,23 +2,25 @@
 using Microsoft.Maui.Storage;
 using TreinoSport.Services;
 using TreinoSport.ViewModels;
-using TreinoSport.XMLPages;
+using TreinoSport.Views;
 
 namespace TreinoSport;
 
 public partial class MainPage : ContentPage
 {
     private readonly UsuarioService _usuarioService;
+    private readonly CadastroPage _cadastroPage;
 
-    public MainPage()
+    public MainPage(UsuarioService usuarioService, CadastroPage cadastroPage)
 	{
         InitializeComponent();
-        _usuarioService = new UsuarioService();
+        _usuarioService = usuarioService;
+        _cadastroPage = cadastroPage;
         LembrarLogin();
     }
 
     private async void ClickCadastroBtn(object sender, EventArgs e) {
-        await Navigation.PushAsync(new CadastroPage());
+        await Navigation.PushAsync(_cadastroPage);
     }
 
     private void ClickLoginBtn(object sender, EventArgs e) {

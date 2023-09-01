@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,8 @@ using TreinoSport.Models;
 
 namespace TreinoSport.Contexts {
     public class TreinoContext : BaseContext{
-        public TreinoContext() { }
+
+        public TreinoContext(IConfiguration configuration) : base(configuration) {}
 
         public async Task<IEnumerable<Treino>> GetTreinosComoAluno(int codigoUsuario) {
             try {
