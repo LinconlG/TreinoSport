@@ -8,16 +8,12 @@ namespace TreinoSport;
 
 public partial class MainPage : ContentPage
 {
-    MainPageViewModel mainPageViewModel;
-
     private readonly UsuarioService _usuarioService;
-    private Button btn;
 
     public MainPage()
 	{
         InitializeComponent();
         _usuarioService = new UsuarioService();
-        this.BindingContext = mainPageViewModel = new MainPageViewModel(); //refatorar metodos para o viewmodel
         LembrarLogin();
     }
 
@@ -26,17 +22,19 @@ public partial class MainPage : ContentPage
     }
 
     private void ClickLoginBtn(object sender, EventArgs e) {
-        btn = sender as Button;
-        if (CheckCampos()) {
+        if (CheckCampos())
             return;
-        }
-        btn.IsEnabled = false;
+
+        LoginBtn.IsEnabled = false;
+
         string email = LoginEmail.Text;
         string senha = Criptografia.sha256_hash(LoginSenha.Text);
+
         if (LembreLogin.IsChecked) {
             Preferences.Set("email", email);
             Preferences.Set("senha", senha);
         }
+
         Login(email, senha);
     }
 
@@ -49,8 +47,8 @@ public partial class MainPage : ContentPage
             avisoLogin.IsVisible = true;
             return;
         }
-        if (btn is not null) {
-            btn.IsEnabled = true;
+        finally {
+            LoginBtn.IsEnabled = true;
         }
 
         if (Preferences.Get("isCT", false)) {
