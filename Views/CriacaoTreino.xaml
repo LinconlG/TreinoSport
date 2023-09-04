@@ -3,10 +3,55 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TreinoSport.Views.CriacaoTreino"
              Title="CriacaoTreino">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+
+        <VerticalStackLayout Padding="10" Spacing="5">
+            <Picker x:Name="_pickerModalidade" Title="Selecione a modalidade" HorizontalTextAlignment="Center" FontSize="{StaticResource fonteTamanho2}">
+                <Picker.Items>
+                    <x:String>Beach Tennis</x:String>
+                    <x:String>Funcional</x:String>
+                    <x:String>Futebol</x:String>
+                    <x:String>Futsal</x:String>
+                    <x:String>Futevôlei</x:String>
+                    <x:String>Tenis</x:String>
+                    <x:String>Vôlei</x:String>
+
+                </Picker.Items>
+            </Picker>
+
+            <Label Text="Descrição" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>
+            <Editor x:Name="_editorDescricao" HeightRequest="100"/>
+
+            <Label Text="Dias da semana" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>
+            <Picker x:Name="_pickerDiaDaSemana" Title="Adicione aqui o dia da semana" HorizontalTextAlignment="Center" FontSize="{StaticResource fonteTamanho2}" WidthRequest="265">
+                <Picker.Items>
+                    <x:String>Domingo</x:String>
+                    <x:String>Segunda-feira</x:String>
+                    <x:String>Terça-feira</x:String>
+                    <x:String>Quarta-feira</x:String>
+                    <x:String>Quinta-feria</x:String>
+                    <x:String>Sexta-feira</x:String>
+                    <x:String>Sábado</x:String>
+
+                </Picker.Items>
+            </Picker>
+            
+            <Grid x:Name="_gridTodosHorarios" Padding="10">
+                <VerticalStackLayout Spacing="10">
+                    <Label x:Name="_labelDiaDaSemana" Text="Domingo" TextDecorations="Underline" FontAttributes="Bold" FontSize="{StaticResource fonteTamanho1}" Grid.Row="0" Grid.ColumnSpan="5" VerticalOptions="Center" HorizontalOptions="Center"/>
+
+                    <Grid x:Name="_gridHorarios0" RowDefinitions="50" ColumnDefinitions="*, *, *, *">
+                        <BoxView Color="#ebedeb"  Grid.Row="1" Grid.ColumnSpan="5"/>
+                        <TimePicker FontSize="{StaticResource fonteTamanho2}" HorizontalOptions="Center" Format="HH:mm" />
+                        <Button x:Name="_btnRemoverHorario" Style="{StaticResource btnMenos}" Grid.Row="1" Grid.Column="1" HeightRequest="40" WidthRequest="40" FontSize="30" HorizontalOptions="Start"/>
+                        <Button x:Name="_btnAddHorario" Clicked="ClickAddHorario" Style="{StaticResource btnMais}" Grid.Row="1" Grid.Column="1" HeightRequest="40" WidthRequest="40" FontSize="30" HorizontalOptions="End"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Grid>
+            
+            
+
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

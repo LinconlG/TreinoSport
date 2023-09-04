@@ -46,6 +46,30 @@
         </Setter>
     </Style>
 
+    <Style TargetType="Button" x:Key="btnMais">
+        <Setter Property="BackgroundColor" Value="LightGray"/>
+        <Setter Property="CornerRadius" Value="50"/>
+        <Setter Property="WidthRequest" Value="55"/>
+        <Setter Property="HeightRequest" Value="55"/>
+        <Setter Property="FontSize" Value="40"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="TextColor" Value="Green"/>
+        <Setter Property="Text" Value="+"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+    </Style>
+
+    <Style TargetType="Button" x:Key="btnMenos">
+        <Setter Property="BackgroundColor" Value="LightGray"/>
+        <Setter Property="CornerRadius" Value="50"/>
+        <Setter Property="WidthRequest" Value="55"/>
+        <Setter Property="HeightRequest" Value="55"/>
+        <Setter Property="FontSize" Value="40"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="TextColor" Value="Red"/>
+        <Setter Property="Text" Value="-"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+    </Style>
+
     <Style TargetType="CheckBox">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Yellow100Accent}, Dark={StaticResource White}}" />
         <Setter Property="VisualStateManager.VisualStateGroups">
