@@ -37,10 +37,10 @@ public partial class MainPage : ContentPage
             Preferences.Set("senha", senha);
         }
 
-        Login(email, senha);
+        await Login(email, senha);
     }
 
-    private async void Login(string email, string senha) {
+    private async Task Login(string email, string senha) {
         
         try {
             await _usuarioService.Login(email, senha);
@@ -63,13 +63,13 @@ public partial class MainPage : ContentPage
         }
     }
 
-    private void LembrarLogin() {
+    private async void LembrarLogin() {
         var email = Preferences.Get("email", "falso");
         var senha = Preferences.Get("senha", "falso");
         if (email == "falso" || senha == "falso") {
             return;
         }
-        Login(email, senha);
+        await Login(email, senha);
     }
 
     private bool CheckCampos() {

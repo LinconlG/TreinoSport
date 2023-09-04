@@ -37,7 +37,7 @@ namespace TreinoSport.Contexts {
                     { "senha", senha}
                 };
 
-                HttpResponseMessage response = await HttpResquest(HttpMethod.Put, _treinoSportApiUrl, endpoint, queryParams);
+                HttpResponseMessage response = await HttpResquest(HttpMethod.Get, _treinoSportApiUrl, endpoint, queryParams);
                 await response.HandleResponse();
 
                 return await HttpUtilities.GetBody<Conta>(response);

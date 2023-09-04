@@ -5,6 +5,7 @@ using System.Xml.Linq;
 using TreinoSport.Contexts;
 using TreinoSport.Contexts.Base;
 using TreinoSport.Services;
+using TreinoSport.ViewModels;
 using TreinoSport.Views;
 
 namespace TreinoSport;
@@ -41,11 +42,16 @@ public static class MauiProgram
         mauiAppBuilder.Services.AddSingleton<UsuarioService>();
         #endregion
 
-        #region Page
+        #region View
         mauiAppBuilder.Services.AddSingleton<MainPage>();
         mauiAppBuilder.Services.AddSingleton<CadastroPage>();
         mauiAppBuilder.Services.AddSingleton<TreinoContext>();
         mauiAppBuilder.Services.AddSingleton<PaginaInicialAluno>();
+        mauiAppBuilder.Services.AddSingleton<PaginaInicialCT>();
+        #endregion
+
+        #region ViewModel
+        mauiAppBuilder.Services.AddSingleton<TreinoViewModel>();
         #endregion
 
         return mauiAppBuilder;
