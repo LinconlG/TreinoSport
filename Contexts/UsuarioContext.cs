@@ -28,19 +28,17 @@ namespace TreinoSport.Contexts {
         }
 
         public async Task<Conta> Login(string email, string senha) {
-            try {                
+            try {
+
+                var endpoint = "/login";
 
                 var queryParams = new Dictionary<string, object>() {
                     { "email", email},
                     { "senha", senha}
                 };
 
-                HttpRequestMessage message = new(HttpMethod.Get, _treinoSportApiUrl + "/login" + ParamsToString(queryParams));
-
-                HttpResponseMessage response = await httpClient.SendAsync(message);
+                HttpResponseMessage response = await HttpResquest(HttpMethod.Put, _treinoSportApiUrl, endpoint, queryParams);
                 await response.HandleResponse();
-
-                string responseBody = await response.Content.ReadAsStringAsync();
 
                 return await HttpUtilities.GetBody<Conta>(response);
             }

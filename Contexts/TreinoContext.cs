@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using CoreMidi;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,16 +15,13 @@ namespace TreinoSport.Contexts {
 
         public async Task<IEnumerable<Treino>> GetTreinosComoAluno(int codigoUsuario) {
             try {
+                var endpoint = "/treino/aluno/todos";
                 var queryParams = new Dictionary<string, object>() {
                     { "codigoUsuario", codigoUsuario}
                 };
 
-                HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Get, _treinoSportApiUrl + "/treino/aluno/todos" + ParamsToString(queryParams));
-
-                HttpResponseMessage response = await httpClient.SendAsync(message);
+                HttpResponseMessage response = await HttpResquest(HttpMethod.Get, _treinoSportApiUrl, endpoint, queryParams);
                 await response.HandleResponse();
-
-                string responseBody = await response.Content.ReadAsStringAsync();
 
                 return await HttpUtilities.GetBody<IEnumerable<Treino>>(response);
             }
@@ -34,16 +32,14 @@ namespace TreinoSport.Contexts {
 
         public async Task<IEnumerable<Treino>> GetTreinosComoCT(int codigoCT) {
             try {
+                var endpoint = "/treino/ct/todos";
+
                 var queryParams = new Dictionary<string, object>() {
                     { "codigoCT", codigoCT}
                 };
 
-                HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Get, _treinoSportApiUrl + "/treino/ct/todos" + ParamsToString(queryParams));
-
-                HttpResponseMessage response = await httpClient.SendAsync(message);
+                HttpResponseMessage response = await HttpResquest(HttpMethod.Get, _treinoSportApiUrl, endpoint, queryParams);
                 await response.HandleResponse();
-
-                string responseBody = await response.Content.ReadAsStringAsync();
 
                 return await HttpUtilities.GetBody<IEnumerable<Treino>>(response);
             }
