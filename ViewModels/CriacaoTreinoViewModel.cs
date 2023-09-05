@@ -12,23 +12,28 @@ namespace TreinoSport.ViewModels {
 
         public ObservableCollection<TimePicker> Horarios { get; set; } = new();
 
-        [ObservableProperty]
-        private TimePicker horario;
-
-
-        Dictionary<string, object> controles;
-
         [ICommand]
         private void AddHorario() {
             //Horarios.Add();
         }
 
-        public void AddHorarioTeste(TimePicker novoHorario) {
-            Horarios.Add(novoHorario);
+        public void AdicionarHorario(TimePicker novoHorario) {
+            if (Horarios.Count < 8) {
+                Horarios.Add(novoHorario);
+            }
         }
 
-        public void RmvHorarioTeste(TimePicker novoHorario) {
-            Horarios.Remove(novoHorario);
+        public void RemoverHorario() {
+            if (Horarios.Count > 0) {
+                Horarios.RemoveAt(Horarios.Count - 1);
+            }
+        }
+
+        public bool LimiteHorarios() {
+            if (Horarios.Count < 8) {
+                return true;
+            }
+            return false;
         }
 
         public void OnAppearing(Dictionary<string, object> controles) {

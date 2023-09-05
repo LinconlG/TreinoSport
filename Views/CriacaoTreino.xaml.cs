@@ -6,27 +6,27 @@ namespace TreinoSport.Views;
 public partial class CriacaoTreino : ContentPage
 {
     CriacaoTreinoViewModel _criacaoTreinoViewModel;
-    private TimePicker _novoHorario;
+    private TimePicker _horarioMaisRecente;
 
-	public CriacaoTreino(CriacaoTreinoViewModel criacaoTreinoViewModel)
+    public CriacaoTreino(CriacaoTreinoViewModel criacaoTreinoViewModel)
 	{
 		InitializeComponent();
         this.BindingContext = _criacaoTreinoViewModel = criacaoTreinoViewModel;
 	}
 
 	private void ClickAddHorario(object sender, EventArgs e) {
-        _novoHorario = new TimePicker {
-            Format = "HH:mm"
-        };
 
-        //por um limite de add
+        if (!_criacaoTreinoViewModel.LimiteHorarios()) {
+            return;
+        }
 
-        _criacaoTreinoViewModel.AddHorarioTeste(_novoHorario);
+        _horarioMaisRecente = new TimePicker { Format = "HH:mm" };
+
+        _criacaoTreinoViewModel.AdicionarHorario(_horarioMaisRecente);
     }
 
     private void ClickRmvHorario(object sender, EventArgs e) {
-
-        _criacaoTreinoViewModel.RmvHorarioTeste(_novoHorario);
+        _criacaoTreinoViewModel.RemoverHorario();
     }
 
     protected override void OnAppearing() {
