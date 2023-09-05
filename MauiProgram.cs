@@ -36,6 +36,7 @@ public static class MauiProgram
         #region Context
         mauiAppBuilder.Services.AddSingleton<BaseContext>();
         mauiAppBuilder.Services.AddSingleton<UsuarioContext>();
+        mauiAppBuilder.Services.AddSingleton<TreinoContext>();
         #endregion
 
         #region Service
@@ -45,13 +46,14 @@ public static class MauiProgram
         #region View
         mauiAppBuilder.Services.AddSingleton<MainPage>();
         mauiAppBuilder.Services.AddSingleton<CadastroPage>();
-        mauiAppBuilder.Services.AddSingleton<TreinoContext>();
+        mauiAppBuilder.Services.AddSingleton<CriacaoTreino>();
         mauiAppBuilder.Services.AddSingleton<PaginaInicialAluno>();
         mauiAppBuilder.Services.AddSingleton<PaginaInicialCT>();
         #endregion
 
         #region ViewModel
         mauiAppBuilder.Services.AddSingleton<TreinoViewModel>();
+        mauiAppBuilder.Services.AddSingleton<CriacaoTreinoViewModel>();
         #endregion
 
         return mauiAppBuilder;
