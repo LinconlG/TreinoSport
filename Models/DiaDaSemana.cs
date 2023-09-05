@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace TreinoSport.Models {
     public class DiaDaSemana {
-        public DayOfWeek Dia { get; set; }
+        public string NomeDia { get; set; }
+        public DayOfWeek DiaEnum { get; set; }
         public List<DateTime> Horarios { get; set; }
     }
 }
