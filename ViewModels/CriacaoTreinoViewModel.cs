@@ -8,37 +8,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TreinoSport.Models;
+using TreinoSport.Models.Enums;
 using TreinoSport.Util;
 
-namespace TreinoSport.ViewModels {
-    public partial class CriacaoTreinoViewModel : ObservableObject {
+namespace TreinoSport.ViewModels
+{
+    public partial class CriacaoTreinoViewModel : ObservableObject
+    {
 
-        public ObservableCollection<DiaDaSemana> DatasHorarios { get; set; } = new();
+        public ObservableCollection<DiaDaSemanaDTO> DatasHorarios { get; set; } = new();
 
-        [ObservableProperty]
-        private DiaDaSemana diaDaSemana;
-
-        [ICommand]
-        private void AddHorario() {
-            //Horarios.Add();
-        }
 
         public void AdicionarHorario(TimePicker novoHorario, string diaString) {
-
-            foreach (var data in DatasHorarios)
-            {
+            foreach (var data in DatasHorarios) {
                 if (data.DiaEnum.ToString() == diaString) {
                     data.Horarios.Add(novoHorario);
                 }
             }
         }
 
-/*        public void RemoverHorario() {
-            if (Horarios.Count > 0) {
-                Horarios.RemoveAt(Horarios.Count - 1);
+        public void RemoverHorario(string diaString) {
+            foreach (var data in DatasHorarios) {
+                if (data.DiaEnum.ToString() == diaString && data.Horarios.Count > 0) {
+                    data.Horarios.RemoveAt(data.Horarios.Count - 1);
+                }
             }
         }
-*/
+
         public bool LimiteHorarios(string diaEnum) {
             var dia = DatasHorarios.First(dia => dia.DiaEnum.ToString() == diaEnum);
             if (dia.Horarios.Count < 8) {
@@ -47,13 +43,34 @@ namespace TreinoSport.ViewModels {
             return false;
         }
 
+        public bool DatasExistem() {
+            return DatasHorarios.Count > 0;
+        }
+
         public void AdicionarDia(DayOfWeek diaEnum) {
-            var diaDaSemana = new DiaDaSemana();
+            var diaDaSemana = new DiaDaSemanaDTO();
             diaDaSemana.DiaEnum = diaEnum;
             diaDaSemana.Horarios = new();
             diaDaSemana.NomeDia = Utilidade.TratarDayOfWeek(diaEnum);
             DatasHorarios.Add(diaDaSemana);
         }
+
+        public void RemoverDiaDaSemana(string diaString) {
+            foreach (var data in DatasHorarios.ToList()) {
+                if (data.DiaEnum.ToString() == diaString) {
+                    DatasHorarios.Remove(data);
+                }
+            }
+        }
+
+        public bool DiaDaSemanaJaExiste(int selectedIndex) {
+            if (DatasHorarios.Any(data => data.DiaEnum == (DayOfWeek)selectedIndex)) {
+                return true;
+            }
+            return false;
+        }
+
+
 
         public void OnAppearing(Dictionary<string, object> controles) {
 

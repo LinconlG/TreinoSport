@@ -25,9 +25,14 @@
 
                 </Picker.Items>
             </Picker>
+            <Label x:Name="_labelAvisoModalidade" Text="Selecione uma modalidade." Style="{StaticResource btnAviso}" IsVisible="false"/>
 
             <Label Text="Descrição" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>
-            <Editor x:Name="_editorDescricao" HeightRequest="100"/>
+            <Editor x:Name="_editorDescricao" HeightRequest="100" FontSize="{StaticResource fonteTamanho2}"/>
+
+            <Label Text="Vencimento do treino" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>
+            <Label Text="Só será considerado o dia selecionado" HorizontalOptions="Center" TextColor="Gray"/>
+            <DatePicker x:Name="_datePickerVencimento" FontSize="{StaticResource fonteTamanho2}" WidthRequest="30" HorizontalOptions="Center" VerticalOptions="Center" Format="dd"/>
 
             <Label Text="Dias da semana" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>
             <Picker x:Name="_pickerDiaDaSemana" Title="Adicione aqui o dia da semana" HorizontalTextAlignment="Center" FontSize="{StaticResource fonteTamanho2}" WidthRequest="265" SelectedIndexChanged="PickerDiaDaSemanaChanged">
@@ -42,17 +47,21 @@
 
                 </Picker.Items>
             </Picker>
+            <Label x:Name="_labelAvisoDiaDaSemana" Text="Deve haver no mínimo um dia." Style="{StaticResource btnAviso}" IsVisible="false"/>
+            
 
             <Grid>
                 
                 <CollectionView ItemsSource="{Binding DatasHorarios}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <StackLayout>
-                                
-                                <Label Text="{Binding NomeDia}" TextDecorations="Underline" FontAttributes="Bold" FontSize="{StaticResource fonteTamanho1}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                            <StackLayout Spacing="10">
+                                <Grid HeightRequest="30">
+                                    <Label Text="{Binding NomeDia}" TextDecorations="Underline" FontAttributes="Bold" FontSize="{StaticResource fonteTamanho1}" VerticalOptions="Center" HorizontalOptions="Center"/>
+                                    <Button Clicked="ClickRmvDia" ClassId="{Binding DiaEnum}" Style="{StaticResource btnMenosRetangulo}" HorizontalOptions="Start" VerticalOptions="Center"/>
+                                </Grid>
 
-                                <Grid Padding="10" BackgroundColor="#ebedeb">
+                                <Grid MinimumHeightRequest="65.45" Padding="10" BackgroundColor="{StaticResource Yellow300Accent}">
                                     <CollectionView ItemsSource="{Binding Horarios}">
                                         <CollectionView.ItemsLayout>
                                             <GridItemsLayout Orientation="Vertical" Span="4" />
@@ -67,9 +76,9 @@
                                     </CollectionView>
                                 </Grid>
 
-                                <Grid HorizontalOptions="Center" WidthRequest="90">
-                                    <Button  ClassId="{Binding DiaEnum}" Style="{StaticResource btnMenos}" HeightRequest="40" WidthRequest="40" FontSize="30" HorizontalOptions="Start"/>
-                                    <Button x:Name="BotaoMais" Clicked="ClickAddHorario" ClassId="{Binding DiaEnum}" Style="{StaticResource btnMais}"  HeightRequest="40" WidthRequest="40" FontSize="30" HorizontalOptions="End"/>
+                                <Grid HorizontalOptions="Center" WidthRequest="90" HeightRequest="50">
+                                    <Button  Clicked="ClickRmvHorario" ClassId="{Binding DiaEnum}" Style="{StaticResource btnMenos}" HeightRequest="40" WidthRequest="40" FontSize="30" HorizontalOptions="Start"/>
+                                    <Button  Clicked="ClickAddHorario" ClassId="{Binding DiaEnum}" Style="{StaticResource btnMais}"  HeightRequest="40" WidthRequest="40" FontSize="30" HorizontalOptions="End"/>
                                 </Grid>
 
                             </StackLayout>
@@ -79,6 +88,7 @@
 
             </Grid>
 
+            <Button Clicked="ClickConfirmarHorarios" Text="Confirmar" WidthRequest="150" FontSize="{StaticResource fonteTamanho2}"/>
 
         </VerticalStackLayout>
     </ScrollView>

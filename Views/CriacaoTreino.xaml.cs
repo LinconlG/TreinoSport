@@ -7,10 +7,13 @@ public partial class CriacaoTreino : ContentPage
 {
     private CriacaoTreinoViewModel criacaoTreinoViewModel;
     private TimePicker _horarioMaisRecente;
+    private bool? flagEditar;
 
-    public CriacaoTreino() {
+    public CriacaoTreino(bool? flagEditar = null) {
         InitializeComponent();
         this.BindingContext = criacaoTreinoViewModel = new();
+        this.flagEditar = flagEditar is null ? false : flagEditar.Value;
+        //chamar metodo que faz o Get, onde o parametro é a flag
     }
 
     private void ClickAddHorario(object sender, EventArgs e) {
@@ -25,27 +28,55 @@ public partial class CriacaoTreino : ContentPage
         criacaoTreinoViewModel.AdicionarHorario(_horarioMaisRecente, diaString);
     }
 
+    private void ClickConfirmarHorarios(object sender, EventArgs e) {
+        if (CheckCampos()) {
+            return;
+        }
+
+    }
+
     private void ClickRmvHorario(object sender, EventArgs e) {
-        //criacaoTreinoViewModel.RemoverHorario();
+        Button button = sender as Button;
+        var diaString = button.ClassId;
+        criacaoTreinoViewModel.RemoverHorario(diaString);
     }
 
-    protected override void OnAppearing() {
-        base.OnAppearing();
-    }
-
-    private void LimparCampos(object sender, EventArgs e) {
-        _pickerModalidade.SelectedItem = null;
-        _editorDescricao.Text = string.Empty;
-        _pickerDiaDaSemana.SelectedItem = null;
-        criacaoTreinoViewModel.DatasHorarios.Clear();
+    private void ClickRmvDia(object sender, EventArgs e) {
+        Button button = sender as Button;
+        var diaString = button.ClassId;
+        criacaoTreinoViewModel.RemoverDiaDaSemana(diaString);
     }
 
     private void PickerDiaDaSemanaChanged(object sender, EventArgs e) {
         Picker pickerDiaDaSemana = (Picker)sender;
-        if (pickerDiaDaSemana.SelectedItem is null) {
+        var index = pickerDiaDaSemana.SelectedIndex;
+        if (pickerDiaDaSemana.SelectedItem is null || DiaDaSemanaJaExiste(index)) {
+            pickerDiaDaSemana.SelectedItem = null;
             return;
         }
-        criacaoTreinoViewModel.AdicionarDia((DayOfWeek)pickerDiaDaSemana.SelectedIndex);
+        criacaoTreinoViewModel.AdicionarDia((DayOfWeek)index);
         pickerDiaDaSemana.SelectedItem = null;
+    }
+
+    private bool DiaDaSemanaJaExiste(int selectedIndex) {
+        return criacaoTreinoViewModel.DiaDaSemanaJaExiste(selectedIndex);
+    }
+
+    private bool CheckCampos() {
+        if (_pickerModalidade.SelectedItem is null) {
+            _labelAvisoModalidade.IsVisible = true;
+            return true;
+        }
+        if (!criacaoTreinoViewModel.DatasExistem()) {
+            _labelAvisoModalidade.IsVisible = true;
+            return true;
+        }
+        _labelAvisoModalidade.IsVisible = false;
+        _labelAvisoModalidade.IsVisible = false;
+        return false;
+    }
+
+    protected override void OnAppearing() {
+        base.OnAppearing();
     }
 }
