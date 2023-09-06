@@ -3,6 +3,7 @@ using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,16 +15,23 @@ namespace TreinoSport.ViewModels {
 
         public ObservableCollection<DiaDaSemana> DatasHorarios { get; set; } = new();
 
+        [ObservableProperty]
+        private DiaDaSemana diaDaSemana;
+
         [ICommand]
         private void AddHorario() {
             //Horarios.Add();
         }
 
-/*        public void AdicionarHorario(TimePicker novoHorario) {
-            if (Horarios.Count < 8) {
-                Horarios.Add(novoHorario);
+        public void AdicionarHorario(TimePicker novoHorario, string diaString) {
+
+            foreach (var data in DatasHorarios)
+            {
+                if (data.DiaEnum.ToString() == diaString) {
+                    data.Horarios.Add(novoHorario);
+                }
             }
-        }*/
+        }
 
 /*        public void RemoverHorario() {
             if (Horarios.Count > 0) {
@@ -31,12 +39,13 @@ namespace TreinoSport.ViewModels {
             }
         }
 */
-/*        public bool LimiteHorarios() {
-            if (Horarios.Count < 8) {
+        public bool LimiteHorarios(string diaEnum) {
+            var dia = DatasHorarios.First(dia => dia.DiaEnum.ToString() == diaEnum);
+            if (dia.Horarios.Count < 8) {
                 return true;
             }
             return false;
-        }*/
+        }
 
         public void AdicionarDia(DayOfWeek diaEnum) {
             var diaDaSemana = new DiaDaSemana();

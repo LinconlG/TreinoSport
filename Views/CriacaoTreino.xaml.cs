@@ -7,34 +7,30 @@ public partial class CriacaoTreino : ContentPage
 {
     private CriacaoTreinoViewModel criacaoTreinoViewModel;
     private TimePicker _horarioMaisRecente;
-    private ToolbarItem itemVoltar;
 
-    public CriacaoTreino()
-	{
-		InitializeComponent();
+    public CriacaoTreino() {
+        InitializeComponent();
         this.BindingContext = criacaoTreinoViewModel = new();
-        //itemVoltar.Clicked += LimparCampos;
-
     }
 
-/*	private void ClickAddHorario(object sender, EventArgs e) {
-
-        if (!_criacaoTreinoViewModel.LimiteHorarios()) {
+    private void ClickAddHorario(object sender, EventArgs e) {
+        Button button = sender as Button;
+        var diaString = button.ClassId;
+        if (!criacaoTreinoViewModel.LimiteHorarios(diaString)) {
             return;
         }
 
-        _horarioMaisRecente = new TimePicker { Format = "HH:mm" };
+        _horarioMaisRecente = new TimePicker();
 
-        _criacaoTreinoViewModel.AdicionarHorario(_horarioMaisRecente);
+        criacaoTreinoViewModel.AdicionarHorario(_horarioMaisRecente, diaString);
     }
 
     private void ClickRmvHorario(object sender, EventArgs e) {
-        _criacaoTreinoViewModel.RemoverHorario();
-    }*/
+        //criacaoTreinoViewModel.RemoverHorario();
+    }
 
     protected override void OnAppearing() {
         base.OnAppearing();
-
     }
 
     private void LimparCampos(object sender, EventArgs e) {
@@ -45,7 +41,10 @@ public partial class CriacaoTreino : ContentPage
     }
 
     private void PickerDiaDaSemanaChanged(object sender, EventArgs e) {
-        Picker pickerDiaDaSemana = (Picker)sender;     
+        Picker pickerDiaDaSemana = (Picker)sender;
+        if (pickerDiaDaSemana.SelectedItem is null) {
+            return;
+        }
         criacaoTreinoViewModel.AdicionarDia((DayOfWeek)pickerDiaDaSemana.SelectedIndex);
         pickerDiaDaSemana.SelectedItem = null;
     }
