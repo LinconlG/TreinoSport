@@ -20,7 +20,6 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
-			.DependenciesInjection()
 			.UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
 			{
@@ -29,33 +28,8 @@ public static class MauiProgram
 			})
             .Configuration.AddConfiguration(config);
 
+        BaseContext.StartContext(config);
+
         return builder.Build();
 	}
-
-    public static MauiAppBuilder DependenciesInjection(this MauiAppBuilder mauiAppBuilder) {
-        #region Context
-        mauiAppBuilder.Services.AddSingleton<BaseContext>();
-        mauiAppBuilder.Services.AddSingleton<UsuarioContext>();
-        mauiAppBuilder.Services.AddSingleton<TreinoContext>();
-        #endregion
-
-        #region Service
-        mauiAppBuilder.Services.AddSingleton<UsuarioService>();
-        #endregion
-
-        #region View
-        mauiAppBuilder.Services.AddSingleton<MainPage>();
-        mauiAppBuilder.Services.AddSingleton<CadastroPage>();
-        mauiAppBuilder.Services.AddSingleton<CriacaoTreino>();
-        mauiAppBuilder.Services.AddSingleton<PaginaInicialAluno>();
-        mauiAppBuilder.Services.AddSingleton<PaginaInicialCT>();
-        #endregion
-
-        #region ViewModel
-        mauiAppBuilder.Services.AddSingleton<TreinoViewModel>();
-        mauiAppBuilder.Services.AddSingleton<CriacaoTreinoViewModel>();
-        #endregion
-
-        return mauiAppBuilder;
-    }
 }

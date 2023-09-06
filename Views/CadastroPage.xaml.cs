@@ -3,18 +3,19 @@ using Microsoft.Maui.Devices;
 using TreinoSport.Contexts;
 using TreinoSport.Models;
 using TreinoSport.Services;
+using TreinoSport.ViewModels;
 
 namespace TreinoSport.Views;
 
 public partial class CadastroPage : ContentPage
 {
-    private readonly UsuarioService _usuarioService;
+    private CadastroViewModel cadastroViewModel { get; set; }
     private Button btn;
 
-	public CadastroPage(UsuarioService usuarioService)
+	public CadastroPage()
 	{
         InitializeComponent();
-        _usuarioService = usuarioService;
+        this.BindingContext = cadastroViewModel = new CadastroViewModel();
 	}
 
 	private async void ClickCadastrarBtn(object sender, EventArgs e) {
@@ -34,7 +35,7 @@ public partial class CadastroPage : ContentPage
             usuario.Descricao = editorDescricao.Text;
         }
         try {
-            await _usuarioService.CadastrarUsuario(usuario);
+            await cadastroViewModel.CadastrarUsuario(usuario);
             await DisplayAlert("Sucesso", "Você foi cadastrado!", "OK");
             LimparCampos();
             await Navigation.PopAsync();

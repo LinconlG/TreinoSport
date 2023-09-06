@@ -10,13 +10,14 @@ using TreinoSport.Contexts.Base;
 using TreinoSport.Models;
 
 namespace TreinoSport.Contexts {
-    public class UsuarioContext : BaseContext{
-        public UsuarioContext(IConfiguration configuration) : base(configuration) { }
+    public class UsuarioContext {
+
+        public UsuarioContext() { }
 
         public async Task<bool> CadastrarUsuario(Conta usuario) {
             try {
                 var endpoint = "/usuario/cadastrar";
-                HttpResponseMessage response = await HttpResquest(HttpMethod.Put, _treinoSportApiUrl, endpoint, body: usuario);
+                HttpResponseMessage response = await BaseContext.HttpResquest(HttpMethod.Put, BaseContext.urlAndroidAPI, endpoint, body: usuario);
                 await response.HandleResponse();
                 var emailExiste = await response.GetBody<bool>();
                 return emailExiste;
@@ -37,7 +38,7 @@ namespace TreinoSport.Contexts {
                     { "senha", senha}
                 };
 
-                HttpResponseMessage response = await HttpResquest(HttpMethod.Get, _treinoSportApiUrl, endpoint, queryParams);
+                HttpResponseMessage response = await BaseContext.HttpResquest(HttpMethod.Get, BaseContext.urlAndroidAPI, endpoint, queryParams);
                 await response.HandleResponse();
 
                 return await HttpUtilities.GetBody<Conta>(response);

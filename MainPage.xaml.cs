@@ -8,19 +8,17 @@ namespace TreinoSport;
 
 public partial class MainPage : ContentPage
 {
-    private readonly UsuarioService _usuarioService;
-    private readonly CadastroPage _cadastroPage;
+    private LoginViewModel loginViewModel;
 
-    public MainPage(UsuarioService usuarioService, CadastroPage cadastroPage)
+    public MainPage()
 	{
         InitializeComponent();
-        _usuarioService = usuarioService;
-        _cadastroPage = cadastroPage;
+        this.BindingContext = loginViewModel = new();
         LembrarLogin();
     }
 
     private async void ClickCadastroBtn(object sender, EventArgs e) {
-        await Navigation.PushAsync(_cadastroPage);
+        await Navigation.PushAsync(new CadastroPage());
     }
 
     private async void ClickLoginBtn(object sender, EventArgs e) {
@@ -43,7 +41,7 @@ public partial class MainPage : ContentPage
     private async Task Login(string email, string senha) {
         
         try {
-            await _usuarioService.Login(email, senha);
+            await loginViewModel.Login(email, senha);
         }
         catch (Exception) {
             avisoLogin.IsVisible = true;

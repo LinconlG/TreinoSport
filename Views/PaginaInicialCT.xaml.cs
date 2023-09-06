@@ -4,17 +4,15 @@ namespace TreinoSport.Views;
 
 public partial class PaginaInicialCT : ContentPage
 {
-    TreinoViewModel _treinoViewModel;
-    CriacaoTreino _criacaoTreino;
-    public PaginaInicialCT(TreinoViewModel treinoViewModel, CriacaoTreino criacaoTreino)
+    private TreinoViewModel treinoViewModel;
+    public PaginaInicialCT()
 	{
 		InitializeComponent();
-        this.BindingContext = _treinoViewModel = treinoViewModel;
-        _criacaoTreino = criacaoTreino;
+        this.BindingContext = treinoViewModel = new();
     }
     protected override void OnAppearing() {
         base.OnAppearing();
-        _treinoViewModel.OnAppearing(refreshLista, avisoTreinosVazio);
+        treinoViewModel.OnAppearing(refreshLista, avisoTreinosVazio);
     }
 
     private void ClickedBtnGerenciarTreino(object sender, EventArgs e) {
@@ -23,6 +21,6 @@ public partial class PaginaInicialCT : ContentPage
 
     }
     private async void ClickAdicionar(object sender, EventArgs e) {
-        await Navigation.PushAsync(_criacaoTreino);
+        await Navigation.PushAsync(new CriacaoTreino());
     }
 }

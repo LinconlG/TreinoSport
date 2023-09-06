@@ -8,9 +8,9 @@ using TreinoSport.Contexts.Base;
 using TreinoSport.Models;
 
 namespace TreinoSport.Contexts {
-    public class TreinoContext : BaseContext{
+    public class TreinoContext {
 
-        public TreinoContext(IConfiguration configuration) : base(configuration) {}
+        public TreinoContext() { }
 
         public async Task<IEnumerable<Treino>> GetTreinosComoAluno(int codigoUsuario) {
             try {
@@ -19,7 +19,7 @@ namespace TreinoSport.Contexts {
                     { "codigoUsuario", codigoUsuario}
                 };
 
-                HttpResponseMessage response = await HttpResquest(HttpMethod.Get, _treinoSportApiUrl, endpoint, queryParams);
+                HttpResponseMessage response = await BaseContext.HttpResquest(HttpMethod.Get, BaseContext.urlAndroidAPI, endpoint, queryParams);
                 await response.HandleResponse();
 
                 return await HttpUtilities.GetBody<IEnumerable<Treino>>(response);
@@ -37,7 +37,7 @@ namespace TreinoSport.Contexts {
                     { "codigoCT", codigoCT}
                 };
 
-                HttpResponseMessage response = await HttpResquest(HttpMethod.Get, _treinoSportApiUrl, endpoint, queryParams);
+                HttpResponseMessage response = await BaseContext.HttpResquest(HttpMethod.Get, BaseContext.urlAndroidAPI, endpoint, queryParams);
                 await response.HandleResponse();
 
                 return await HttpUtilities.GetBody<IEnumerable<Treino>>(response);

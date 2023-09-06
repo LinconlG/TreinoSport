@@ -12,20 +12,20 @@ using System.Threading.Tasks;
 using TreinoSport.Extensions;
 
 namespace TreinoSport.Contexts.Base {
-    public class BaseContext {
+    public abstract class BaseContext {
 
-        protected readonly HttpClient httpClient;
-        protected readonly string _treinoSportApiUrl;
-        protected readonly IConfiguration _configuration;
+        private static HttpClient httpClient;
+        public static string urlAndroidAPI;
+        private static IConfiguration _configuration;
 
-        public BaseContext(IConfiguration configuration) {
+        public static void StartContext(IConfiguration configuration) {
             _configuration = configuration;
-            _treinoSportApiUrl = _configuration.GetConnectionString("treinoSportApi");
+            urlAndroidAPI = _configuration.GetConnectionString("treinoSportApi");
             httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Add("Accept", "application/json;charset=UTF-8");
         }
 
-        protected async Task<HttpResponseMessage> HttpResquest(HttpMethod verbo, string urlApi, string endpoint, Dictionary<string, object> queryParams = null, object body = null) {
+        public static async Task<HttpResponseMessage> HttpResquest(HttpMethod verbo, string urlApi, string endpoint, Dictionary<string, object> queryParams = null, object body = null) {
             var api = await CheckAPI();
             if (api.StatusCode != HttpStatusCode.OK) {
                 throw new Exception("Falha na conexão com a API");
@@ -40,9 +40,9 @@ namespace TreinoSport.Contexts.Base {
             return response;
         }
 
-        public async Task<HttpResponseMessage> CheckAPI() {
+        public static async Task<HttpResponseMessage> CheckAPI() {
             try {
-                HttpRequestMessage message = new(HttpMethod.Get, _treinoSportApiUrl + "/check");
+                HttpRequestMessage message = new(HttpMethod.Get, urlAndroidAPI + "/check");
 
 
                 var task = httpClient.SendAsync(message);
@@ -58,7 +58,7 @@ namespace TreinoSport.Contexts.Base {
 
         }
 
-        public HttpClientHandler GetInsecureHandler() {
+        public static HttpClientHandler GetInsecureHandler() {
             HttpClientHandler handler = new();
             handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
             {
@@ -69,7 +69,7 @@ namespace TreinoSport.Contexts.Base {
             return handler;
         }
 
-        public string ParamsToString(Dictionary<string, object> queryParams) {
+        public static string ParamsToString(Dictionary<string, object> queryParams) {
             if (queryParams == null || queryParams.Count == 0) {
                 return "";
             }

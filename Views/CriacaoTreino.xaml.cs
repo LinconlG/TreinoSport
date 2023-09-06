@@ -5,14 +5,14 @@ namespace TreinoSport.Views;
 
 public partial class CriacaoTreino : ContentPage
 {
-    CriacaoTreinoViewModel _criacaoTreinoViewModel;
+    private CriacaoTreinoViewModel criacaoTreinoViewModel;
     private TimePicker _horarioMaisRecente;
     private ToolbarItem itemVoltar;
 
-    public CriacaoTreino(CriacaoTreinoViewModel criacaoTreinoViewModel)
+    public CriacaoTreino()
 	{
 		InitializeComponent();
-        this.BindingContext = _criacaoTreinoViewModel = criacaoTreinoViewModel;
+        this.BindingContext = criacaoTreinoViewModel = new();
         //itemVoltar.Clicked += LimparCampos;
 
     }
@@ -41,12 +41,12 @@ public partial class CriacaoTreino : ContentPage
         _pickerModalidade.SelectedItem = null;
         _editorDescricao.Text = string.Empty;
         _pickerDiaDaSemana.SelectedItem = null;
-        _criacaoTreinoViewModel.DatasHorarios.Clear();
+        criacaoTreinoViewModel.DatasHorarios.Clear();
     }
 
     private void PickerDiaDaSemanaChanged(object sender, EventArgs e) {
         Picker pickerDiaDaSemana = (Picker)sender;     
-        _criacaoTreinoViewModel.AdicionarDia((DayOfWeek)pickerDiaDaSemana.SelectedIndex);
+        criacaoTreinoViewModel.AdicionarDia((DayOfWeek)pickerDiaDaSemana.SelectedIndex);
         pickerDiaDaSemana.SelectedItem = null;
     }
 }
