@@ -1,18 +1,22 @@
+using System;
 using System.Collections.ObjectModel;
+using TreinoSport.Models;
+using TreinoSport.Models.Enums;
 using TreinoSport.ViewModels;
 
 namespace TreinoSport.Views;
 
-public partial class CriacaoTreino : ContentPage
-{
+public partial class CriacaoTreino : ContentPage {
     private CriacaoTreinoViewModel criacaoTreinoViewModel;
     private TimePicker _horarioMaisRecente;
     private bool? flagEditar;
+    private IEnumerable<string> treinosExistentes;
 
-    public CriacaoTreino(bool? flagEditar = null) {
+    public CriacaoTreino(bool? flagEditar = null, int? codigoTreino = null, IEnumerable<string> treinosExistentes = null) {
         InitializeComponent();
         this.BindingContext = criacaoTreinoViewModel = new();
         this.flagEditar = flagEditar is null ? false : flagEditar.Value;
+        this.treinosExistentes = treinosExistentes;
         //chamar metodo que faz o Get, onde o parametro é a flag
     }
 
@@ -28,11 +32,19 @@ public partial class CriacaoTreino : ContentPage
         criacaoTreinoViewModel.AdicionarHorario(_horarioMaisRecente, diaString);
     }
 
-    private void ClickConfirmarHorarios(object sender, EventArgs e) {
+    private async void ClickConfirmarHorarios(object sender, EventArgs e) {
         if (CheckCampos()) {
             return;
         }
-
+        try {
+            var treino = AtribuirTreino();
+            await criacaoTreinoViewModel.CriarEditarTreino(treino);
+            await DisplayAlert("Tudo certo", "Os detalhes do treino foram salvos com sucesso!", "OK");
+            await Navigation.PopAsync();
+        }
+        catch (Exception ex) {
+            throw new Exception(ex.Message);
+        }
     }
 
     private void ClickRmvHorario(object sender, EventArgs e) {
@@ -47,6 +59,15 @@ public partial class CriacaoTreino : ContentPage
         criacaoTreinoViewModel.RemoverDiaDaSemana(diaString);
     }
 
+    private async void PickerModalidadeChanged(object sender, EventArgs e) {
+        Picker pickerModalidade = (Picker)sender;
+        var index = pickerModalidade.SelectedIndex;
+        if (CheckTreinosExistentes(index)) {
+            await DisplayAlert("Alerta", "Já existe um treino dessa modalidade.", "OK");
+            pickerModalidade.SelectedItem = null;
+        }
+    }
+
     private void PickerDiaDaSemanaChanged(object sender, EventArgs e) {
         Picker pickerDiaDaSemana = (Picker)sender;
         var index = pickerDiaDaSemana.SelectedIndex;
@@ -56,6 +77,11 @@ public partial class CriacaoTreino : ContentPage
         }
         criacaoTreinoViewModel.AdicionarDia((DayOfWeek)index);
         pickerDiaDaSemana.SelectedItem = null;
+    }
+
+    private bool CheckTreinosExistentes(int index) {
+        var modalidade = (ModalidadeTreino)index;
+        return treinosExistentes.Contains(modalidade.ToString());
     }
 
     private bool DiaDaSemanaJaExiste(int selectedIndex) {
@@ -68,12 +94,26 @@ public partial class CriacaoTreino : ContentPage
             return true;
         }
         if (!criacaoTreinoViewModel.DatasExistem()) {
-            _labelAvisoModalidade.IsVisible = true;
+            _labelAvisoDiaDaSemana.IsVisible = true;
             return true;
         }
         _labelAvisoModalidade.IsVisible = false;
-        _labelAvisoModalidade.IsVisible = false;
+        _labelAvisoDiaDaSemana.IsVisible = false;
         return false;
+    }
+
+    private Treino AtribuirTreino() {
+        var treino = new Treino();
+        treino.Descricao = _editorDescricao.Text;
+        treino.Criador = new();
+        treino.Criador.Codigo = Preferences.Get("codigoConta", 0);
+        if (treino.Criador.Codigo == 0) {
+            throw new Exception("Preferencia de conta não foi salva");
+        }
+        treino.Modalidade = (ModalidadeTreino)_pickerModalidade.SelectedIndex;
+        treino.Nome = treino.Modalidade.ToString();
+        treino.DataVencimento = _datePickerVencimento.Date;
+        return treino;
     }
 
     protected override void OnAppearing() {

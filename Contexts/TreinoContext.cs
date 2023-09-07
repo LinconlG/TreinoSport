@@ -46,5 +46,17 @@ namespace TreinoSport.Contexts {
                 throw new Exception($"{e.Message}");
             }
         }
+
+        public async Task PutTreino(Treino treino) {
+            try {
+                var endpoint = "/treino/ct/criar";
+
+                HttpResponseMessage response = await BaseContext.HttpResquest(HttpMethod.Put, BaseContext.urlAndroidAPI, endpoint, null, treino);
+                await response.HandleResponse();
+            }
+            catch (Exception e) {
+                throw new Exception($"{e.Message}");
+            }
+        }
     }
 }

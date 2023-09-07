@@ -30,6 +30,7 @@ public partial class CadastroPage : ContentPage
 		usuario.Nome = nomeCompletoEntry.Text;
         usuario.Email = emailEntry.Text;
         usuario.Senha = Criptografia.sha256_hash(senhaEntry.Text);
+        usuario.IsCentroTreinamento = false;
         if (tipoConta.SelectedIndex == 1) {
             usuario.IsCentroTreinamento = true;
             usuario.Descricao = editorDescricao.Text;

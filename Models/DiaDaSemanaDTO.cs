@@ -14,7 +14,7 @@ namespace TreinoSport.Models
         public ObservableCollection<TimePicker> Horarios { get; set; }
 
 
-        private List<DateTime> ConverterDateTime() {
+        public List<DateTime> ConverterDateTime() {
             var horariosDateTime = new List<DateTime>();
             foreach (var horario in Horarios) {
                 var aux = new DateTime(horario.Time.Ticks);

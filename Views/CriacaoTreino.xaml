@@ -13,7 +13,7 @@
     <ScrollView>
 
         <VerticalStackLayout Padding="10" Spacing="5">
-            <Picker x:Name="_pickerModalidade" Title="Selecione a modalidade" HorizontalTextAlignment="Center" FontSize="{StaticResource fonteTamanho2}">
+            <Picker x:Name="_pickerModalidade" Title="Selecione a modalidade" HorizontalTextAlignment="Center" SelectedIndexChanged="PickerModalidadeChanged" FontSize="{StaticResource fonteTamanho2}">
                 <Picker.Items>
                     <x:String>Beach Tennis</x:String>
                     <x:String>Funcional</x:String>

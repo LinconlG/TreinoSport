@@ -15,12 +15,12 @@ public partial class PaginaInicialCT : ContentPage
         treinoViewModel.OnAppearing(refreshLista, avisoTreinosVazio);
     }
 
-    private void ClickedBtnGerenciarTreino(object sender, EventArgs e) {
+    private async void ClickedBtnGerenciarTreino(object sender, EventArgs e) {
         var btn = (Button)sender;
-        var codigoTreino = int.Parse(btn.Text);
-
+        var codigoTreino = int.Parse(btn.ClassId);
+        //criar nova tela q mostra alunos etc
     }
     private async void ClickAdicionar(object sender, EventArgs e) {
-        await Navigation.PushAsync(new CriacaoTreino());
+        await Navigation.PushAsync(new CriacaoTreino(treinosExistentes: treinoViewModel.Treinos.Select(treino => treino.Nome)));
     }
 }

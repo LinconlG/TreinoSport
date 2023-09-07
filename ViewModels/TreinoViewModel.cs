@@ -36,8 +36,8 @@ namespace TreinoSport.ViewModels {
                 Treinos.Clear();
                 var lista = await _treinoContext.GetTreinosComoAluno(Preferences.Get("codigoConta", 0));
                 ChecarTreinos(lista);
-                foreach (var item in lista) {
-                    Treinos.Add(item);
+                foreach (var treino in lista) {
+                    Treinos.Add(treino);
                 }
             }
             catch (Exception e) {

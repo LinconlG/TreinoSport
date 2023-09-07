@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TreinoSport.Contexts;
 using TreinoSport.Models;
 using TreinoSport.Models.Enums;
 using TreinoSport.Util;
@@ -16,8 +17,13 @@ namespace TreinoSport.ViewModels
     public partial class CriacaoTreinoViewModel : ObservableObject
     {
 
-        public ObservableCollection<DiaDaSemanaDTO> DatasHorarios { get; set; } = new();
+        public ObservableCollection<DiaDaSemanaDTO> DatasHorarios { get; set; }
+        private TreinoContext treinoContext;
 
+        public CriacaoTreinoViewModel() {
+            treinoContext = new();
+            DatasHorarios = new();
+        }
 
         public void AdicionarHorario(TimePicker novoHorario, string diaString) {
             foreach (var data in DatasHorarios) {
@@ -70,6 +76,21 @@ namespace TreinoSport.ViewModels
             return false;
         }
 
+        public async Task CriarEditarTreino(Treino treino) {
+            try {
+                if (treino.Codigo != 0) {
+                    //fazer a edicao
+                }
+                else {
+                    treino.DatasTreinos = DatasHorarios.ToList().ConvertAll(dataDTO => new DiaDaSemana(dataDTO));
+                    await treinoContext.PutTreino(treino);
+                }
+            }
+            catch (Exception ex) {
+                throw new Exception(ex.Message);
+            }
+
+        }
 
 
         public void OnAppearing(Dictionary<string, object> controles) {
