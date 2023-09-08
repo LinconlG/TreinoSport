@@ -16,5 +16,6 @@ namespace TreinoSport.Models {
         public List<DiaDaSemana> DatasTreinos { get; set; }
         public DateTime DataVencimento { get; set; }
         public ModalidadeTreino Modalidade { get; set; }
+        public int LimiteAlunos { get; set; }
     }
 }

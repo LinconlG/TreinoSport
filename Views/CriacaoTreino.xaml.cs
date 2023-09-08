@@ -125,6 +125,7 @@ public partial class CriacaoTreino : ContentPage {
         treino.Modalidade = (ModalidadeTreino)_pickerModalidade.SelectedIndex;
         treino.Nome = treino.Modalidade.ToString();
         treino.DataVencimento = _datePickerVencimento.Date;
+        treino.LimiteAlunos = int.Parse(_entryLimiteAlunos.Text);
         return treino;
     }
 
@@ -137,6 +138,7 @@ public partial class CriacaoTreino : ContentPage {
             _pickerModalidade.SelectedIndex = (int)treino.Modalidade;
             _editorDescricao.Text = treino.Descricao;
             _datePickerVencimento.Date = treino.DataVencimento;
+            _entryLimiteAlunos.Text = treino.LimiteAlunos.ToString();
         }
         catch (Exception) {
             await DisplayAlert("Erro", "Ocorreu um erro", "OK");
@@ -146,5 +148,23 @@ public partial class CriacaoTreino : ContentPage {
 
     protected override void OnAppearing() {
         base.OnAppearing();
+    }
+
+    private void Limite_TextChanged(object sender, TextChangedEventArgs e) {
+        Entry entry = sender as Entry;
+        string numeros = entry.Text;
+        foreach (char c in numeros) {
+            if (!Char.IsAsciiDigit(c)) {
+                _labelAvisoLimite.IsVisible = true;
+                _btnConfirmar.IsEnabled = false;
+                return;
+            }
+        }
+
+        if (numeros.Length > 2) {
+            entry.Text = entry.Text.Remove(entry.Text.Length - 1);
+        }
+        _labelAvisoLimite.IsVisible = false;
+        _btnConfirmar.IsEnabled = true;
     }
 }
