@@ -9,6 +9,7 @@ namespace TreinoSport.Models {
         public DayOfWeek Dia { get; set; }
         public List<DateTime> Horarios { get; set; }
 
+        public DiaDaSemana() { }
 
         public DiaDaSemana(DiaDaSemanaDTO dto) {
             Dia = dto.DiaEnum;

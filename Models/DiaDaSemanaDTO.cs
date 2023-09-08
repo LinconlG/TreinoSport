@@ -1,10 +1,13 @@
-﻿using System;
+﻿using CommunityToolkit.Maui.Core.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TreinoSport.Extensions;
+using TreinoSport.Util;
 
 namespace TreinoSport.Models
 {
@@ -21,6 +24,14 @@ namespace TreinoSport.Models
                 horariosDateTime.Add(aux);
             }
             return horariosDateTime;
+        }
+
+        public DiaDaSemanaDTO() {}
+
+        public DiaDaSemanaDTO(DiaDaSemana diaDaSemana) { 
+            NomeDia = Utilidade.TratarDayOfWeek(diaDaSemana.Dia);
+            DiaEnum = diaDaSemana.Dia;
+            Horarios = diaDaSemana.Horarios.ConvertAll(h => h.ToTimePicker()).ToObservableCollection();
         }
     }
 }

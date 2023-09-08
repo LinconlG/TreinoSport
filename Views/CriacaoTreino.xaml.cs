@@ -9,15 +9,17 @@ namespace TreinoSport.Views;
 public partial class CriacaoTreino : ContentPage {
     private CriacaoTreinoViewModel criacaoTreinoViewModel;
     private TimePicker _horarioMaisRecente;
-    private bool? flagEditar;
+    private bool flagEditar;
+    private int? codigoTreino;
     private IEnumerable<string> treinosExistentes;
 
     public CriacaoTreino(bool? flagEditar = null, int? codigoTreino = null, IEnumerable<string> treinosExistentes = null) {
         InitializeComponent();
         this.BindingContext = criacaoTreinoViewModel = new();
         this.flagEditar = flagEditar is null ? false : flagEditar.Value;
+        this.codigoTreino = codigoTreino is null ? null : codigoTreino.Value;
         this.treinosExistentes = treinosExistentes;
-        //chamar metodo que faz o Get, onde o parametro é a flag
+        BuscarDetalhesTreino(this.flagEditar, codigoTreino);
     }
 
     private void ClickAddHorario(object sender, EventArgs e) {
@@ -38,7 +40,14 @@ public partial class CriacaoTreino : ContentPage {
         }
         try {
             var treino = AtribuirTreino();
-            await criacaoTreinoViewModel.CriarEditarTreino(treino);
+            if (flagEditar) {
+                treino.Codigo = codigoTreino.Value;
+                await criacaoTreinoViewModel.AtualizarDetalhesTreino(treino);
+            }
+            else {
+                await criacaoTreinoViewModel.CriarTreino(treino);
+            }
+
             await DisplayAlert("Tudo certo", "Os detalhes do treino foram salvos com sucesso!", "OK");
             await Navigation.PopAsync();
         }
@@ -60,6 +69,9 @@ public partial class CriacaoTreino : ContentPage {
     }
 
     private async void PickerModalidadeChanged(object sender, EventArgs e) {
+        if (flagEditar) {
+            return;
+        }
         Picker pickerModalidade = (Picker)sender;
         var index = pickerModalidade.SelectedIndex;
         if (CheckTreinosExistentes(index)) {
@@ -114,6 +126,22 @@ public partial class CriacaoTreino : ContentPage {
         treino.Nome = treino.Modalidade.ToString();
         treino.DataVencimento = _datePickerVencimento.Date;
         return treino;
+    }
+
+    private async void BuscarDetalhesTreino(bool flagEditar, int? codigoTreino) {
+        if (!flagEditar) {
+            return;
+        }
+        try {
+            var treino = await criacaoTreinoViewModel.BuscarDetalhesTreino(codigoTreino.Value);
+            _pickerModalidade.SelectedIndex = (int)treino.Modalidade;
+            _editorDescricao.Text = treino.Descricao;
+            _datePickerVencimento.Date = treino.DataVencimento;
+        }
+        catch (Exception) {
+            await DisplayAlert("Erro", "Ocorreu um erro", "OK");
+            await Navigation.PopAsync();
+        }
     }
 
     protected override void OnAppearing() {

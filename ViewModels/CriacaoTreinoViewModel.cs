@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Core.Extensions;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
@@ -76,15 +77,10 @@ namespace TreinoSport.ViewModels
             return false;
         }
 
-        public async Task CriarEditarTreino(Treino treino) {
+        public Task CriarTreino(Treino treino) {
             try {
-                if (treino.Codigo != 0) {
-                    //fazer a edicao
-                }
-                else {
-                    treino.DatasTreinos = DatasHorarios.ToList().ConvertAll(dataDTO => new DiaDaSemana(dataDTO));
-                    await treinoContext.PutTreino(treino);
-                }
+                treino.DatasTreinos = DatasHorarios.ToList().ConvertAll(dataDTO => new DiaDaSemana(dataDTO));
+                return treinoContext.PutTreino(treino);
             }
             catch (Exception ex) {
                 throw new Exception(ex.Message);
@@ -92,6 +88,32 @@ namespace TreinoSport.ViewModels
 
         }
 
+        public async Task<Treino> BuscarDetalhesTreino(int codigoTreino) {
+            try {
+                var treino = await treinoContext.GetDetalhesTreino(codigoTreino);
+                foreach (var dia in treino.DatasTreinos) {
+                    AdicionarDia(dia.Dia);
+                    foreach (var horario in dia.Horarios) {
+                        TimePicker timePicker = new();
+                        timePicker.Time = horario.TimeOfDay;
+                        AdicionarHorario(timePicker, dia.Dia.ToString());
+                    }
+                }
+                return treino;
+            }
+            catch (Exception ex) {
+                throw new Exception(ex.Message);
+            }
+        }
+        public Task AtualizarDetalhesTreino(Treino treino) {
+            try {
+                treino.DatasTreinos = DatasHorarios.ToList().ConvertAll(dataDTO => new DiaDaSemana(dataDTO));
+                return treinoContext.PatchDetalhesTreino(treino);
+            }
+            catch (Exception ex) {
+                throw new Exception(ex.Message);
+            }
+        }
 
         public void OnAppearing(Dictionary<string, object> controles) {
 
