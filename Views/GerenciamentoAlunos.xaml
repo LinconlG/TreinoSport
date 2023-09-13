@@ -3,34 +3,62 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TreinoSport.Views.GerenciamentoAlunos"
              Title="Gerenciamento">
-    <VerticalStackLayout>
-        <Grid Padding="5">
-            <StackLayout Spacing="15">
-                <Label Text="Volei" FontSize="23" FontAttributes="Bold" TextDecorations="Underline" HorizontalOptions="Center"/>
-                <!-- -->
-                <Label Text="Adicionar aluno" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>
-                <Entry BackgroundColor="#e8e8e6" Placeholder="Digite o email do aluno que deseja adicionar" PlaceholderColor="Gray" HorizontalTextAlignment="Center" FontSize="16" HorizontalOptions="Center"/>
-                <Button Text="Adicionar" WidthRequest="150"/>
-                <!-- -->
-                <Label Text="Lista de alunos (X)" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>
-                <Grid HeightRequest="200">
-                    <Border Stroke="black" StrokeThickness="2" Padding="5">
-                        <ScrollView>
-                            <StackLayout Spacing="8">
-                                <Button Text="Fulano da silva" Style="{StaticResource btnRemoverAluno}"/>
-                                <Button Text="Fulano da a" Style="{StaticResource btnRemoverAluno}"/>
-                                <Button Text="Fulano da silva" Style="{StaticResource btnRemoverAluno}"/>
-                                <Button Text="Fulano da sil" Style="{StaticResource btnRemoverAluno}"/>
-                                <Button Text="Fulano da si" Style="{StaticResource btnRemoverAluno}"/>
-                                <Button Text="Fulano da silva" Style="{StaticResource btnRemoverAluno}"/>
-                                <Button Text="Fulano da" Style="{StaticResource btnRemoverAluno}"/>
-                            </StackLayout>
-                        </ScrollView>
-                    </Border>
-                </Grid>
-                <!-- -->
-                
-            </StackLayout>
-        </Grid>
-    </VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout>
+
+            <Grid Padding="5">
+
+                <StackLayout Spacing="15">
+                    <Label Text="Volei" FontSize="23" FontAttributes="Bold" TextDecorations="Underline" HorizontalOptions="Center"/>
+                    <!-- -->
+                    <Label Text="Adicionar aluno" TextDecorations="Underline" FontAttributes="Bold" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>
+                    <Entry BackgroundColor="#e8e8e6" Placeholder="Digite o email do aluno que deseja adicionar" PlaceholderColor="Gray" HorizontalTextAlignment="Center" FontSize="16" HorizontalOptions="Center"/>
+                    <Button Text="Adicionar" WidthRequest="150"/>
+                    <!-- -->
+                    <Label Text="Lista de alunos (X)" FontAttributes="Bold" TextDecorations="Underline" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>
+                    <Grid HeightRequest="200">
+                        <Border Stroke="black" StrokeThickness="2" Padding="5">
+                            <ScrollView>
+                                <StackLayout Spacing="8">
+                                    <Button Text="Fulano da silva" Style="{StaticResource btnRemoverAluno}"/>
+                                    <Button Text="Fulano da a" Style="{StaticResource btnRemoverAluno}"/>
+                                    <Button Text="Fulano da silva" Style="{StaticResource btnRemoverAluno}"/>
+                                    <Button Text="Fulano da sil" Style="{StaticResource btnRemoverAluno}"/>
+                                    <Button Text="Fulano da si" Style="{StaticResource btnRemoverAluno}"/>
+                                    <Button Text="Fulano da silva" Style="{StaticResource btnRemoverAluno}"/>
+                                    <Button Text="Fulano da" Style="{StaticResource btnRemoverAluno}"/>
+                                </StackLayout>
+                            </ScrollView>
+                        </Border>
+                    </Grid>
+                    <!-- -->
+                    <Label Text="Dias da semana" TextDecorations="Underline" FontSize="{StaticResource fonteTamanho1}" FontAttributes="Bold" HorizontalOptions="Center"/>
+                    <!-- -->
+                    <Grid HeightRequest="200" BackgroundColor="{StaticResource Yellow300Accent}">
+                        <StackLayout Spacing="20" Padding="8">
+                            <Label Text="Domingo" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>
+                            <HorizontalStackLayout Spacing="8">
+                                <Button Text="00:00" FontSize="18"/>
+                                <Button Text="00:00" FontSize="18"/>
+                                <Button Text="00:00" FontSize="18"/>
+                            </HorizontalStackLayout>
+                        </StackLayout>
+                    </Grid>
+
+                    <Grid HeightRequest="200" BackgroundColor="{StaticResource Yellow300Accent}">
+                        <StackLayout Spacing="20" Padding="8">
+                            <Label Text="Segunda" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>
+                            <HorizontalStackLayout Spacing="8">
+                                <Button Text="00:00" FontSize="18"/>
+                                <Button Text="00:00" FontSize="18"/>
+                                <Button Text="00:00" FontSize="18"/>
+                            </HorizontalStackLayout>
+                        </StackLayout>
+                    </Grid>
+
+                </StackLayout>
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
