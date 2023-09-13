@@ -2,11 +2,16 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TreinoSport.Views.GerenciamentoTreino"
-             Title="GerenciamentoTreino">
+             Title="Gerenciamento">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Border ClassId="xxxxxxxx" StrokeThickness="5" StrokeShape="RoundRectangle 0,40,40,0" Stroke="green">
+            <Grid Padding="16">
+                <Button ClassId="0" BackgroundColor="Transparent" Clicked="ClickGerenciarTreino"/>
+                <StackLayout>
+                    <Label Text="Vôlei" FontAttributes="Bold" HorizontalOptions="Center" FontSize="{StaticResource fonteTamanho1}"/>
+                    <Label Text="Selecione para gerenciar" FontAttributes="Bold" HorizontalOptions="Center" FontSize="{StaticResource fonteTamanho2}"/>
+                </StackLayout>
+            </Grid>
+        </Border>
     </VerticalStackLayout>
 </ContentPage>

@@ -38,6 +38,8 @@ public partial class CriacaoTreino : ContentPage {
         if (CheckCampos()) {
             return;
         }
+        var btn = (Button)sender;
+        btn.IsEnabled = false;
         try {
             var treino = AtribuirTreino();
             if (flagEditar) {
@@ -53,6 +55,9 @@ public partial class CriacaoTreino : ContentPage {
         }
         catch (Exception ex) {
             throw new Exception(ex.Message);
+        }
+        finally {
+            btn.IsEnabled = true;
         }
     }
 

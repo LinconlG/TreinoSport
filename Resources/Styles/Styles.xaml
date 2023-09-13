@@ -77,6 +77,17 @@
         <Setter Property="FontAttributes" Value="Bold"/>
     </Style>
 
+    <Style TargetType="Button" x:Key="btnRemoverAluno">
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="MinimumHeightRequest" Value="20"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="FontSize" Value="{StaticResource fonteTamanho2}"/>
+    </Style>
+
+    <Style Class="FlyoutItemLabelStyle" TargetType="Label">
+        <Setter Property="FontSize" Value="16" />
+    </Style>
     <Style TargetType="Button" x:Key="btnMenosRetangulo">
         <Setter Property="BackgroundColor" Value="LightGray"/>
         <Setter Property="CornerRadius" Value="5"/>
@@ -126,7 +137,7 @@
 
     <Style TargetType="Editor">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
-        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="BackgroundColor" Value="#e8e8e6" />
         <Setter Property="FontFamily" Value="OpenSansRegular"/>
         <Setter Property="FontSize" Value="14" />
         <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />

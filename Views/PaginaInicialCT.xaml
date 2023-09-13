@@ -20,7 +20,7 @@
                                     <Button ClassId="{Binding Codigo}" BackgroundColor="Transparent" Clicked="ClickedBtnEditarTreino"/>
                                     <StackLayout Spacing="5">
                                         <Label Text="{Binding Nome}" FontSize="{StaticResource fonteTamanho1}" FontAttributes="Bold" HorizontalOptions="Center"/>
-                                        <Label Text="Selecione para gerenciar" FontSize="{StaticResource fonteTamanho2}" HorizontalOptions="Center"/>
+                                        <Label Text="Selecione para editar" FontSize="{StaticResource fonteTamanho2}" HorizontalOptions="Center"/>
                                     </StackLayout>
                                 </Grid>
                             </Border>

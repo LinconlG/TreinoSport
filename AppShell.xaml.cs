@@ -4,13 +4,15 @@ namespace TreinoSport;
 
 public partial class AppShell : Shell
 {
-	private static FlyoutItem _paginaCT;
-    private static FlyoutItem _paginaAluno;
+	private static FlyoutItem paginaCT;
+    private static FlyoutItem paginaAluno;
+    private static FlyoutItem paginaGerenciarTreino;
     public AppShell()
 	{
 		InitializeComponent();
-		_paginaCT = PaginaInicialCT;
-		_paginaAluno = PaginaInicialAluno;
+		paginaCT = _flyoutPaginaInicialCT;
+		paginaAluno = _flyoutPaginaInicialAluno;
+		paginaGerenciarTreino = _flyoutGerenciamentoTreino;
     }
 
 	private async void ClickSair(object sender, EventArgs e) {
@@ -24,12 +26,14 @@ public partial class AppShell : Shell
 
 	public static void VisibilidadeFlyoutCT(bool isCT) {
 		if (isCT) {
-            _paginaCT.IsVisible = true;
-			_paginaAluno.IsVisible = false;
+            paginaCT.IsVisible = true;
+			paginaGerenciarTreino.IsVisible = true;
+			paginaAluno.IsVisible = false;
 		}
 		else {
-			_paginaCT.IsVisible = false;
-            _paginaAluno.IsVisible = true;
+			paginaCT.IsVisible = false;
+            paginaGerenciarTreino.IsVisible = false;
+            paginaAluno.IsVisible = true;
         }
 	}
 }

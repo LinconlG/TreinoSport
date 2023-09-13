@@ -24,15 +24,21 @@
                   Route="MainPage" Shell.FlyoutBehavior="Disabled" FlyoutItemIsVisible="False"/>
     
 
-    <FlyoutItem x:Name="PaginaInicialAluno" Route="PaginaInicialAluno" Title="Treinos" Icon="iconshome.png">
+    <FlyoutItem x:Name="_flyoutPaginaInicialAluno" Route="PaginaInicialAluno" Title="Treinos" Icon="iconshome.png">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate views:PaginaInicialAluno}"/>
         </Tab>
     </FlyoutItem>
 
-    <FlyoutItem x:Name="PaginaInicialCT" Route="PaginaInicialCT" Title="Treinos" Icon="iconshome.png">
+    <FlyoutItem x:Name="_flyoutPaginaInicialCT" Route="PaginaInicialCT" Title="Criar e editar treinos" Icon="iconshome.png">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate views:PaginaInicialCT}"/>
+        </Tab>
+    </FlyoutItem>
+
+    <FlyoutItem x:Name="_flyoutGerenciamentoTreino" Route="GerenciamentoTreino" Title="Gerenciar treinos" Icon="iconshome.png">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate views:GerenciamentoTreino}"/>
         </Tab>
     </FlyoutItem>
 

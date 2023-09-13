@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TreinoSport.Views.GerenciamentoAlunos"
+             Title="Gerenciamento">
+    <VerticalStackLayout>
+        <Grid Padding="5">
+            <StackLayout Spacing="15">
+                <Label Text="Volei" FontSize="23" FontAttributes="Bold" TextDecorations="Underline" HorizontalOptions="Center"/>
+                <!-- -->
+                <Label Text="Adicionar aluno" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>
+                <Entry BackgroundColor="#e8e8e6" Placeholder="Digite o email do aluno que deseja adicionar" PlaceholderColor="Gray" HorizontalTextAlignment="Center" FontSize="16" HorizontalOptions="Center"/>
+                <Button Text="Adicionar" WidthRequest="150"/>
+                <!-- -->
+                <Label Text="Lista de alunos (X)" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>
+                <Grid HeightRequest="200">
+                    <Border Stroke="black" StrokeThickness="2" Padding="5">
+                        <ScrollView>
+                            <StackLayout Spacing="8">
+                                <Button Text="Fulano da silva" Style="{StaticResource btnRemoverAluno}"/>
+                                <Button Text="Fulano da a" Style="{StaticResource btnRemoverAluno}"/>
+                                <Button Text="Fulano da silva" Style="{StaticResource btnRemoverAluno}"/>
+                                <Button Text="Fulano da sil" Style="{StaticResource btnRemoverAluno}"/>
+                                <Button Text="Fulano da si" Style="{StaticResource btnRemoverAluno}"/>
+                                <Button Text="Fulano da silva" Style="{StaticResource btnRemoverAluno}"/>
+                                <Button Text="Fulano da" Style="{StaticResource btnRemoverAluno}"/>
+                            </StackLayout>
+                        </ScrollView>
+                    </Border>
+                </Grid>
+                <!-- -->
+                
+            </StackLayout>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>
