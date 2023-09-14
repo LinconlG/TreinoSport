@@ -1,12 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TreinoSport.Contexts;
 using TreinoSport.Models;
 
@@ -68,6 +62,25 @@ namespace TreinoSport.ViewModels {
             }
         }
 
+        [ICommand]
+        private async Task GetTreinosParaGerenciar() {
+            try {
+                IsBusy = true;
+                Treinos.Clear();
+                var lista = await _treinoContext.GetTreinosParaGerenciar(Preferences.Get("codigoConta", 0));
+                foreach (var treino in lista) {
+                    AtribuirBordas(treino);
+                    Treinos.Add(treino);
+                }
+            }
+            catch (Exception e) {
+                throw new Exception(e.Message);
+            }
+            finally {
+                IsBusy = false;
+            }
+        }
+
         private void ChecarTreinos(IEnumerable<Treino> treinos) {
             if (refreshLista is null || avisoTreinoVazio is null) {
                 return;
@@ -81,6 +94,18 @@ namespace TreinoSport.ViewModels {
                 avisoTreinoVazio.IsVisible = false;
             }
         }
+
+        private void AtribuirBordas(Treino treino) {
+            var hoje = DateTime.Now.DayOfWeek;
+            foreach (var dia in treino.DatasTreinos) {
+                if (dia.Dia == hoje) {
+                    treino.Cor = new Color(15, 166, 10);
+                    break;
+                }
+                treino.Cor = new Color(171, 31, 31);
+            }
+        }
+
         public void OnAppearing(RefreshView refreshView = null, Grid avisoTreinoVazio = null) {
             IsBusy = true;
             refreshLista = refreshView;

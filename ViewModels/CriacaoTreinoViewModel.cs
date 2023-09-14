@@ -29,22 +29,22 @@ namespace TreinoSport.ViewModels
         public void AdicionarHorario(TimePicker novoHorario, string diaString) {
             foreach (var data in DatasHorarios) {
                 if (data.DiaEnum.ToString() == diaString) {
-                    data.Horarios.Add(novoHorario);
+                    data.HorariosPicker.Add(novoHorario);
                 }
             }
         }
 
         public void RemoverHorario(string diaString) {
             foreach (var data in DatasHorarios) {
-                if (data.DiaEnum.ToString() == diaString && data.Horarios.Count > 0) {
-                    data.Horarios.RemoveAt(data.Horarios.Count - 1);
+                if (data.DiaEnum.ToString() == diaString && data.HorariosPicker.Count > 0) {
+                    data.HorariosPicker.RemoveAt(data.HorariosPicker.Count - 1);
                 }
             }
         }
 
         public bool LimiteHorarios(string diaEnum) {
             var dia = DatasHorarios.First(dia => dia.DiaEnum.ToString() == diaEnum);
-            if (dia.Horarios.Count < 8) {
+            if (dia.HorariosPicker.Count < 8) {
                 return true;
             }
             return false;
@@ -57,7 +57,7 @@ namespace TreinoSport.ViewModels
         public void AdicionarDia(DayOfWeek diaEnum) {
             var diaDaSemana = new DiaDaSemanaDTO();
             diaDaSemana.DiaEnum = diaEnum;
-            diaDaSemana.Horarios = new();
+            diaDaSemana.HorariosPicker = new();
             diaDaSemana.NomeDia = Utilidade.TratarDayOfWeek(diaEnum);
             DatasHorarios.Add(diaDaSemana);
         }
@@ -95,7 +95,7 @@ namespace TreinoSport.ViewModels
                     AdicionarDia(dia.Dia);
                     foreach (var horario in dia.Horarios) {
                         TimePicker timePicker = new();
-                        timePicker.Time = horario.TimeOfDay;
+                        timePicker.Time = horario.Hora.TimeOfDay;
                         AdicionarHorario(timePicker, dia.Dia.ToString());
                     }
                 }

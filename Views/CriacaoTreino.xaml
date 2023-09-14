@@ -70,7 +70,7 @@
                                             </Grid>
 
                                             <Grid MinimumHeightRequest="65.45" Padding="10" BackgroundColor="{StaticResource Yellow300Accent}">
-                                                <CollectionView ItemsSource="{Binding Horarios}">
+                                                <CollectionView ItemsSource="{Binding HorariosPicker}">
                                                     <CollectionView.ItemsLayout>
                                                         <GridItemsLayout Orientation="Vertical" Span="4" />
                                                     </CollectionView.ItemsLayout>

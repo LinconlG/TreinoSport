@@ -14,24 +14,30 @@ namespace TreinoSport.Models
     public class DiaDaSemanaDTO {
         public string NomeDia { get; set; }
         public DayOfWeek DiaEnum { get; set; }
-        public ObservableCollection<TimePicker> Horarios { get; set; }
+        public ObservableCollection<TimePicker> HorariosPicker { get; set; }
+        public List<Horario> Horarios { get; set; }
 
 
-        public List<DateTime> ConverterDateTime() {
-            var horariosDateTime = new List<DateTime>();
-            foreach (var horario in Horarios) {
-                var aux = new DateTime(horario.Time.Ticks);
+        public List<Horario> ConverterHorario() {
+            var horariosDateTime = new List<Horario>();
+
+            for (int i = 0; i < HorariosPicker.Count; i++) {
+                var aux = new Horario() { Codigo = i+1, AlunosPresentes = new(), Hora = new(HorariosPicker[i].Time.Ticks) };
                 horariosDateTime.Add(aux);
             }
+/*            foreach (var horarioPicker in HorariosPicker) {
+                var aux = new Horario() { AlunosPresentes = new(), Hora = new(horarioPicker.Time.Ticks) };
+                horariosDateTime.Add(aux);
+            }*/
             return horariosDateTime;
         }
 
         public DiaDaSemanaDTO() {}
-
+            
         public DiaDaSemanaDTO(DiaDaSemana diaDaSemana) { 
             NomeDia = Utilidade.TratarDayOfWeek(diaDaSemana.Dia);
             DiaEnum = diaDaSemana.Dia;
-            Horarios = diaDaSemana.Horarios.ConvertAll(h => h.ToTimePicker()).ToObservableCollection();
+            HorariosPicker = diaDaSemana.Horarios.ConvertAll(h => h.Hora.ToTimePicker()).ToObservableCollection();
         }
     }
 }

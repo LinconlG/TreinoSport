@@ -17,5 +17,6 @@ namespace TreinoSport.Models {
         public DateTime DataVencimento { get; set; }
         public ModalidadeTreino Modalidade { get; set; }
         public int LimiteAlunos { get; set; }
+        public Color Cor { get; set; }
     }
 }
