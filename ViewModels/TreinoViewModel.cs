@@ -19,6 +19,8 @@ namespace TreinoSport.ViewModels {
         [ObservableProperty]
         private Treino treino;
         [ObservableProperty]
+        private Treino conta;
+        [ObservableProperty]
         private bool _isBusy;
 
         public TreinoViewModel() {
@@ -112,8 +114,20 @@ namespace TreinoSport.ViewModels {
 
         public async Task<Treino> BuscarTreinoBasico(int codigoTreino) {
             Treino = await _treinoContext.GetTreinoBasico(codigoTreino);
-            Alunos = (await _treinoContext.GetAlunos(codigoTreino)).ToObservableCollection();
+            Treino.Alunos = await _treinoContext.GetAlunos(codigoTreino);
+            AddAluno(Treino.Alunos);
             return Treino;
+        }
+
+        private void AddAluno(List<Conta> alunos) {
+
+            if (!alunos.Any()) {
+                return;
+            }
+            Alunos.Clear();
+            foreach (var aluno in alunos) {
+                Alunos.Add(aluno);
+            }
         }
 
         public void OnAppearing(RefreshView refreshView = null, Grid avisoTreinoVazio = null) {

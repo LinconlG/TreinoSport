@@ -24,21 +24,18 @@
                     <!-- -->
                     <Label x:Name="_labelListaAlunos" Text="Lista de alunos (X)" FontAttributes="Bold" TextDecorations="Underline" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>
 
-                    <Border Stroke="black" StrokeThickness="2" Padding="5" HeightRequest="200">
-                        <ScrollView>
-                            <StackLayout>
-                                <CollectionView ItemsSource="{Binding Alunos}">
-                                    <CollectionView.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid>
-                                                <Button Text="{Binding Nome}" Style="{StaticResource btnRemoverAluno}"/>
-                                            </Grid>
-                                        </DataTemplate>
-                                    </CollectionView.ItemTemplate>
-                                </CollectionView>
-                            </StackLayout>
-                        </ScrollView>
-                    </Border>
+                    <Grid>
+                        <Border Stroke="Black" StrokeThickness="2" Padding="5" HeightRequest="200">
+                            <CollectionView ItemsSource="{Binding Alunos}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Padding="3" Text="{Binding Nome}" Style="{StaticResource btnRemoverAluno}"/>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Border>
+                        
+                    </Grid>
 
                     <!-- -->
                     <Label Text="Dias da semana" TextDecorations="Underline" FontSize="{StaticResource fonteTamanho1}" FontAttributes="Bold" HorizontalOptions="Center"/>
