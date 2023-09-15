@@ -26,15 +26,17 @@
 
                     <Grid>
                         <Border Stroke="Black" StrokeThickness="2" Padding="5" HeightRequest="200">
-                            <CollectionView ItemsSource="{Binding Alunos}">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Button Padding="3" Text="{Binding Nome}" Style="{StaticResource btnRemoverAluno}"/>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
+                            <ScrollView>
+                                <CollectionView ItemsSource="{Binding Alunos}" VerticalScrollBarVisibility="Always">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Button Padding="3" Text="{Binding Nome}" Style="{StaticResource btnRemoverAluno}"/>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </ScrollView>
                         </Border>
-                        
+
                     </Grid>
 
                     <!-- -->
