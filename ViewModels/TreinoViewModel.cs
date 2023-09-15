@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Core.Extensions;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using TreinoSport.Contexts;
@@ -13,6 +14,8 @@ namespace TreinoSport.ViewModels {
 
         private TreinoContext _treinoContext;
         public ObservableCollection<Treino> Treinos { get; set; }
+        public ObservableCollection<Conta> Alunos { get; set; }
+
         [ObservableProperty]
         private Treino treino;
         [ObservableProperty]
@@ -21,6 +24,7 @@ namespace TreinoSport.ViewModels {
         public TreinoViewModel() {
             _treinoContext = new();
             Treinos = new();
+            Alunos = new();
         }
 
         [ICommand]
@@ -104,6 +108,12 @@ namespace TreinoSport.ViewModels {
                 }
                 treino.Cor = new Color(171, 31, 31);
             }
+        }
+
+        public async Task<Treino> BuscarTreinoBasico(int codigoTreino) {
+            Treino = await _treinoContext.GetTreinoBasico(codigoTreino);
+            Alunos = (await _treinoContext.GetAlunos(codigoTreino)).ToObservableCollection();
+            return Treino;
         }
 
         public void OnAppearing(RefreshView refreshView = null, Grid avisoTreinoVazio = null) {
