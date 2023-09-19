@@ -38,6 +38,12 @@ namespace TreinoSport.Models
             NomeDia = Utilidade.TratarDayOfWeek(diaDaSemana.Dia);
             DiaEnum = diaDaSemana.Dia;
             HorariosPicker = diaDaSemana.Horarios.ConvertAll(h => h.Hora.ToTimePicker()).ToObservableCollection();
+            Horarios = diaDaSemana.Horarios is null ? null : diaDaSemana.Horarios;
+            if (Horarios != null) {
+                for (int i = 0;i < Horarios.Count;i++) {
+                    Horarios[i].HoraString = Horarios[i].Hora.ToString("HH:mm");
+                }
+            }
         }
     }
 }

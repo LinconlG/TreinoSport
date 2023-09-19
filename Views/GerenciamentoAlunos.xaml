@@ -19,7 +19,7 @@
                     <Label x:Name="_labelNomeTreino" Text="Volei" FontSize="23" FontAttributes="Bold" TextDecorations="Underline" HorizontalOptions="Center"/>
                     <!-- -->
                     <Label Text="Adicionar aluno" TextDecorations="Underline" FontAttributes="Bold" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>
-                    <Entry BackgroundColor="#e8e8e6" Placeholder="Digite o email do aluno que deseja adicionar" PlaceholderColor="Gray" HorizontalTextAlignment="Center" FontSize="16" HorizontalOptions="Center"/>
+                    <Entry x:Name="_entryAddAluno" BackgroundColor="#e8e8e6" Placeholder="Digite o email do aluno que deseja adicionar" PlaceholderColor="Gray" HorizontalTextAlignment="Center" FontSize="16" HorizontalOptions="Center"/>
                     <Button Text="Adicionar" WidthRequest="150"/>
                     <!-- -->
                     <Label x:Name="_labelListaAlunos" Text="Lista de alunos (X)" FontAttributes="Bold" TextDecorations="Underline" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>
@@ -42,27 +42,38 @@
                     <!-- -->
                     <Label Text="Dias da semana" TextDecorations="Underline" FontSize="{StaticResource fonteTamanho1}" FontAttributes="Bold" HorizontalOptions="Center"/>
                     <!-- -->
-                    <Grid HeightRequest="200" BackgroundColor="{StaticResource Yellow300Accent}">
-                        <StackLayout Spacing="20" Padding="8">
-                            <Label Text="Segunda" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>
-                            <HorizontalStackLayout Spacing="8">
-                                <Button Text="00:00" FontSize="18"/>
-                                <Button Text="00:00" FontSize="18"/>
-                                <Button Text="00:00" FontSize="18"/>
-                            </HorizontalStackLayout>
-                        </StackLayout>
-                    </Grid>
+                    <CollectionView ItemsSource="{Binding DatasHorarios}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="5">
+                                    <Grid BackgroundColor="{StaticResource Yellow300Accent}">
+                                        <StackLayout>
 
-                    <Grid HeightRequest="200" BackgroundColor="{StaticResource Yellow300Accent}">
-                        <StackLayout Spacing="20" Padding="8">
-                            <Label Text="Segunda" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>
-                            <HorizontalStackLayout Spacing="8">
-                                <Button Text="00:00" FontSize="18"/>
-                                <Button Text="00:00" FontSize="18"/>
-                                <Button Text="00:00" FontSize="18"/>
-                            </HorizontalStackLayout>
-                        </StackLayout>
-                    </Grid>
+                                            <Grid>
+                                                <Label FontAttributes="Bold" FontSize="{StaticResource fonteTamanho1}" Text="{Binding NomeDia}" HorizontalOptions="Center"/>
+                                            </Grid>
+
+                                            <Grid>
+                                                <CollectionView ItemsSource="{Binding Horarios}">
+                                                    <CollectionView.ItemsLayout>
+                                                        <GridItemsLayout Orientation="Vertical" Span="4" />
+                                                    </CollectionView.ItemsLayout>
+                                                    <CollectionView.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <Grid HorizontalOptions="Center" Padding="5">
+                                                                <Button ClassId="{Binding Codigo}" Text="{Binding HoraString}" FontSize="{StaticResource fonteTamanho2}"/>
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                    </CollectionView.ItemTemplate>
+                                                </CollectionView>
+                                            </Grid>
+
+                                        </StackLayout>
+                                    </Grid>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
 
                 </StackLayout>
             </Grid>

@@ -15,6 +15,7 @@ namespace TreinoSport.ViewModels {
         private TreinoContext _treinoContext;
         public ObservableCollection<Treino> Treinos { get; set; }
         public ObservableCollection<Conta> Alunos { get; set; }
+        public ObservableCollection<DiaDaSemanaDTO> DatasHorarios { get; set; }
 
         [ObservableProperty]
         private Treino treino;
@@ -27,6 +28,7 @@ namespace TreinoSport.ViewModels {
             _treinoContext = new();
             Treinos = new();
             Alunos = new();
+            DatasHorarios = new();
         }
 
         [ICommand]
@@ -116,6 +118,7 @@ namespace TreinoSport.ViewModels {
             Treino = await _treinoContext.GetTreinoBasico(codigoTreino);
             Treino.Alunos = await _treinoContext.GetAlunos(codigoTreino);
             AddAluno(Treino.Alunos);
+            AddDatas(Treino.DatasTreinos);
             return Treino;
         }
 
@@ -128,6 +131,22 @@ namespace TreinoSport.ViewModels {
             foreach (var aluno in alunos) {
                 Alunos.Add(aluno);
             }
+        }
+
+        private void AddDatas(List<DiaDaSemana> datas) {
+
+            if (!datas.Any()) {
+                return;
+            }
+            DatasHorarios.Clear();
+            foreach (var data in datas) {
+                DatasHorarios.Add(new DiaDaSemanaDTO(data));
+            }
+        }
+
+        public void AdicionarAluno(int codigoTreino, string emailAluno) {
+            //meotod de add
+            //ad na lista
         }
 
         public void OnAppearing(RefreshView refreshView = null, Grid avisoTreinoVazio = null) {

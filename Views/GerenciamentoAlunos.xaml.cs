@@ -17,4 +17,9 @@ public partial class GerenciamentoAlunos : ContentPage
 		_labelNomeTreino.Text = treino.Nome;
 		_labelListaAlunos.Text = _labelListaAlunos.Text.Replace("X", $"{treino.Alunos.Count}");
     }
+
+	private void ClickAdicionarAluno(object sender, EventArgs e) {
+		var emailAluno = _entryAddAluno.Text;
+		//metodo viewmodel
+	}
 }
