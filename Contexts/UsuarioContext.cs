@@ -28,6 +28,25 @@ namespace TreinoSport.Contexts {
             }
         }
 
+        public async Task<Conta> GetContaPorCodigo(int codigoConta) {
+            try {
+                var endpoint = "/usuario/conta/codigo";
+
+                var queryParams = new Dictionary<string, object>() {
+                    { "codigoConta", codigoConta}
+                };
+
+                HttpResponseMessage response = await BaseContext.HttpResquest(HttpMethod.Get, BaseContext.urlAndroidAPI, endpoint, queryParams);
+                await response.HandleResponse();
+                var conta = await response.GetBody<Conta>();
+                return conta;
+            }
+            catch (Exception e) {
+
+                throw new Exception($"{e.Message}");
+            }
+        }
+
         public async Task<Conta> Login(string email, string senha) {
             try {
 

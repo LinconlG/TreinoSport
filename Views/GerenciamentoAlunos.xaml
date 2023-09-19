@@ -20,7 +20,7 @@
                     <!-- -->
                     <Label Text="Adicionar aluno" TextDecorations="Underline" FontAttributes="Bold" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>
                     <Entry x:Name="_entryAddAluno" BackgroundColor="#e8e8e6" Placeholder="Digite o email do aluno que deseja adicionar" PlaceholderColor="Gray" HorizontalTextAlignment="Center" FontSize="16" HorizontalOptions="Center"/>
-                    <Button Text="Adicionar" WidthRequest="150"/>
+                    <Button Clicked="ClickAdicionarAluno" Text="Adicionar" WidthRequest="150"/>
                     <!-- -->
                     <Label x:Name="_labelListaAlunos" Text="Lista de alunos (X)" FontAttributes="Bold" TextDecorations="Underline" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>
 

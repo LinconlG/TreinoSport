@@ -5,11 +5,13 @@ namespace TreinoSport.Views;
 public partial class GerenciamentoAlunos : ContentPage
 {
 	TreinoViewModel treinoViewModel;
+	private int codigoTreino;
 	public GerenciamentoAlunos(int codigoTreino)
 	{
 		InitializeComponent();
 		this.BindingContext = treinoViewModel = new();
 		ReceberTreino(codigoTreino);
+		this.codigoTreino = codigoTreino;
 	}
 
 	private async void ReceberTreino(int codigoTreino) {
@@ -18,8 +20,8 @@ public partial class GerenciamentoAlunos : ContentPage
 		_labelListaAlunos.Text = _labelListaAlunos.Text.Replace("X", $"{treino.Alunos.Count}");
     }
 
-	private void ClickAdicionarAluno(object sender, EventArgs e) {
+	private async void ClickAdicionarAluno(object sender, EventArgs e) {
 		var emailAluno = _entryAddAluno.Text;
-		//metodo viewmodel
+		await treinoViewModel.AdicionarAluno(codigoTreino, emailAluno);
 	}
 }

@@ -12,7 +12,8 @@ namespace TreinoSport.ViewModels {
         Grid avisoTreinoVazio;
 
 
-        private TreinoContext _treinoContext;
+        private TreinoContext treinoContext;
+        private UsuarioContext usuarioContext;
         public ObservableCollection<Treino> Treinos { get; set; }
         public ObservableCollection<Conta> Alunos { get; set; }
         public ObservableCollection<DiaDaSemanaDTO> DatasHorarios { get; set; }
@@ -25,7 +26,8 @@ namespace TreinoSport.ViewModels {
         private bool _isBusy;
 
         public TreinoViewModel() {
-            _treinoContext = new();
+            treinoContext = new();
+            usuarioContext = new();
             Treinos = new();
             Alunos = new();
             DatasHorarios = new();
@@ -36,7 +38,7 @@ namespace TreinoSport.ViewModels {
             try {
                 IsBusy = true;
                 Treinos.Clear();
-                var lista = await _treinoContext.GetTreinosComoAluno(Preferences.Get("codigoConta", 0));
+                var lista = await treinoContext.GetTreinosComoAluno(Preferences.Get("codigoConta", 0));
                 ChecarTreinos(lista);
                 foreach (var treino in lista) {
                     Treinos.Add(treino);
@@ -56,7 +58,7 @@ namespace TreinoSport.ViewModels {
             try {
                 IsBusy = true;
                 Treinos.Clear();
-                var lista = await _treinoContext.GetTreinosComoCT(Preferences.Get("codigoConta", 0));
+                var lista = await treinoContext.GetTreinosComoCT(Preferences.Get("codigoConta", 0));
                 ChecarTreinos(lista);
                 foreach (var item in lista) {
                     Treinos.Add(item);
@@ -75,7 +77,7 @@ namespace TreinoSport.ViewModels {
             try {
                 IsBusy = true;
                 Treinos.Clear();
-                var lista = await _treinoContext.GetTreinosParaGerenciar(Preferences.Get("codigoConta", 0));
+                var lista = await treinoContext.GetTreinosParaGerenciar(Preferences.Get("codigoConta", 0));
                 foreach (var treino in lista) {
                     AtribuirBordas(treino);
                     Treinos.Add(treino);
@@ -115,8 +117,9 @@ namespace TreinoSport.ViewModels {
         }
 
         public async Task<Treino> BuscarTreinoBasico(int codigoTreino) {
-            Treino = await _treinoContext.GetTreinoBasico(codigoTreino);
-            Treino.Alunos = await _treinoContext.GetAlunos(codigoTreino);
+            Treino = await treinoContext.GetTreinoBasico(codigoTreino);
+            Treino.Alunos = await treinoContext.GetAlunos(codigoTreino);
+            Alunos.Clear();
             AddAluno(Treino.Alunos);
             AddDatas(Treino.DatasTreinos);
             return Treino;
@@ -127,7 +130,6 @@ namespace TreinoSport.ViewModels {
             if (!alunos.Any()) {
                 return;
             }
-            Alunos.Clear();
             foreach (var aluno in alunos) {
                 Alunos.Add(aluno);
             }
@@ -144,9 +146,10 @@ namespace TreinoSport.ViewModels {
             }
         }
 
-        public void AdicionarAluno(int codigoTreino, string emailAluno) {
-            //meotod de add
-            //ad na lista
+        public async Task AdicionarAluno(int codigoTreino, string emailAluno) {
+            var codigoAlunoInserido = await treinoContext.PutAluno(codigoTreino, emailAluno);
+            var aluno = await usuarioContext.GetContaPorCodigo(codigoAlunoInserido);
+            AddAluno(new List<Conta> { aluno });
         }
 
         public void OnAppearing(RefreshView refreshView = null, Grid avisoTreinoVazio = null) {

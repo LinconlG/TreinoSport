@@ -146,5 +146,25 @@ namespace TreinoSport.Contexts {
                 throw new Exception($"{e.Message}");
             }
         }
+
+        public async Task<int> PutAluno(int codigoTreino, string emailAluno) {
+            try {
+                var endpoint = "/treino/alunos";
+
+                var queryParams = new Dictionary<string, object>() {
+                    { "codigoTreino", codigoTreino},
+                    { "emailAluno", emailAluno}
+                };
+
+                HttpResponseMessage response = await BaseContext.HttpResquest(HttpMethod.Put, BaseContext.urlAndroidAPI, endpoint, queryParams);
+                await response.HandleResponse();
+
+                var alunoInserido = await HttpUtilities.GetBody<int>(response);
+                return alunoInserido;
+            }
+            catch (Exception e) {
+                throw new Exception($"{e.Message}");
+            }
+        }
     }
 }
