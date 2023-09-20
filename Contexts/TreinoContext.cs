@@ -163,6 +163,17 @@ namespace TreinoSport.Contexts {
                 return alunoInserido;
         }
 
+        public async Task DeleteTreino(int codigoTreino) {
+            var endpoint = "/treino/ct/detalhes";
+
+            var queryParams = new Dictionary<string, object>() {
+                    { "codigoTreino", codigoTreino}
+                };
+
+            HttpResponseMessage response = await BaseContext.HttpResquest(HttpMethod.Delete, BaseContext.urlAndroidAPI, endpoint, queryParams);
+            await response.HandleResponse();
+        }
+
         public async Task DeleteAluno(int codigoTreino, int codigoAluno) {
             try {
                 var endpoint = "/treino/alunos";

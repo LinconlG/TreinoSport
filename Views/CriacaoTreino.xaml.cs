@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using TreinoSport.Extensions;
 using TreinoSport.Models;
 using TreinoSport.Models.Enums;
 using TreinoSport.ViewModels;
@@ -32,6 +33,25 @@ public partial class CriacaoTreino : ContentPage {
         _horarioMaisRecente = new TimePicker();
 
         criacaoTreinoViewModel.AdicionarHorario(_horarioMaisRecente, diaString);
+    }
+
+    private async void ClickExcluirTreino(object sender, EventArgs e) {
+        bool resposta = await DisplayAlert("Confirmação", "Deseja deletar este treino?", "Sim", "Não");
+        if (!resposta) {
+            return;
+        }
+        try {
+            await criacaoTreinoViewModel.DeletarTreino(codigoTreino.Value);
+            await Navigation.PopAsync();
+        }
+        catch (Exception ex) {
+            if (TaskExtension.IsPublicMessageCheck(ex)) {
+                await DisplayAlert("Erro", ex.Message, "Ok");
+            }
+            else {
+                await DisplayAlert("Erro", "Ocorreu um erro!", "Ok");
+            }
+        }
     }
 
     private async void ClickConfirmarHorarios(object sender, EventArgs e) {
@@ -139,6 +159,7 @@ public partial class CriacaoTreino : ContentPage {
             return;
         }
         try {
+            _btnExcluir.IsVisible = true;
             var treino = await criacaoTreinoViewModel.BuscarDetalhesTreino(codigoTreino.Value);
             _pickerModalidade.SelectedIndex = (int)treino.Modalidade;
             _editorDescricao.Text = treino.Descricao;

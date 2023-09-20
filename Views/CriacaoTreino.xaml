@@ -101,6 +101,7 @@
             </Grid>
 
             <Button x:Name="_btnConfirmar" Clicked="ClickConfirmarHorarios" Text="Confirmar" WidthRequest="150" FontSize="{StaticResource fonteTamanho2}"/>
+            <Button IsVisible="false" x:Name="_btnExcluir" Clicked="ClickExcluirTreino" Text="Excluir" BackgroundColor="Red" WidthRequest="150" FontSize="{StaticResource fonteTamanho2}"/>
 
         </VerticalStackLayout>
     </ScrollView>

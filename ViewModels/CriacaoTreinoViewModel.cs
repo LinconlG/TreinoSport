@@ -34,6 +34,9 @@ namespace TreinoSport.ViewModels
             }
         }
 
+        public async Task DeletarTreino(int codigoTreino) {
+            await treinoContext.DeleteTreino(codigoTreino);
+        }
         public void RemoverHorario(string diaString) {
             foreach (var data in DatasHorarios) {
                 if (data.DiaEnum.ToString() == diaString && data.HorariosPicker.Count > 0) {
