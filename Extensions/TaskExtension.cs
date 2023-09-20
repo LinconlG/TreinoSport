@@ -11,7 +11,16 @@ namespace TreinoSport.Extensions {
             if (task == await Task.WhenAny(task, Task.Delay(millisecondsTimeout)))
                 return await task;
             else
-                return new HttpResponseMessage(System.Net.HttpStatusCode.GatewayTimeout); //throw new TimeoutException("Não houve retorno da API.");
+                throw new TimeoutException("Não houve retorno da API.");
+        }
+
+        public static bool IsPublicMessageCheck(this Exception exception) {
+            try {
+                return ((APIException)exception).IsPublicMessage;
+            }
+            catch (Exception) {
+                return false;
+            }
         }
     }
 }

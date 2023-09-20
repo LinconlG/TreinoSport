@@ -26,24 +26,28 @@ namespace TreinoSport.Contexts.Base {
         }
 
         public static async Task<HttpResponseMessage> HttpResquest(HttpMethod verbo, string urlApi, string endpoint, Dictionary<string, object> queryParams = null, object body = null) {
-            var api = await CheckAPI();
-            if (api.StatusCode != HttpStatusCode.OK) {
-                throw new Exception("Falha na conexão com a API");
+            try {
+                var api = await CheckAPI();
+                if (api.StatusCode != HttpStatusCode.OK) {
+                    throw new Exception("Falha na conexão com a API");
+                }
+
+                HttpRequestMessage message = new(verbo, urlApi + endpoint + ParamsToString(queryParams));
+
+                message.Content = body is null ? null : JsonContent.Create(body);
+
+                HttpResponseMessage response = await httpClient.SendAsync(message);
+
+                return response;
             }
-
-            HttpRequestMessage message = new(verbo, urlApi + endpoint + ParamsToString(queryParams));
-
-            message.Content = body is null ? null : JsonContent.Create(body);
-
-            HttpResponseMessage response = await httpClient.SendAsync(message);
-
-            return response;
+            catch (Exception e) {
+                throw new Exception(e.Message);
+            }
         }
 
         public static async Task<HttpResponseMessage> CheckAPI() {
             try {
                 HttpRequestMessage message = new(HttpMethod.Get, urlAndroidAPI + "/check");
-
 
                 var task = httpClient.SendAsync(message);
 
@@ -52,8 +56,7 @@ namespace TreinoSport.Contexts.Base {
                 return response;
             }
             catch (Exception e) {
-
-                throw new Exception(e.Message);
+                throw new APIException(e.Message, true);
             }
 
         }

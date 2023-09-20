@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Java.Util.Zip;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,8 @@ using System.Net;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using TreinoSport.Extensions;
+using TreinoSport.Models;
 
 namespace TreinoSport.Contexts.Base {
     public static class HttpUtilities {
@@ -164,8 +167,8 @@ namespace TreinoSport.Contexts.Base {
         internal static async Task HandleResponse(this HttpResponseMessage response) {
 
             if (response.StatusCode == HttpStatusCode.InternalServerError) {
-             
-                throw new Exception(response.Content.ToString());
+                var apiError = await response.GetBody<ApiError>();
+                throw new APIException(apiError.Message, apiError.IsPublicMessage);
             }
 
             if (response.StatusCode == HttpStatusCode.BadRequest) {

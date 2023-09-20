@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TreinoSport.Contexts.Base;
+using TreinoSport.Extensions;
 using TreinoSport.Models;
 
 namespace TreinoSport.Contexts {
@@ -148,7 +149,6 @@ namespace TreinoSport.Contexts {
         }
 
         public async Task<int> PutAluno(int codigoTreino, string emailAluno) {
-            try {
                 var endpoint = "/treino/alunos";
 
                 var queryParams = new Dictionary<string, object>() {
@@ -161,6 +161,19 @@ namespace TreinoSport.Contexts {
 
                 var alunoInserido = await HttpUtilities.GetBody<int>(response);
                 return alunoInserido;
+        }
+
+        public async Task DeleteAluno(int codigoTreino, int codigoAluno) {
+            try {
+                var endpoint = "/treino/alunos";
+
+                var queryParams = new Dictionary<string, object>() {
+                    { "codigoTreino", codigoTreino},
+                    { "codigoConta", codigoAluno}
+                };
+
+                HttpResponseMessage response = await BaseContext.HttpResquest(HttpMethod.Delete, BaseContext.urlAndroidAPI, endpoint, queryParams);
+                await response.HandleResponse();
             }
             catch (Exception e) {
                 throw new Exception($"{e.Message}");

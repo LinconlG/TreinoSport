@@ -1,3 +1,4 @@
+using TreinoSport.Extensions;
 using TreinoSport.ViewModels;
 
 namespace TreinoSport.Views;
@@ -20,8 +21,33 @@ public partial class GerenciamentoAlunos : ContentPage
 		_labelListaAlunos.Text = _labelListaAlunos.Text.Replace("X", $"{treino.Alunos.Count}");
     }
 
-	private async void ClickAdicionarAluno(object sender, EventArgs e) {
-		var emailAluno = _entryAddAluno.Text;
-		await treinoViewModel.AdicionarAluno(codigoTreino, emailAluno);
+    private async void ClickRemoverAluno(object sender, EventArgs e) {
+        bool resposta = await DisplayAlert("Confirmação", "Deseja remover este aluno do treino?", "Sim", "Não");
+		if (!resposta) {
+			return;
+		}
+        Button btn = sender as Button;
+		var codigoAluno = int.Parse(btn.ClassId);
+		await treinoViewModel.RemoverAluno(codigoTreino, codigoAluno);
+    }
+
+    private async void ClickAdicionarAluno(object sender, EventArgs e) {
+		if (_entryAddAluno.Text == null || _entryAddAluno.Text == "") {
+			return;
+		}
+		try {
+            var emailAluno = _entryAddAluno.Text;
+            await treinoViewModel.AdicionarAluno(codigoTreino, emailAluno);
+            _entryAddAluno.Text = String.Empty;
+        }
+		catch (Exception ex) {
+			if (TaskExtension.IsPublicMessageCheck(ex)) {
+				await DisplayAlert("Erro",ex.Message, "Ok");
+			}
+			else {
+                await DisplayAlert("Erro", "Ocorreu um erro!", "Ok");
+            }
+        }
+
 	}
 }

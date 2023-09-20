@@ -112,7 +112,7 @@ namespace TreinoSport.ViewModels {
                     treino.Cor = new Color(15, 166, 10);
                     break;
                 }
-                treino.Cor = new Color(171, 31, 31);
+                treino.Cor = new Color(8, 3, 3);
             }
         }
 
@@ -143,6 +143,15 @@ namespace TreinoSport.ViewModels {
             DatasHorarios.Clear();
             foreach (var data in datas) {
                 DatasHorarios.Add(new DiaDaSemanaDTO(data));
+            }
+        }
+
+        public async Task RemoverAluno(int codigoTreino, int codigoAluno) {
+            await treinoContext.DeleteAluno(codigoTreino, codigoAluno);
+            foreach (var aluno in Alunos.ToList()) {
+                if (aluno.Codigo == codigoAluno) {
+                    Alunos.Remove(aluno);
+                }
             }
         }
 

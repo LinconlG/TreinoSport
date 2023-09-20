@@ -42,7 +42,6 @@ namespace TreinoSport.Contexts {
                 return conta;
             }
             catch (Exception e) {
-
                 throw new Exception($"{e.Message}");
             }
         }
