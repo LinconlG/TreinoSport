@@ -68,7 +68,7 @@
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net7.0-maccatalyst'">
     <PackageReference Include="CommunityToolkit.Maui">
-      <Version>5.3.0</Version>
+      <Version>6.0.0</Version>
     </PackageReference>
   </ItemGroup>
 
@@ -103,6 +103,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <MauiXaml Update="Views\AlunoTreinoDetalhes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="Views\CadastroPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>

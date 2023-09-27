@@ -19,7 +19,7 @@
                         <StackLayout Padding="8">
                             <Border Stroke="#C49B33" StrokeThickness="3" StrokeShape="RoundRectangle 40,0,0,40" Background="#e8e8e6" Padding="15">
                                 <Grid>
-                                    <Button BackgroundColor="Transparent"/>
+                                    <Button Clicked="ClickAlunoDetalhesTreino" ClassId="{Binding Codigo}" BackgroundColor="Transparent"/>
                                     <StackLayout Spacing="5">
                                         <Label Text="{Binding Nome}" FontSize="{StaticResource fonteTamanho1}" FontAttributes="Bold" HorizontalOptions="Center"/>
                                         <Grid>

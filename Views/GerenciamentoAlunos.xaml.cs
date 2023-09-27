@@ -1,3 +1,4 @@
+using CommunityToolkit.Maui.Views;
 using TreinoSport.Extensions;
 using TreinoSport.ViewModels;
 
@@ -50,7 +51,8 @@ public partial class GerenciamentoAlunos : ContentPage
 		Button btn = sender as Button;
 		var codigoDia = int.Parse(btn.ClassId[1].ToString());
 		var codigoHorario = int.Parse(btn.ClassId);
-		await Navigation.PushAsync(new GerenciamentoAulaHorario(codigoTreino, codigoDia, codigoHorario));
+        this.ShowPopup(new GerenciamentoAulaHorario(codigoTreino, codigoDia, codigoHorario));
+		//await Navigation.PushAsync(new GerenciamentoAulaHorario(codigoTreino, codigoDia, codigoHorario));
 	}
     private async void ClickAdicionarAluno(object sender, EventArgs e) {
         Button btn = sender as Button;
