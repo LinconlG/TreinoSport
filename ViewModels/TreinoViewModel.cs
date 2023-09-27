@@ -131,6 +131,7 @@ namespace TreinoSport.ViewModels {
                 return;
             }
             foreach (var aluno in alunos) {
+
                 Alunos.Add(aluno);
             }
         }
@@ -155,9 +156,15 @@ namespace TreinoSport.ViewModels {
             }
         }
 
+        public bool ChecarAluno(string emailAluno) {
+            if (Alunos.Any(al => al.Email == emailAluno)) {
+                return true;
+            }
+            return false;
+        }
+
         public async Task AdicionarAluno(int codigoTreino, string emailAluno) {
-            var codigoAlunoInserido = await treinoContext.PutAluno(codigoTreino, emailAluno);
-            var aluno = await usuarioContext.GetContaPorCodigo(codigoAlunoInserido);
+            var aluno = await treinoContext.PutAluno(codigoTreino, emailAluno);
             AddAluno(new List<Conta> { aluno });
         }
 

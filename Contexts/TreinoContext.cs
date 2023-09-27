@@ -148,7 +148,7 @@ namespace TreinoSport.Contexts {
             }
         }
 
-        public async Task<int> PutAluno(int codigoTreino, string emailAluno) {
+        public async Task<Conta> PutAluno(int codigoTreino, string emailAluno) {
                 var endpoint = "/treino/alunos";
 
                 var queryParams = new Dictionary<string, object>() {
@@ -159,7 +159,7 @@ namespace TreinoSport.Contexts {
                 HttpResponseMessage response = await BaseContext.HttpResquest(HttpMethod.Put, BaseContext.urlAndroidAPI, endpoint, queryParams);
                 await response.HandleResponse();
 
-                var alunoInserido = await HttpUtilities.GetBody<int>(response);
+                var alunoInserido = await HttpUtilities.GetBody<Conta>(response);
                 return alunoInserido;
         }
 

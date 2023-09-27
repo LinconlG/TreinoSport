@@ -22,20 +22,49 @@ public partial class GerenciamentoAlunos : ContentPage
     }
 
     private async void ClickRemoverAluno(object sender, EventArgs e) {
+        Button btn = sender as Button;
+        btn.IsEnabled = false;
+
         bool resposta = await DisplayAlert("Confirmação", "Deseja remover este aluno do treino?", "Sim", "Não");
 		if (!resposta) {
 			return;
 		}
-        Button btn = sender as Button;
-		var codigoAluno = int.Parse(btn.ClassId);
-		await treinoViewModel.RemoverAluno(codigoTreino, codigoAluno);
-    }
 
+		var codigoAluno = int.Parse(btn.ClassId);
+		try {		
+            await treinoViewModel.RemoverAluno(codigoTreino, codigoAluno);
+        }
+        catch (Exception ex) {
+            if (TaskExtension.IsPublicMessageCheck(ex)) {
+                await DisplayAlert("Erro", ex.Message, "Ok");
+            }
+            else {
+                await DisplayAlert("Erro", "Ocorreu um erro!", "Ok");
+            }
+        }
+        finally {
+            btn.IsEnabled = true;
+        }
+    }
+	private async void ClickAulaHorario(object sender, EventArgs e) {
+		Button btn = sender as Button;
+		var codigoDia = int.Parse(btn.ClassId[1].ToString());
+		var codigoHorario = int.Parse(btn.ClassId);
+		await Navigation.PushAsync(new GerenciamentoAulaHorario(codigoTreino, codigoDia, codigoHorario));
+	}
     private async void ClickAdicionarAluno(object sender, EventArgs e) {
-		if (_entryAddAluno.Text == null || _entryAddAluno.Text == "") {
-			return;
-		}
-		try {
+        Button btn = sender as Button;
+        try {
+            btn.IsEnabled = false;
+
+            if (_entryAddAluno.Text == null || _entryAddAluno.Text == "") {
+                return;
+            }
+            if (treinoViewModel.ChecarAluno(_entryAddAluno.Text)) {
+                await DisplayAlert("Erro", "Este aluno já está inscrito no treino!", "Ok");
+                return;
+            }
+
             var emailAluno = _entryAddAluno.Text;
             await treinoViewModel.AdicionarAluno(codigoTreino, emailAluno);
             _entryAddAluno.Text = String.Empty;
@@ -47,6 +76,9 @@ public partial class GerenciamentoAlunos : ContentPage
 			else {
                 await DisplayAlert("Erro", "Ocorreu um erro!", "Ok");
             }
+		}
+		finally {
+			btn.IsEnabled = true;
         }
 
 	}

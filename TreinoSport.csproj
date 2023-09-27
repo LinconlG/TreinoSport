@@ -112,6 +112,9 @@
     <MauiXaml Update="Views\GerenciamentoAlunos.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>
+    <MauiXaml Update="Views\GerenciamentoAulaHorario.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </MauiXaml>
     <MauiXaml Update="Views\GerenciamentoTreino.xaml">
       <Generator>MSBuild:Compile</Generator>
     </MauiXaml>

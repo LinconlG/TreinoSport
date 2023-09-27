@@ -22,13 +22,10 @@ namespace TreinoSport.Models
             var horariosDateTime = new List<Horario>();
 
             for (int i = 0; i < HorariosPicker.Count; i++) {
-                var aux = new Horario() { Codigo = i+1, AlunosPresentes = new(), Hora = new(HorariosPicker[i].Time.Ticks) };
+                var codString = $"{i+1}{(int)DiaEnum}";
+                var aux = new Horario() { Codigo = int.Parse(codString), AlunosPresentes = new(), Hora = new(HorariosPicker[i].Time.Ticks) };
                 horariosDateTime.Add(aux);
             }
-/*            foreach (var horarioPicker in HorariosPicker) {
-                var aux = new Horario() { AlunosPresentes = new(), Hora = new(horarioPicker.Time.Ticks) };
-                horariosDateTime.Add(aux);
-            }*/
             return horariosDateTime;
         }
 
