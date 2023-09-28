@@ -103,6 +103,21 @@ namespace TreinoSport.ViewModels {
                 avisoTreinoVazio.IsVisible = false;
             }
         }
+        public List<Conta> BuscarAlunosPopUp(DayOfWeek dia, int codigoHorario) {
+            foreach (var data in DatasHorarios) {
+
+                if (data.DiaEnum == dia) {
+
+                    foreach (var horario in data.Horarios) {
+
+                        if (horario.Codigo == codigoHorario) {
+                            return horario.AlunosPresentes;
+                        }
+                    }
+                }
+            }
+            return new List<Conta>();
+        }
 
         private void AtribuirBordas(Treino treino) {
             var hoje = DateTime.Now.DayOfWeek;

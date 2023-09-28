@@ -8,6 +8,7 @@ public partial class AlunoTreinoDetalhes : ContentPage
 {
 	AlunoTreinoViewModel alunoTreinoViewModel;
     private int codigoTreino;
+    private int limitePresenca;
 	public AlunoTreinoDetalhes(int codigoTreino)
 	{
 		InitializeComponent();
@@ -35,6 +36,10 @@ public partial class AlunoTreinoDetalhes : ContentPage
                 var codigoAluno = Preferences.Get("codigoConta", 0);
                 if (alunos.Any(aluno => aluno.Codigo == codigoAluno)) {
                     await DisplayAlert("Erro", "Você já marcou presença neste horário.", "OK");
+                    return;
+                }
+                if (alunos.Count >= limitePresenca) {
+                    await DisplayAlert("Erro", "O limite de alunos presentes para este horário já foi atingido.", "OK");
                     return;
                 }
                 await alunoTreinoViewModel.MarcarPresenca(codigoTreino, codigoDia, codigoHorario, codigoAluno);
@@ -71,6 +76,7 @@ public partial class AlunoTreinoDetalhes : ContentPage
 		_labelTituloTreino.Text = treino.Modalidade.ToString();
 		_labelDescricao.Text = treino.Descricao;
 		_labelVencimento.Text = treino.DataVencimento.Day.ToString();
-		_labelLimite.Text = treino.LimiteAlunos.ToString();
+        limitePresenca = treino.LimiteAlunos;
+        _labelLimite.Text = treino.LimiteAlunos.ToString();
 	}
 }

@@ -31,10 +31,11 @@
             <Editor x:Name="_editorDescricao" HeightRequest="100" FontSize="{StaticResource fonteTamanho2}"/>
 
             <Label Text="Vencimento do treino" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>
-            <Label Text="Só será considerado o dia selecionado" HorizontalOptions="Center" TextColor="Gray"/>
+            <Label Text="Só será considerado o dia selecionado" HorizontalOptions="Center" FontSize="15" TextColor="Gray"/>
             <DatePicker x:Name="_datePickerVencimento" FontSize="{StaticResource fonteTamanho2}" WidthRequest="30" HorizontalOptions="Center" VerticalOptions="Center" Format="dd"/>
 
             <Label Text="Limite de alunos presentes" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>
+            <Label Text="Limite de alunos presentes em um único horário" FontSize="15" HorizontalOptions="Center" TextColor="Gray"/>
             <Entry x:Name="_entryLimiteAlunos" Keyboard="Numeric" MinimumWidthRequest="15" MaximumWidthRequest="30" HorizontalOptions="Center" VerticalOptions="Center" FontSize="{StaticResource fonteTamanho2}" TextChanged="Limite_TextChanged"/>
             <Label x:Name="_labelAvisoLimite" Text="Digite um número válido." Style="{StaticResource btnAviso}" IsVisible="false"/>
 
