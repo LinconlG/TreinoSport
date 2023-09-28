@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using TreinoSport.Extensions;
@@ -17,7 +18,6 @@ namespace TreinoSport.Models
         public ObservableCollection<TimePicker> HorariosPicker { get; set; }
         public List<Horario> Horarios { get; set; }
 
-
         public List<Horario> ConverterHorario() {
             var horariosDateTime = new List<Horario>();
 
@@ -27,6 +27,13 @@ namespace TreinoSport.Models
                 horariosDateTime.Add(aux);
             }
             return horariosDateTime;
+        }
+
+        public DiaDaSemana Conversao() {
+            var dia = new DiaDaSemana();
+            dia.Dia = DiaEnum;
+            dia.Horarios = Horarios;
+            return dia;
         }
 
         public DiaDaSemanaDTO() {}

@@ -190,5 +190,35 @@ namespace TreinoSport.Contexts {
                 throw new Exception($"{e.Message}");
             }
         }
+
+        public async Task PatchInserirAlunoHorario(int codigoTreino, int codigoDia, int codigoHorario, int codigoAluno, List<DiaDaSemana> diasDaSemana) {
+            var endpoint = "/treino/aluno/presenca/marcar";
+
+            var queryParams = new Dictionary<string, object>() {
+                    { "codigoTreino", codigoTreino},
+                    { "codigoDia", codigoDia},
+                    { "codigoHorario", codigoHorario},
+                    { "codigoAluno", codigoAluno}
+                };
+
+            HttpResponseMessage response = await BaseContext.HttpResquest(HttpMethod.Patch, BaseContext.urlAndroidAPI, endpoint, queryParams, diasDaSemana);
+            await response.HandleResponse();
+
+        }
+
+        public async Task PatchDeletarAlunoHorario(int codigoTreino, int codigoDia, int codigoHorario, int codigoAluno, List<DiaDaSemana> diasDaSemana) {
+            var endpoint = "/treino/aluno/presenca/remover";
+
+            var queryParams = new Dictionary<string, object>() {
+                    { "codigoTreino", codigoTreino},
+                    { "codigoDia", codigoDia},
+                    { "codigoHorario", codigoHorario},
+                    { "codigoAluno", codigoAluno}
+                };
+
+            HttpResponseMessage response = await BaseContext.HttpResquest(HttpMethod.Patch, BaseContext.urlAndroidAPI, endpoint, queryParams, diasDaSemana);
+            await response.HandleResponse();
+
+        }
     }
 }

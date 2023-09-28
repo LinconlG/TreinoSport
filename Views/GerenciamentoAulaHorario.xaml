@@ -11,13 +11,13 @@
         <Grid>
             <Border Stroke="Black" StrokeThickness="2" Padding="5" WidthRequest="300" HeightRequest="300">
                 <ScrollView>
-                    <StackLayout Padding="5">
-                        <Label Text="Nome1" FontSize="17"/>
-                        <Label Text="Nome1" FontSize="17"/>
-                        <Label Text="Nome1" FontSize="17"/>
-                        <Label Text="Nome1" FontSize="17"/>
-                        <Label Text="Nome1" FontSize="17"/>
-                    </StackLayout>
+                    <CollectionView ItemsSource="{Binding Alunos}" VerticalScrollBarVisibility="Always">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Conta">
+                                <Label Text="{Binding Nome}" FontSize="17"/>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
                 </ScrollView>
             </Border>
         </Grid>

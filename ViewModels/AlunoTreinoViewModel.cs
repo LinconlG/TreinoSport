@@ -25,7 +25,24 @@ namespace TreinoSport.ViewModels {
             AddDatasHorarios(treino.DatasTreinos);
             return treino;
         }
+/*        private void AtribuirAlunos(DayOfWeek dia, int codigoHorario) {
+            Alunos.Clear();
+            foreach (var data in DatasHorarios) {
 
+                if (data.DiaEnum == dia) {
+
+                    foreach (var horario in data.Horarios) {
+
+                        if (horario.Codigo == codigoHorario) {
+
+                            foreach (var alunoPresente in horario.AlunosPresentes) {
+                                Alunos.Add(alunoPresente);
+                            }
+                        }
+                    }
+                }
+            }
+        }*/
         private void AddDatasHorarios(List<DiaDaSemana> diasDaSemana) {
             if (!diasDaSemana.Any()) {
                 return;
@@ -43,6 +60,34 @@ namespace TreinoSport.ViewModels {
                 return false;
             }
             return true;
+        }
+        public async Task MarcarPresenca(int codigoTreino, int codigoDia, int codigoHorario, int codigoAluno) {
+            var datasDTO = DatasHorarios.ToList();
+            var datas = datasDTO.ConvertAll(d => d.Conversao());
+            await treinoContext.PatchInserirAlunoHorario(codigoTreino, codigoDia, codigoHorario, codigoAluno, datas);
+            await BuscarTreino(codigoTreino);
+        }
+        public async Task RemoverPresenca(int codigoTreino, int codigoDia, int codigoHorario, int codigoAluno) {
+            var datasDTO = DatasHorarios.ToList();
+            var datas = datasDTO.ConvertAll(d => d.Conversao());
+            await treinoContext.PatchDeletarAlunoHorario(codigoTreino, codigoDia, codigoHorario, codigoAluno, datas);
+            await BuscarTreino(codigoTreino);
+        }
+
+        public List<Conta> BuscarAlunosPopUp(DayOfWeek dia, int codigoHorario) {
+            foreach (var data in DatasHorarios) {
+
+                if (data.DiaEnum == dia) {
+
+                    foreach (var horario in data.Horarios) {
+
+                        if (horario.Codigo == codigoHorario) {
+                            return horario.AlunosPresentes;
+                        }
+                    }
+                }
+            }
+            return new List<Conta>();
         }
     }
 }
