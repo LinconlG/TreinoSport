@@ -30,9 +30,9 @@
             <Label Text="Descrição" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>
             <Editor x:Name="_editorDescricao" HeightRequest="100" FontSize="{StaticResource fonteTamanho2}"/>
 
-            <Label Text="Vencimento do treino" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>
-            <Label Text="Só será considerado o dia selecionado" HorizontalOptions="Center" FontSize="15" TextColor="Gray"/>
-            <DatePicker x:Name="_datePickerVencimento" FontSize="{StaticResource fonteTamanho2}" WidthRequest="30" HorizontalOptions="Center" VerticalOptions="Center" Format="dd"/>
+            <Label Text="Vencimento do treino" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center" IsVisible="false"/>
+            <Label Text="Só será considerado o dia selecionado" HorizontalOptions="Center" FontSize="15" TextColor="Gray" IsVisible="false"/>
+            <DatePicker x:Name="_datePickerVencimento" FontSize="{StaticResource fonteTamanho2}" WidthRequest="30" HorizontalOptions="Center" VerticalOptions="Center" Format="dd" IsVisible="false"/>
 
             <Label Text="Limite de alunos presentes" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>
             <Label Text="Limite de alunos presentes em um único horário" FontSize="15" HorizontalOptions="Center" TextColor="Gray"/>

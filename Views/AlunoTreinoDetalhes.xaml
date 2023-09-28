@@ -25,11 +25,11 @@
 
         </Grid>
 
-        <Grid ColumnDefinitions="3*,*,4*,*">
-            <Label Text="Vencimento: " HorizontalOptions="End" FontSize="{StaticResource fonteTamanho2}"/>
-            <Label x:Name="_labelVencimento" Text="0" Grid.Column="1" FontSize="{StaticResource fonteTamanho2}" TextDecorations="Underline"/>
-            <Label Text="Limite de presença: " HorizontalOptions="End" Grid.Column="2" FontSize="{StaticResource fonteTamanho2}"/>
-            <Label  x:Name="_labelLimite"  Text="0" Grid.Column="3" FontSize="{StaticResource fonteTamanho2}" TextDecorations="Underline"/>
+        <Grid RowDefinitions="*,*" ColumnDefinitions="*,*">
+            <Label Text="Dia de vencimento: " HorizontalOptions="Center" FontSize="{StaticResource fonteTamanho2}" IsVisible="false"/>
+            <Label x:Name="_labelVencimento" Text="0" Grid.Column="1" FontSize="{StaticResource fonteTamanho2}" TextDecorations="Underline" IsVisible="false"/>
+            <Label Text="Limite de presença: " HorizontalOptions="Center" Grid.Row="1" Grid.Column="0" FontSize="{StaticResource fonteTamanho2}"/>
+            <Label  x:Name="_labelLimite"  Text="0" Grid.Column="3" Grid.Row="1" FontSize="{StaticResource fonteTamanho2}" TextDecorations="Underline"/>
         </Grid>
 
         <Grid HeightRequest="30">
