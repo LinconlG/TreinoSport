@@ -12,12 +12,12 @@
     </ContentPage.Resources>
 
     <StackLayout>
-        <RefreshView x:Name="RefreshLista" x:DataType="local:TreinoViewModel" Command="{Binding GetTreinosComoAlunoCommand}" IsRefreshing="{Binding IsBusy}">
+        <RefreshView x:Name="RefreshLista" x:DataType="local:TreinoViewModel" Command="{Binding GetTreinosComCoresCommand}" IsRefreshing="{Binding IsBusy}">
             <CollectionView ItemsSource="{Binding Treinos}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Treino">
                         <StackLayout Padding="8">
-                            <Border Stroke="#C49B33" StrokeThickness="3" StrokeShape="RoundRectangle 40,0,0,40" Background="#e8e8e6" Padding="15">
+                            <Border StrokeThickness="5" StrokeShape="RoundRectangle 40,40,0,0" Stroke="{Binding Cor}" Padding="15">
                                 <Grid>
                                     <Button Clicked="ClickAlunoDetalhesTreino" ClassId="{Binding Codigo}" BackgroundColor="Transparent"/>
                                     <StackLayout Spacing="5">

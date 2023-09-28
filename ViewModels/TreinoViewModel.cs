@@ -71,11 +71,12 @@ namespace TreinoSport.ViewModels {
         }
 
         [ICommand]
-        private async Task GetTreinosParaGerenciar() {
+        private async Task GetTreinosComCores() {
             try {
                 IsBusy = true;
                 Treinos.Clear();
-                var lista = await treinoContext.GetTreinosParaGerenciar(Preferences.Get("codigoConta", 0));
+                var lista = await treinoContext.GetTreinosComCores(Preferences.Get("codigoConta", 0), Preferences.Get("isCT", false));
+                ChecarTreinos(lista);
                 foreach (var treino in lista) {
                     AtribuirBordas(treino);
                     Treinos.Add(treino);

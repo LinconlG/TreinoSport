@@ -91,12 +91,13 @@ namespace TreinoSport.Contexts {
             }
         }
 
-        public async Task<IEnumerable<Treino>> GetTreinosParaGerenciar(int codigoCT) {
+        public async Task<IEnumerable<Treino>> GetTreinosComCores(int codigoConta, bool isCT) {
             try {
                 var endpoint = "/treino/gerenciamento/lista";
 
                 var queryParams = new Dictionary<string, object>() {
-                    { "codigoCT", codigoCT}
+                    { "codigoConta", codigoConta},
+                    { "isCT", isCT}
                 };
 
                 HttpResponseMessage response = await BaseContext.HttpResquest(HttpMethod.Get, BaseContext.urlAndroidAPI, endpoint, queryParams);

@@ -26,13 +26,13 @@ public partial class GerenciamentoAlunos : ContentPage
         Button btn = sender as Button;
         btn.IsEnabled = false;
 
-        bool resposta = await DisplayAlert("Confirmação", "Deseja remover este aluno do treino?", "Sim", "Não");
-		if (!resposta) {
-			return;
-		}
+		try {
+            bool resposta = await DisplayAlert("Confirmação", "Deseja remover este aluno do treino?", "Sim", "Não");
+            if (!resposta) {
+                return;
+            }
 
-		var codigoAluno = int.Parse(btn.ClassId);
-		try {		
+            var codigoAluno = int.Parse(btn.ClassId);
             await treinoViewModel.RemoverAluno(codigoTreino, codigoAluno);
         }
         catch (Exception ex) {

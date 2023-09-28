@@ -6,7 +6,7 @@
              xmlns:models="clr-namespace:TreinoSport.Models"
              Title="Gerenciamento">
     <StackLayout>
-        <RefreshView x:Name="refreshLista" x:DataType="local:TreinoViewModel" Command="{Binding GetTreinosParaGerenciarCommand}" IsRefreshing="{Binding IsBusy}">
+        <RefreshView x:Name="refreshLista" x:DataType="local:TreinoViewModel" Command="{Binding GetTreinosComCoresCommand}" IsRefreshing="{Binding IsBusy}">
             <CollectionView ItemsSource="{Binding Treinos}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Treino">
