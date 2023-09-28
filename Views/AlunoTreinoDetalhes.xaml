@@ -2,15 +2,21 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TreinoSport.Views.AlunoTreinoDetalhes"
+             xmlns:local="clr-namespace:TreinoSport.ViewModels"
              Title="Detalhes">
+
+    <ContentPage.BindingContext>
+        <local:AlunoTreinoViewModel></local:AlunoTreinoViewModel>
+    </ContentPage.BindingContext>
+
     <VerticalStackLayout Padding="10" Spacing="10">
-        
-        <Label Text="Treino" HorizontalOptions="Center" FontSize="{StaticResource fonteTamanho1}" FontAttributes="Bold" Padding="10"/>
-        
+
+        <Label x:Name="_labelTituloTreino" Text="Treino" HorizontalOptions="Center" FontSize="{StaticResource fonteTamanho1}" FontAttributes="Bold" Padding="10"/>
+
         <Grid BackgroundColor="LightGray" HeightRequest="100" Padding="8">
             <ScrollView>
                 <StackLayout>
-                    <Label FontSize="17" Text="Descrição modalidade, etc as coisas que fazem etc"/>
+                    <Label x:Name="_labelDescricao" FontSize="17" Text="Descrição"/>
                 </StackLayout>
             </ScrollView>
         </Grid>
@@ -21,33 +27,56 @@
 
         <Grid ColumnDefinitions="3*,*,4*,*">
             <Label Text="Vencimento: " HorizontalOptions="End" FontSize="{StaticResource fonteTamanho2}"/>
-            <Label Text="25" Grid.Column="1" FontSize="{StaticResource fonteTamanho2}" TextDecorations="Underline"/>
+            <Label x:Name="_labelVencimento" Text="0" Grid.Column="1" FontSize="{StaticResource fonteTamanho2}" TextDecorations="Underline"/>
             <Label Text="Limite de presença: " HorizontalOptions="End" Grid.Column="2" FontSize="{StaticResource fonteTamanho2}"/>
-            <Label Text="8" Grid.Column="3" FontSize="{StaticResource fonteTamanho2}" TextDecorations="Underline"/>
+            <Label  x:Name="_labelLimite"  Text="0" Grid.Column="3" FontSize="{StaticResource fonteTamanho2}" TextDecorations="Underline"/>
         </Grid>
 
         <Grid HeightRequest="30">
-            
+
         </Grid>
 
         <Grid>
-            <StackLayout Spacing="10">
-                <Label Text="Horários de treino" HorizontalOptions="Center" FontSize="{StaticResource fonteTamanho1}"/>
-                <!-- Collection view -->
-                <Grid BackgroundColor="{StaticResource Yellow300Accent}">
-                    <StackLayout>
-                        <Grid>
-                            <Label Text="Domingo"/>
-                        </Grid>
+            <Border Stroke="Black" StrokeThickness="2" Padding="5">
+                <StackLayout Spacing="10">
+                    <Label Text="Horários de treino" HorizontalOptions="Center" FontSize="{StaticResource fonteTamanho1}"/>
+                    <!-- Collection view -->
+                    <CollectionView ItemsSource="{Binding DatasHorarios}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="5">
+                                    <Grid BackgroundColor="{StaticResource Yellow300Accent}">
+                                        <StackLayout>
 
-                        <Grid>
-                            
-                        </Grid>
-                    </StackLayout>
-                </Grid>
-                <!-- Collection view -->
-            </StackLayout>
+                                            <Grid Padding="10">
+                                                <Label FontAttributes="Bold" FontSize="{StaticResource fonteTamanho1}" Text="{Binding NomeDia}" HorizontalOptions="Center"/>
+                                            </Grid>
+
+                                            <Grid>
+                                                <CollectionView ItemsSource="{Binding Horarios}">
+                                                    <CollectionView.ItemsLayout>
+                                                        <GridItemsLayout Orientation="Vertical" Span="4" />
+                                                    </CollectionView.ItemsLayout>
+                                                    <CollectionView.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <Grid HorizontalOptions="Center" Padding="5">
+                                                                <Button ClassId="{Binding Codigo}" Text="{Binding HoraString}" FontSize="{StaticResource fonteTamanho2}"/>
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                    </CollectionView.ItemTemplate>
+                                                </CollectionView>
+                                            </Grid>
+
+                                        </StackLayout>
+                                    </Grid>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <!-- Collection view -->
+                </StackLayout>
+            </Border>
         </Grid>
-        
+
     </VerticalStackLayout>
 </ContentPage>

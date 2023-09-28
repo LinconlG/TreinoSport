@@ -49,7 +49,7 @@
                                     <Grid BackgroundColor="{StaticResource Yellow300Accent}">
                                         <StackLayout>
 
-                                            <Grid>
+                                            <Grid Padding="10">
                                                 <Label FontAttributes="Bold" FontSize="{StaticResource fonteTamanho1}" Text="{Binding NomeDia}" HorizontalOptions="Center"/>
                                             </Grid>
 

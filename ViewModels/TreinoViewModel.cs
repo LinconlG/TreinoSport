@@ -13,7 +13,6 @@ namespace TreinoSport.ViewModels {
 
 
         private TreinoContext treinoContext;
-        private UsuarioContext usuarioContext;
         public ObservableCollection<Treino> Treinos { get; set; }
         public ObservableCollection<Conta> Alunos { get; set; }
         public ObservableCollection<DiaDaSemanaDTO> DatasHorarios { get; set; }
@@ -27,7 +26,6 @@ namespace TreinoSport.ViewModels {
 
         public TreinoViewModel() {
             treinoContext = new();
-            usuarioContext = new();
             Treinos = new();
             Alunos = new();
             DatasHorarios = new();
