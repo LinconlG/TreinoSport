@@ -1,5 +1,6 @@
 ﻿using Microsoft.Maui.Controls.Xaml;
 using Microsoft.Maui.Storage;
+using TreinoSport.Extensions;
 using TreinoSport.Services;
 using TreinoSport.ViewModels;
 using TreinoSport.Views;
@@ -27,15 +28,15 @@ public partial class MainPage : ContentPage
 
         LoginBtn.IsEnabled = false;
 
-        string email = LoginEmail.Text;
-        string senha = Criptografia.sha256_hash(LoginSenha.Text);
-
+        string email = _entryLoginEmail.Text;
+        string senhaPref = _entryLoginSenha.Text ;
+        string senhaCrpt = Criptografia.sha256_hash(senhaPref);
         if (LembreLogin.IsChecked) {
             Preferences.Set("email", email);
-            Preferences.Set("senha", senha);
+            Preferences.Set("senha", senhaPref);
         }
 
-        await Login(email, senha);
+        await Login(email, senhaCrpt);
     }
 
     private async Task Login(string email, string senha) {
@@ -43,8 +44,14 @@ public partial class MainPage : ContentPage
         try {
             await loginViewModel.Login(email, senha);
         }
-        catch (Exception) {
-            avisoLogin.IsVisible = true;
+        catch (Exception ex) {
+            if (ex.IsPublicMessageCheck()) {
+                await DisplayAlert("Erro", ex.Message, "Ok");
+            }
+            else {
+                _labelavisoLogin.IsVisible = true;
+            }
+
             return;
         }
         finally {
@@ -67,17 +74,19 @@ public partial class MainPage : ContentPage
         if (email == "falso" || senha == "falso") {
             return;
         }
+        _entryLoginEmail.Text = email;
+        _entryLoginSenha.Text = senha;
         await Login(email, senha);
     }
 
     private bool CheckCampos() {
         var flag = false;
-        if (String.IsNullOrWhiteSpace(LoginEmail.Text) || !Criptografia.ValidarEmail(LoginEmail.Text) || String.IsNullOrWhiteSpace(LoginSenha.Text) || LoginSenha.Text.Length < 8) {
-            avisoLogin.IsVisible = true;
+        if (String.IsNullOrWhiteSpace(_entryLoginEmail.Text) || !Criptografia.ValidarEmail(_entryLoginEmail.Text) || String.IsNullOrWhiteSpace(_entryLoginSenha.Text) || _entryLoginSenha.Text.Length < 8) {
+            _labelavisoLogin.IsVisible = true;
             flag = true;
         }
         else {
-            avisoLogin.IsVisible = false;
+            _labelavisoLogin.IsVisible = false;
         }
         return flag;
     }

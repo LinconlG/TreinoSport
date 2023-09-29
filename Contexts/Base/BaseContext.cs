@@ -29,7 +29,7 @@ namespace TreinoSport.Contexts.Base {
             try {
                 var api = await CheckAPI();
                 if (api.StatusCode != HttpStatusCode.OK) {
-                    throw new Exception("Falha na conexão com a API");
+                    throw new APIException("Falha na conexão com a API", true);
                 }
 
                 HttpRequestMessage message = new(verbo, urlApi + endpoint + ParamsToString(queryParams));
@@ -41,7 +41,7 @@ namespace TreinoSport.Contexts.Base {
                 return response;
             }
             catch (Exception e) {
-                throw new Exception(e.Message);
+                throw new APIException(e.Message, e.IsPublicMessageCheck());
             }
         }
 

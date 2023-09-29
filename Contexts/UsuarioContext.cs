@@ -47,23 +47,18 @@ namespace TreinoSport.Contexts {
         }
 
         public async Task<Conta> Login(string email, string senha) {
-            try {
 
-                var endpoint = "/login";
+            var endpoint = "/login";
 
-                var queryParams = new Dictionary<string, object>() {
+            var queryParams = new Dictionary<string, object>() {
                     { "email", email},
                     { "senha", senha}
                 };
 
-                HttpResponseMessage response = await BaseContext.HttpResquest(HttpMethod.Get, BaseContext.urlAndroidAPI, endpoint, queryParams);
-                await response.HandleResponse();
+            HttpResponseMessage response = await BaseContext.HttpResquest(HttpMethod.Get, BaseContext.urlAndroidAPI, endpoint, queryParams);
+            await response.HandleResponse();
 
-                return await HttpUtilities.GetBody<Conta>(response);
-            }
-            catch (Exception e) {
-                throw new Exception($"{e.Message}");
-            }
+            return await HttpUtilities.GetBody<Conta>(response);
         }
     }
 }
