@@ -38,6 +38,10 @@
             <Label x:Name="CadastroLabel" Text="Não tenho cadastro" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource LabelClicavel}" TextDecorations="Underline"/>
             <Button x:Name="CadastroBtn" BackgroundColor="Transparent" Clicked="ClickCadastroBtn" HeightRequest="20"/>
         </Grid>
+        <Grid WidthRequest="180" >
+            <Label x:Name="_labelRedefinirSenha" HorizontalOptions="Center" Text="Esqueci minha senha" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource LabelClicavel}" TextDecorations="Underline"/>
+            <Button x:Name="_btnRedefinirSenha" BackgroundColor="Transparent" Clicked="ClickSenhaBtn" HeightRequest="20"/>
+        </Grid>
         <Grid>
             <Button x:Name="LoginBtn" Clicked="ClickLoginBtn" Text="Login" FontAttributes="Bold" FontSize="16" WidthRequest="150" HeightRequest="50"/>
         </Grid>

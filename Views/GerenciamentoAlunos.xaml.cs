@@ -36,7 +36,7 @@ public partial class GerenciamentoAlunos : ContentPage
             await treinoViewModel.RemoverAluno(codigoTreino, codigoAluno);
         }
         catch (Exception ex) {
-            if (TaskExtension.IsPublicMessageCheck(ex)) {
+            if (ex.IsPublicMessageCheck()) {
                 await DisplayAlert("Erro", ex.Message, "Ok");
             }
             else {

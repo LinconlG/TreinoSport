@@ -60,5 +60,47 @@ namespace TreinoSport.Contexts {
 
             return await HttpUtilities.GetBody<Conta>(response);
         }
+
+        public async Task<int> PutEnviarTokenSenha(string email) {
+
+            var endpoint = "/usuario/senha/envio";
+
+            var queryParams = new Dictionary<string, object>() {
+                    { "email", email}
+            };
+
+            HttpResponseMessage response = await BaseContext.HttpResquest(HttpMethod.Put, BaseContext.urlAndroidAPI, endpoint, queryParams);
+            await response.HandleResponse();
+
+            var codigoConta = await response.GetBody<int>();
+
+            return codigoConta;
+        }
+
+        public async Task GetChecarTokenSenha(int codigoConta, string tokenInserido) {
+
+            var endpoint = "/usuario/token";
+
+            var queryParams = new Dictionary<string, object>() {
+                    { "codigoConta", codigoConta},
+                    { "tokenInserido", tokenInserido}
+            };
+
+            HttpResponseMessage response = await BaseContext.HttpResquest(HttpMethod.Get, BaseContext.urlAndroidAPI, endpoint, queryParams);
+            await response.HandleResponse();
+        }
+        public async Task PutRedefinirSenha(int codigoConta, string novaSenha, string tokenInserido) {
+
+            var endpoint = "/usuario/senha/redefinir";
+
+            var queryParams = new Dictionary<string, object>() {
+                    { "codigoConta", codigoConta},
+                    { "tokenInserido", tokenInserido},
+                    { "novaSenha", novaSenha}
+            };
+
+            HttpResponseMessage response = await BaseContext.HttpResquest(HttpMethod.Put, BaseContext.urlAndroidAPI, endpoint, queryParams);
+            await response.HandleResponse();
+        }
     }
 }

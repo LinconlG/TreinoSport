@@ -21,7 +21,9 @@ public partial class MainPage : ContentPage
     private async void ClickCadastroBtn(object sender, EventArgs e) {
         await Navigation.PushAsync(new CadastroPage());
     }
-
+    private async void ClickSenhaBtn(object sender, EventArgs e) {
+        await Navigation.PushAsync(new RedefinirSenha());
+    }
     private async void ClickLoginBtn(object sender, EventArgs e) {
         if (CheckCampos())
             return;
@@ -30,33 +32,38 @@ public partial class MainPage : ContentPage
 
         string email = _entryLoginEmail.Text;
         string senhaPref = _entryLoginSenha.Text ;
-        string senhaCrpt = Criptografia.sha256_hash(senhaPref);
+
         if (LembreLogin.IsChecked) {
             Preferences.Set("email", email);
             Preferences.Set("senha", senhaPref);
         }
 
-        await Login(email, senhaCrpt);
+        await Login(email, senhaPref);
     }
 
     private async Task Login(string email, string senha) {
         
         try {
-            await loginViewModel.Login(email, senha);
+            string senhaCrpt = Criptografia.sha256_hash(senha);
+            await loginViewModel.Login(email, senhaCrpt);
         }
         catch (Exception ex) {
             if (ex.IsPublicMessageCheck()) {
                 await DisplayAlert("Erro", ex.Message, "Ok");
-            }
-            else {
                 _labelavisoLogin.IsVisible = true;
             }
-
+            else {
+                await DisplayAlert("Erro", "Ocorreu um erro!", "Ok");
+            }
+            Preferences.Clear();         
             return;
         }
         finally {
             LoginBtn.IsEnabled = true;
         }
+
+        _entryLoginEmail.Text = String.Empty;
+        _entryLoginSenha.Text = String.Empty;
 
         if (Preferences.Get("isCT", false)) {
             AppShell.VisibilidadeFlyoutCT(true);

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TreinoSport.Views.RedefinirSenha"
+             Title="Esqueci minha senha">
+    <Grid>
+        <ActivityIndicator VerticalOptions="Center" HorizontalOptions="Center" x:Name="_carregamento" IsRunning="false"/>
+        <VerticalStackLayout x:Name="_stackInserirEmail" Spacing="10" WidthRequest="300" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="true">
+            <Label Text="Insira seu e-mail" HorizontalOptions="Center" FontSize="{StaticResource fonteTamanho1}" />
+            <Entry x:Name="_entryEmail" BackgroundColor="LightGray" FontSize="17"/>
+            <Label x:Name="_labelAvisoEmail" Text="Verifique o e-mail informado." FontSize="{StaticResource FonteAviso}" TextColor="{StaticResource CorAviso}" IsVisible="false"/>
+            <Button Clicked="ClickEnviarCodigo" Text="Enviar" FontSize="18" FontAttributes="Bold" WidthRequest="150"/>
+        </VerticalStackLayout>
+        <VerticalStackLayout x:Name="_stackInserirCodigo" Spacing="10" WidthRequest="330" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="false">
+            <Label Text="Um código de 4 dígitos foi enviado para o seu email, insira seu código abaixo:" HorizontalOptions="Center" FontSize="17" />
+            <Entry x:Name="_entryToken" BackgroundColor="LightGray" FontSize="35" WidthRequest="100"/>
+            <Label x:Name="_labelAvisoToken" Text="Erro. Verifique o código." FontSize="{StaticResource FonteAviso}" TextColor="{StaticResource CorAviso}" IsVisible="false"/>
+            <Button Clicked="ClickChecarCodigo" Text="Confirmar" FontSize="18" FontAttributes="Bold" WidthRequest="150"/>
+        </VerticalStackLayout>
+        <VerticalStackLayout x:Name="_stackNovaSenha" Spacing="10" WidthRequest="330" VerticalOptions="Center" HorizontalOptions="Center" IsVisible="false">
+            <Label Text="Insira a nova senha." HorizontalOptions="Center" FontSize="17" />
+            <Label Text="A senha deve conter no mínimo 8 caracteres" HorizontalOptions="Center" FontSize="15" />
+            <Entry x:Name="_entrysenha" BackgroundColor="LightGray" FontSize="17" IsPassword="True" WidthRequest="200"/>
+            <Label x:Name="_labelAvisoSenha" Text="Verifique a quantidade de caracteres e se a senha em ambos os campos são iguais." FontSize="{StaticResource FonteAviso}" TextColor="{StaticResource CorAviso}" IsVisible="false"/>
+            <Label Text="Confirme a senha" HorizontalOptions="Center" FontSize="17" />
+            <Entry x:Name="_entryConfirmarSenha" BackgroundColor="LightGray" FontSize="17" IsPassword="True" WidthRequest="200"/>
+            <Button Clicked="ClickRedefinirSenha" Text="Redefinir" FontSize="18" FontAttributes="Bold" WidthRequest="150"/>
+        </VerticalStackLayout>
+        
+    </Grid>
+</ContentPage>
