@@ -5,6 +5,7 @@
              xmlns:models="clr-namespace:TreinoSport.Models"
              xmlns:services="clr-namespace:TreinoSport.Services"
              xmlns:local="clr-namespace:TreinoSport.ViewModels"
+             Shell.TabBarIsVisible="True"
              Title="Treinos">
     <ContentPage.Resources>
         <x:Double x:Key="fonteTamanho1">20</x:Double>

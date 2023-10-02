@@ -4,42 +4,19 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:TreinoSport"
-    xmlns:views="clr-namespace:TreinoSport.Views"
-    Shell.FlyoutBehavior="Flyout">
-
-    <Shell.FlyoutHeader>
-        <Grid HeightRequest="200" BackgroundColor="White">
-            <Image Source="treinosporticone.png"/>
-        </Grid>
-    </Shell.FlyoutHeader>
-
-    <Shell.FlyoutFooter>
-        <Grid>
-            <Button Text="Sair" Clicked="ClickSair"/>
-        </Grid>
-    </Shell.FlyoutFooter>
+    xmlns:views="clr-namespace:TreinoSport.Views">
 
     <ShellContent Title="Home"
                   ContentTemplate="{DataTemplate local:MainPage}"
-                  Route="MainPage" Shell.FlyoutBehavior="Disabled" FlyoutItemIsVisible="False"/>
+                  Route="MainPage" Shell.TabBarIsVisible="False"/>
+
+    <TabBar>
+        <ShellContent x:Name="_tabPaginaAluno" Route="PaginaInicialAluno" Title="Inicio" Icon="iconshome.png" ContentTemplate="{DataTemplate views:PaginaInicialAluno}"/>
+        <ShellContent x:Name="_tabPaginaCT" Route="PaginaInicialCT" Title="Criar/editar" Icon="iconshome.png" ContentTemplate="{DataTemplate views:PaginaInicialCT}"/>
+        <ShellContent x:Name="_tabGerenciamento" Route="GerenciamentoTreino" Title="Gerenciar" Icon="iconshome.png" ContentTemplate="{DataTemplate views:GerenciamentoTreino}"/>
+        <ShellContent Route="Sair" Title="Sair" Icon="iconshome.png" ContentTemplate="{DataTemplate views:Sair}"/>
+    </TabBar>
     
 
-    <FlyoutItem x:Name="_flyoutPaginaInicialAluno" Route="PaginaInicialAluno" Title="Treinos" Icon="iconshome.png">
-        <Tab>
-            <ShellContent ContentTemplate="{DataTemplate views:PaginaInicialAluno}"/>
-        </Tab>
-    </FlyoutItem>
-
-    <FlyoutItem x:Name="_flyoutPaginaInicialCT" Route="PaginaInicialCT" Title="Criar e editar treinos" Icon="iconshome.png">
-        <Tab>
-            <ShellContent ContentTemplate="{DataTemplate views:PaginaInicialCT}"/>
-        </Tab>
-    </FlyoutItem>
-
-    <FlyoutItem x:Name="_flyoutGerenciamentoTreino" Route="GerenciamentoTreino" Title="Gerenciar treinos" Icon="iconshome.png">
-        <Tab>
-            <ShellContent ContentTemplate="{DataTemplate views:GerenciamentoTreino}"/>
-        </Tab>
-    </FlyoutItem>
 
 </Shell>

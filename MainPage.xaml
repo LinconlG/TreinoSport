@@ -4,7 +4,9 @@
              x:Class="TreinoSport.MainPage"
              xmlns:views="clr-namespace:TreinoSport.Views"
             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
-             Shell.NavBarIsVisible="False">
+             Title="Login"
+             Shell.TabBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled">
     <ContentPage.Behaviors>
         <mct:StatusBarBehavior StatusBarColor="{StaticResource Yellow100Accent}" />
     </ContentPage.Behaviors>
@@ -27,23 +29,24 @@
                 <Label x:Name="_labelavisoLogin" Text="Verifique o email e a senha." FontSize="{StaticResource FonteAviso}" TextColor="{StaticResource CorAviso}" IsVisible="false"/>
                 <Grid>
                     <HorizontalStackLayout>
-                        <CheckBox x:Name="LembreLogin" HorizontalOptions="Start" HeightRequest="18"/>
+                        <CheckBox x:Name="_checkLembrarLogin" HorizontalOptions="Start" HeightRequest="18"/>
                         <Label Text="Lembrar login" FontSize="16" FontAttributes="Bold"/>
                     </HorizontalStackLayout>
                 </Grid>
 
             </VerticalStackLayout>
         </Grid>
-        <Grid WidthRequest="150">
-            <Label x:Name="CadastroLabel" Text="Não tenho cadastro" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource LabelClicavel}" TextDecorations="Underline"/>
-            <Button x:Name="CadastroBtn" BackgroundColor="Transparent" Clicked="ClickCadastroBtn" HeightRequest="20"/>
-        </Grid>
+
         <Grid WidthRequest="180" >
             <Label x:Name="_labelRedefinirSenha" HorizontalOptions="Center" Text="Esqueci minha senha" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource LabelClicavel}" TextDecorations="Underline"/>
             <Button x:Name="_btnRedefinirSenha" BackgroundColor="Transparent" Clicked="ClickSenhaBtn" HeightRequest="20"/>
         </Grid>
         <Grid>
             <Button x:Name="LoginBtn" Clicked="ClickLoginBtn" Text="Login" FontAttributes="Bold" FontSize="16" WidthRequest="150" HeightRequest="50"/>
+        </Grid>
+
+        <Grid>
+            <Button Clicked="ClickCadastroBtn" Text="Cadastrar" FontAttributes="Bold" FontSize="16" TextColor="Black" BorderColor="{StaticResource Yellow100Accent}" BackgroundColor="Transparent" BorderWidth="4" HeightRequest="50" WidthRequest="150"/>
         </Grid>
 
         <Grid>

@@ -56,10 +56,12 @@ public partial class CadastroPage : ContentPage
         if (selectedIndex == 1) {
             labelDescricao.IsVisible = true;
             editorDescricao.IsVisible = true;
+            _labelNome.Text = "Nome do centro de treinamento";
         }
         else {
             labelDescricao.IsVisible = false;
             editorDescricao.IsVisible = false;
+            _labelNome.Text = "Nome completo";
         }
     }
 

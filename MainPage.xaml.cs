@@ -33,16 +33,15 @@ public partial class MainPage : ContentPage
         string email = _entryLoginEmail.Text;
         string senhaPref = _entryLoginSenha.Text ;
 
-        if (LembreLogin.IsChecked) {
+        if (_checkLembrarLogin.IsChecked) {
             Preferences.Set("email", email);
             Preferences.Set("senha", senhaPref);
         }
 
         await Login(email, senhaPref);
     }
-
     private async Task Login(string email, string senha) {
-        
+
         try {
             string senhaCrpt = Criptografia.sha256_hash(senha);
             await loginViewModel.Login(email, senhaCrpt);
@@ -79,6 +78,7 @@ public partial class MainPage : ContentPage
         var email = Preferences.Get("email", "falso");
         var senha = Preferences.Get("senha", "falso");
         if (email == "falso" || senha == "falso") {
+            _checkLembrarLogin.IsChecked = false;
             return;
         }
         _entryLoginEmail.Text = email;
