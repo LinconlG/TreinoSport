@@ -74,6 +74,9 @@
 
   <ItemGroup>
     <None Remove="appsettings.json" />
+    <None Remove="Resources\Images\deslizantes.png" />
+    <None Remove="Resources\Images\editar.png" />
+    <None Remove="Resources\Images\saida.png" />
   </ItemGroup>
 
   <ItemGroup>
