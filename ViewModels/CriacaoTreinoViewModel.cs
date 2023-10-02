@@ -26,16 +26,19 @@ namespace TreinoSport.ViewModels
             DatasHorarios = new();
         }
 
-        public void AdicionarHorario(TimePicker novoHorario, string diaString) {
+        public void AdicionarHorario(TimePicker novoHorario, string diaString, Horario horario = null) {
             foreach (var data in DatasHorarios) {
                 if (data.DiaEnum.ToString() == diaString) {
+                    if (horario != null) {
+                        data.Horarios.Add(horario);
+                    }
                     data.HorariosPicker.Add(novoHorario);
                 }
             }
         }
 
-        public async Task DeletarTreino(int codigoTreino) {
-            await treinoContext.DeleteTreino(codigoTreino);
+        public Task DeletarTreino(int codigoTreino) {
+            return treinoContext.DeleteTreino(codigoTreino);
         }
         public void RemoverHorario(string diaString) {
             foreach (var data in DatasHorarios) {
@@ -99,7 +102,7 @@ namespace TreinoSport.ViewModels
                     foreach (var horario in dia.Horarios) {
                         TimePicker timePicker = new();
                         timePicker.Time = horario.Hora.TimeOfDay;
-                        AdicionarHorario(timePicker, dia.Dia.ToString());
+                        AdicionarHorario(timePicker, dia.Dia.ToString(), horario);
                     }
                 }
                 return treino;

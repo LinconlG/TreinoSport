@@ -74,7 +74,12 @@ public partial class CriacaoTreino : ContentPage {
             await Navigation.PopAsync();
         }
         catch (Exception ex) {
-            throw new Exception(ex.Message);
+            if (ex.IsPublicMessageCheck()) {
+                await DisplayAlert("Erro", ex.Message, "Ok");
+            }
+            else {
+                await DisplayAlert("Erro", "Ocorreu um erro!", "Ok");
+            }
         }
         finally {
             btn.IsEnabled = true;

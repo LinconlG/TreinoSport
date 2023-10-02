@@ -16,7 +16,7 @@ namespace TreinoSport.Models
         public string NomeDia { get; set; }
         public DayOfWeek DiaEnum { get; set; }
         public ObservableCollection<TimePicker> HorariosPicker { get; set; }
-        public List<Horario> Horarios { get; set; }
+        public List<Horario> Horarios { get; set; } = new();
 
         public List<Horario> ConverterHorario() {
             var horariosDateTime = new List<Horario>();
@@ -24,6 +24,10 @@ namespace TreinoSport.Models
             for (int i = 0; i < HorariosPicker.Count; i++) {
                 var codString = $"{i+1}{(int)DiaEnum}";
                 var aux = new Horario() { Codigo = int.Parse(codString), AlunosPresentes = new(), Hora = new(HorariosPicker[i].Time.Ticks) };
+                var horarioTemp = Horarios.FirstOrDefault(h => h.Codigo == aux.Codigo && h.Hora == aux.Hora);
+                if (horarioTemp != default) {
+                    aux.AlunosPresentes = horarioTemp.AlunosPresentes;
+                }
                 horariosDateTime.Add(aux);
             }
             return horariosDateTime;
