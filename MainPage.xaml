@@ -8,7 +8,7 @@
              Shell.TabBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled">
     <ContentPage.Behaviors>
-        <mct:StatusBarBehavior StatusBarColor="{StaticResource Yellow100Accent}" />
+        <mct:StatusBarBehavior StatusBarColor="{StaticResource Primary}" />
     </ContentPage.Behaviors>
 
     <ContentPage.Resources>
@@ -46,7 +46,7 @@
         </Grid>
 
         <Grid>
-            <Button Clicked="ClickCadastroBtn" Text="Cadastrar" FontAttributes="Bold" FontSize="16" TextColor="Black" BorderColor="{StaticResource Yellow100Accent}" BackgroundColor="Transparent" BorderWidth="4" HeightRequest="50" WidthRequest="150"/>
+            <Button Clicked="ClickCadastroBtn" Text="Cadastrar" FontAttributes="Bold" FontSize="16" TextColor="Black" BorderColor="{StaticResource Primary}" BackgroundColor="Transparent" BorderWidth="4" HeightRequest="50" WidthRequest="150"/>
         </Grid>
 
         <Grid>

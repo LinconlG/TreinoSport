@@ -14,6 +14,7 @@
         <ShellContent x:Name="_tabPaginaAluno" Route="PaginaInicialAluno" Title="Inicio" Icon="iconshome.png" ContentTemplate="{DataTemplate views:PaginaInicialAluno}"/>
         <ShellContent x:Name="_tabPaginaCT" Route="PaginaInicialCT" Title="Criar/editar" Icon="editar.png" ContentTemplate="{DataTemplate views:PaginaInicialCT}"/>
         <ShellContent x:Name="_tabGerenciamento" Route="GerenciamentoTreino" Title="Gerenciar" Icon="deslizantes.png" ContentTemplate="{DataTemplate views:GerenciamentoTreino}"/>
+        <ShellContent Route="Configuracoes" Title="Configurações" Icon="definicoes.png" ContentTemplate="{DataTemplate views:Configuracoes}"/>
         <ShellContent Route="Sair" Title="Sair" Icon="saida.png" ContentTemplate="{DataTemplate views:Sair}"/>
     </TabBar>
     
