@@ -1,5 +1,6 @@
 using CommunityToolkit.Maui.Views;
 using TreinoSport.Extensions;
+using TreinoSport.Models;
 using TreinoSport.ViewModels;
 
 namespace TreinoSport.Views;
@@ -23,8 +24,10 @@ public partial class AlunoTreinoDetalhes : ContentPage
         var codigoDia = int.Parse(btn.ClassId[1].ToString());
         var codigoHorario = int.Parse(btn.ClassId);
         var alunos = alunoTreinoViewModel.BuscarAlunosPopUp((DayOfWeek)codigoDia, codigoHorario);
+        var codigoAluno = Preferences.Get("codigoConta", 0);
+        var opcoes = VerificarPresenca(codigoAluno, alunos);
         try {
-            var resultado = await DisplayActionSheet("SELECIONE UMA OPÇÃO", "FECHAR", null, "LISTA DE PRESENÇA", "MARCAR PRESENÇA", "REMOVER PRESENÇA");
+            var resultado = await DisplayActionSheet("SELECIONE UMA OPÇÃO", "FECHAR", null, opcoes);
             if (resultado == null) {
                 return;
             }
@@ -33,11 +36,7 @@ public partial class AlunoTreinoDetalhes : ContentPage
                 return;
             }
             if (resultado == "MARCAR PRESENÇA") {
-                var codigoAluno = Preferences.Get("codigoConta", 0);
-                if (alunos.Any(aluno => aluno.Codigo == codigoAluno)) {
-                    await DisplayAlert("Erro", "Você já marcou presença neste horário.", "OK");
-                    return;
-                }
+                
                 if (alunos.Count >= limitePresenca) {
                     await DisplayAlert("Erro", "O limite de alunos presentes para este horário já foi atingido.", "OK");
                     return;
@@ -47,11 +46,7 @@ public partial class AlunoTreinoDetalhes : ContentPage
                 return;
             }
             if (resultado == "REMOVER PRESENÇA") {
-                var codigoAluno = Preferences.Get("codigoConta", 0);
-                if (!alunos.Any(aluno => aluno.Codigo == codigoAluno)) {
-                    await DisplayAlert("Erro", "Você não possui presença neste horário.", "OK");
-                    return;
-                }
+
                 await alunoTreinoViewModel.RemoverPresenca(codigoTreino, codigoDia, codigoHorario, codigoAluno);
                 await DisplayAlert("Concluído", "A presença no horário foi removida.", "OK");
                 return;
@@ -69,6 +64,18 @@ public partial class AlunoTreinoDetalhes : ContentPage
             btn.IsEnabled = true;
         }
 
+    }
+
+    private string[] VerificarPresenca(int codigoAluno, List<Conta> alunos) {
+        string[] opcoes;
+
+        if (alunos.Any(a => a.Codigo == codigoAluno)) {
+            opcoes = new string[] { "LISTA DE PRESENÇA", "REMOVER PRESENÇA" };
+        }
+        else {
+            opcoes = new string[] { "LISTA DE PRESENÇA", "MARCAR PRESENÇA" };
+        }
+        return opcoes;
     }
 
 	private async void BuscarTreino(int codigoTreino) {
