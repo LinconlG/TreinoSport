@@ -102,5 +102,12 @@ namespace TreinoSport.Contexts {
             HttpResponseMessage response = await BaseContext.HttpResquest(HttpMethod.Put, BaseContext.urlAndroidAPI, endpoint, queryParams);
             await response.HandleResponse();
         }
+        public async Task PatchConta(Conta conta) {
+
+            var endpoint = "/usuario/atualizar";
+
+            HttpResponseMessage response = await BaseContext.HttpResquest(HttpMethod.Patch, BaseContext.urlAndroidAPI, endpoint, null, conta);
+            await response.HandleResponse();
+        }
     }
 }

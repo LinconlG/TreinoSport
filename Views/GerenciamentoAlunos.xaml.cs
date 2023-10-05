@@ -49,10 +49,24 @@ public partial class GerenciamentoAlunos : ContentPage
     }
 	private async void ClickAulaHorario(object sender, EventArgs e) {
 		Button btn = sender as Button;
-		var codigoDia = int.Parse(btn.ClassId[1].ToString());
-		var codigoHorario = int.Parse(btn.ClassId);
-        var alunos = treinoViewModel.BuscarAlunosPopUp((DayOfWeek)codigoDia, codigoHorario);
-        await this.ShowPopupAsync(new GerenciamentoAulaHorario(alunos));
+        btn.IsEnabled = false;
+        try {
+            var codigoDia = int.Parse(btn.ClassId[1].ToString());
+            var codigoHorario = int.Parse(btn.ClassId);
+            var alunos = treinoViewModel.BuscarAlunosPopUp((DayOfWeek)codigoDia, codigoHorario);
+            await this.ShowPopupAsync(new GerenciamentoAulaHorario(alunos));
+        }
+        catch (Exception ex) {
+            if (ex.IsPublicMessageCheck()) {
+                await DisplayAlert("Erro", ex.Message, "Ok");
+            }
+            else {
+                await DisplayAlert("Erro", "Ocorreu um erro!", "Ok");
+            }
+        }
+        finally {
+            btn.IsEnabled = true;
+        }
 	}
     private async void ClickAdicionarAluno(object sender, EventArgs e) {
         Button btn = sender as Button;
@@ -72,7 +86,7 @@ public partial class GerenciamentoAlunos : ContentPage
             _entryAddAluno.Text = String.Empty;
         }
 		catch (Exception ex) {
-			if (TaskExtension.IsPublicMessageCheck(ex)) {
+			if (ex.IsPublicMessageCheck()) {
 				await DisplayAlert("Erro",ex.Message, "Ok");
 			}
 			else {

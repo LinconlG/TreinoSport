@@ -9,19 +9,25 @@
                 <Label Text="Edite seu perfil" FontAttributes="Bold" FontSize="{StaticResource fonteTamanho1}" />
             </Grid>
 
-            <StackLayout Grid.Row="1">
+            <StackLayout Spacing="10" Grid.Row="1">
+                <Label Text="Nome" FontAttributes="Italic" FontSize="{StaticResource fonteTamanho2}"/>
                 <Grid ColumnDefinitions="auto,*">
                     <Entry x:Name="_entryNome" Text="Nome" FontSize="17" Grid.Column="0" WidthRequest="300"/>
                     <ImageButton WidthRequest="50" HeightRequest="30" Source="lapis.png" Grid.Column="1" HorizontalOptions="Start"/>
                 </Grid>
-                <Grid ColumnDefinitions="auto,*">
+
+                <Label x:Name="_labelDescricao" IsVisible="false" FontAttributes="Italic" Text="Descrição" FontSize="{StaticResource fonteTamanho2}"/>
+                <Grid x:Name="_gridDescricao" IsVisible="false" ColumnDefinitions="auto,*">
                     <Editor x:Name="_entryDescricao" Text="Descricao" FontSize="17" Grid.Column="0" HeightRequest="100" WidthRequest="300"/>
                     <ImageButton WidthRequest="50" HeightRequest="30" Source="lapis.png" Grid.Column="1" HorizontalOptions="Start"/>
                 </Grid>
+
+                <Label Text="Email" FontAttributes="Italic" FontSize="{StaticResource fonteTamanho2}"/>
                 <Grid ColumnDefinitions="auto,*">
                     <Entry x:Name="_entryEmail" Text="Email" FontSize="17" Grid.Column="0" WidthRequest="300"/>
                     <ImageButton WidthRequest="50" HeightRequest="30" Source="lapis.png" Grid.Column="1" HorizontalOptions="Start"/>
                 </Grid>
+                <Button Clicked="ClickSalvarAlterações" Text="Salvar alterações" WidthRequest="150" HorizontalOptions="Center"/>
             </StackLayout>
         </StackLayout>
 

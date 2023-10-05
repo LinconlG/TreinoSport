@@ -53,7 +53,7 @@ public partial class AlunoTreinoDetalhes : ContentPage
             }
         }
         catch (Exception ex) {
-            if (TaskExtension.IsPublicMessageCheck(ex)) {
+            if (ex.IsPublicMessageCheck()) {
                 await DisplayAlert("Erro", ex.Message, "Ok");
             }
             else {

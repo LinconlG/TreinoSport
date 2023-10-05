@@ -10,6 +10,9 @@ public partial class Sair : ContentPage {
             if (flagCarregado) {
                 Saindo();
             }
+            else {
+                flagCarregado = true;
+            }
         };
     }
 
@@ -32,6 +35,5 @@ public partial class Sair : ContentPage {
                 await Shell.Current.GoToAsync($"//{nameof(PaginaInicialAluno)}");
             }
         }
-        flagCarregado = true;
     }
 }
