@@ -16,6 +16,7 @@ namespace TreinoSport.ViewModels {
         public ObservableCollection<Treino> Treinos { get; set; }
         public ObservableCollection<Conta> Alunos { get; set; }
         public ObservableCollection<DiaDaSemanaDTO> DatasHorarios { get; set; }
+        public List<DiaDaSemana> dataLista { get; set; }
 
         [ObservableProperty]
         private Treino treino;
@@ -133,11 +134,11 @@ namespace TreinoSport.ViewModels {
         }
 
         public async Task<Treino> BuscarTreinoBasico(int codigoTreino) {
-            Treino = await treinoContext.GetTreinoBasico(codigoTreino);
+            Treino = await treinoContext.GetDetalhesTreinoBasico(codigoTreino);
             Treino.Alunos = await treinoContext.GetAlunos(codigoTreino);
             Alunos.Clear();
             AddAluno(Treino.Alunos);
-            AddDatas(Treino.DatasTreinos);
+            AddDatas(dataLista);
             return Treino;
         }
 

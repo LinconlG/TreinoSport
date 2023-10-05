@@ -1,5 +1,6 @@
 using CommunityToolkit.Maui.Views;
 using TreinoSport.Extensions;
+using TreinoSport.Models;
 using TreinoSport.ViewModels;
 
 namespace TreinoSport.Views;
@@ -8,10 +9,11 @@ public partial class GerenciamentoAlunos : ContentPage
 {
 	TreinoViewModel treinoViewModel;
 	private int codigoTreino;
-	public GerenciamentoAlunos(int codigoTreino)
+	public GerenciamentoAlunos(int codigoTreino, List<DiaDaSemana> datas)
 	{
 		InitializeComponent();
 		this.BindingContext = treinoViewModel = new();
+        treinoViewModel.dataLista = datas;
 		ReceberTreino(codigoTreino);
 		this.codigoTreino = codigoTreino;
 	}

@@ -14,8 +14,9 @@ public partial class GerenciamentoTreino : ContentPage
 	private async void ClickGerenciarTreino(object sender, EventArgs e) {
         var btn = (Button)sender;
         var codigoTreino = int.Parse(btn.ClassId);
+        var datas = treinoViewModel.Treinos.Where(t => t.Codigo == codigoTreino).Select(t => t.DatasTreinos).First();
         try {
-            await Navigation.PushAsync(new GerenciamentoAlunos(codigoTreino));
+            await Navigation.PushAsync(new GerenciamentoAlunos(codigoTreino, datas));
         }
         catch (Exception ex) {
             throw new Exception(ex.Message);
