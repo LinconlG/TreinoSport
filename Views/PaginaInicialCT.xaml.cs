@@ -17,12 +17,16 @@ public partial class PaginaInicialCT : ContentPage
 
     private async void ClickedBtnEditarTreino(object sender, EventArgs e) {
         var btn = (Button)sender;
+        btn.IsEnabled = false;
         var codigoTreino = int.Parse(btn.ClassId);
         try {
             await Navigation.PushAsync(new CriacaoTreino(true, codigoTreino));
         }
         catch (Exception ex) {
             throw new Exception(ex.Message);
+        }
+        finally {
+            btn.IsEnabled = true;
         }
 
     }

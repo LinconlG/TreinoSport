@@ -56,12 +56,7 @@ public partial class AlunoTreinoDetalhes : ContentPage
             }
         }
         catch (Exception ex) {
-            if (ex.IsPublicMessageCheck()) {
-                await DisplayAlert("Erro", ex.Message, "Ok");
-            }
-            else {
-                await DisplayAlert("Erro", "Ocorreu um erro!", "Ok");
-            }
+            this.HandlerException(ex);
         }
         finally {
             btn.IsEnabled = true;

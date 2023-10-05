@@ -22,5 +22,14 @@ namespace TreinoSport.Extensions {
                 return false;
             }
         }
+
+        public static async void HandlerException(this Page page, Exception ex) {
+            if (ex.IsPublicMessageCheck()) {
+                await page.DisplayAlert("Erro", ex.Message, "Ok");
+            }
+            else {
+                await page.DisplayAlert("Erro", "Ocorreu um erro!", "Ok");
+            }
+        }
     }
 }
