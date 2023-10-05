@@ -8,14 +8,18 @@ public partial class Configuracoes : ContentPage
 {
 	UsuarioContext usuarioContext;
 	private bool flagCarregado;
+    private int codigoConta = 1;
 	public Configuracoes()
 	{
 		InitializeComponent();
 		usuarioContext = new();
+        codigoConta = ContaStatic.GetCodigo();
         Loaded += (s, e) => { BuscarConta(); };
         Appearing += (s, e) => {
             if (flagCarregado) {
-                BuscarConta();
+                if (codigoConta != ContaStatic.GetCodigo()) {
+                    BuscarConta();
+                }
             }
             else {
                 flagCarregado = true;
@@ -25,11 +29,10 @@ public partial class Configuracoes : ContentPage
 
 	private async void BuscarConta() {
 
-		try {
-            var codigoConta = Preferences.Get("codigoConta", 0);
+		try {    
             var conta = await usuarioContext.GetContaPorCodigo(codigoConta);
             _entryNome.Text = conta.Nome;
-            if (Preferences.Get("isCT", false)) {
+            if (ContaStatic.GetIsCT()) {
                 _gridDescricao.IsVisible = true;
                 _labelDescricao.IsVisible = true;
                 _entryDescricao.Text = conta.Descricao;
@@ -53,7 +56,7 @@ public partial class Configuracoes : ContentPage
 	private async void ClickSalvarAlterações(object sender, EventArgs e) {
 		try {
 			var conta = new Conta();
-			conta.Codigo = Preferences.Get("codigoConta", 0);
+			conta.Codigo = ContaStatic.GetCodigo();
 			conta.Nome = _entryNome.Text;
 			conta.Descricao = _entryDescricao.Text != null ? _entryDescricao.Text : null;
 			conta.Email = _entryEmail.Text;

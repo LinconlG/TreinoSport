@@ -1,6 +1,7 @@
 ﻿using Microsoft.Maui.Controls.Xaml;
 using Microsoft.Maui.Storage;
 using TreinoSport.Extensions;
+using TreinoSport.Models;
 using TreinoSport.Services;
 using TreinoSport.ViewModels;
 using TreinoSport.Views;
@@ -34,8 +35,7 @@ public partial class MainPage : ContentPage
         string senhaPref = _entryLoginSenha.Text ;
 
         if (_checkLembrarLogin.IsChecked) {
-            Preferences.Set("email", email);
-            Preferences.Set("senha", senhaPref);
+            ContaStatic.SetConta(email, senhaPref);
         }
 
         await Login(email, senhaPref);
@@ -64,7 +64,7 @@ public partial class MainPage : ContentPage
         _entryLoginEmail.Text = String.Empty;
         _entryLoginSenha.Text = String.Empty;
 
-        if (Preferences.Get("isCT", false)) {
+        if (ContaStatic.GetIsCT()) {
             AppShell.VisibilidadeFlyoutCT(true);
             await Shell.Current.GoToAsync($"//{nameof(PaginaInicialCT)}");
         }
@@ -75,9 +75,9 @@ public partial class MainPage : ContentPage
     }
 
     private async void LembrarLogin() {
-        var email = Preferences.Get("email", "falso");
-        var senha = Preferences.Get("senha", "falso");
-        if (email == "falso" || senha == "falso") {
+        var email = ContaStatic.GetEmail();
+        var senha = ContaStatic.GetSenha();
+        if (email == null || senha == null) {
             _checkLembrarLogin.IsChecked = false;
             return;
         }

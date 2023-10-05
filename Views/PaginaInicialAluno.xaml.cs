@@ -11,7 +11,8 @@ public partial class PaginaInicialAluno : ContentPage {
     private async void ClickAlunoDetalhesTreino(object sender, EventArgs e) {
         Button btn = (Button)sender;
         var codigoTreino = int.Parse(btn.ClassId);
-        await Navigation.PushAsync(new AlunoTreinoDetalhes(codigoTreino));
+        var datas = treinoViewModel.Treinos.Where(t => t.Codigo == codigoTreino).Select(t => t.DatasTreinos).First();
+        await Navigation.PushAsync(new AlunoTreinoDetalhes(codigoTreino, datas));
     }
     protected override void OnAppearing() {
         base.OnAppearing();

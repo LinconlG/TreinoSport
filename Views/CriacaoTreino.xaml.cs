@@ -61,7 +61,7 @@ public partial class CriacaoTreino : ContentPage {
         var btn = (Button)sender;
         btn.IsEnabled = false;
         try {
-            var treino = AtribuirTreino();
+            var treino = await AtribuirTreino();
             if (flagEditar) {
                 treino.Codigo = codigoTreino.Value;
                 await criacaoTreinoViewModel.AtualizarDetalhesTreino(treino);
@@ -144,13 +144,20 @@ public partial class CriacaoTreino : ContentPage {
         return false;
     }
 
-    private Treino AtribuirTreino() {
+    private async Task<Treino> AtribuirTreino() {
         var treino = new Treino();
         treino.Descricao = _editorDescricao.Text;
         treino.Criador = new();
-        treino.Criador.Codigo = Preferences.Get("codigoConta", 0);
-        if (treino.Criador.Codigo == 0) {
-            throw new Exception("Preferencia de conta não foi salva");
+        try {
+            treino.Criador.Codigo = ContaStatic.GetCodigo();
+        }
+        catch (Exception ex) {
+            if (ex.IsPublicMessageCheck()) {
+                await DisplayAlert("Erro", ex.Message, "Ok");
+            }
+            else {
+                await DisplayAlert("Erro", "Ocorreu um erro!", "Ok");
+            }
         }
         treino.Modalidade = (ModalidadeTreino)_pickerModalidade.SelectedIndex;
         treino.Nome = treino.Modalidade.ToString();

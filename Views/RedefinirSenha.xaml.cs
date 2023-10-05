@@ -1,4 +1,5 @@
 using TreinoSport.Extensions;
+using TreinoSport.Models;
 using TreinoSport.Services;
 using TreinoSport.ViewModels;
 
@@ -19,11 +20,10 @@ public partial class RedefinirSenha : ContentPage
 		}
 		_stackInserirEmail.IsVisible = false;
 		_carregamento.IsRunning = true;
-		//criar opcao ja tenho codigo
 		try {
 			var email = _entryEmail.Text;
 			var codigoConta = await senhaViewModel.EnviarTokenSenha(email);
-            Preferences.Set("codigoConta", codigoConta);
+            ContaStatic.SetCodigo(codigoConta);
 			_carregamento.IsRunning = false;
 			_stackInserirCodigo.IsVisible = true;
 		}
@@ -46,9 +46,9 @@ public partial class RedefinirSenha : ContentPage
 		_carregamento.IsRunning = true;
 		try {
 			var token = _entryToken.Text;
-            var codigoConta = Preferences.Get("codigoConta", 0);
+            var codigoConta = ContaStatic.GetCodigo();
             await senhaViewModel.ChecarTokenSenha(codigoConta, token);
-            Preferences.Set("token", token);
+            ContaStatic.SetToken(token);
             _carregamento.IsRunning = false;
             _stackNovaSenha.IsVisible = true;
         }
@@ -71,8 +71,8 @@ public partial class RedefinirSenha : ContentPage
             _stackNovaSenha.IsVisible = false;
             _carregamento.IsRunning = true;
             var senha = Criptografia.sha256_hash(_entrysenha.Text);
-            var codigoConta = Preferences.Get("codigoConta", 0);
-            var token = Preferences.Get("token", "");
+            var codigoConta = ContaStatic.GetCodigo();
+            var token = ContaStatic.GetToken();
             await senhaViewModel.RedefinirSenha(codigoConta, senha, token);
             Preferences.Clear();
             await DisplayAlert("Senha alterada", "Sua senha foi alterada com sucesso!", "Ok");

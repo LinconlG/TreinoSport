@@ -1,4 +1,5 @@
 using CommunityToolkit.Maui.Views;
+using System.Collections.ObjectModel;
 using TreinoSport.Extensions;
 using TreinoSport.Models;
 using TreinoSport.ViewModels;
@@ -10,10 +11,11 @@ public partial class AlunoTreinoDetalhes : ContentPage
 	AlunoTreinoViewModel alunoTreinoViewModel;
     private int codigoTreino;
     private int limitePresenca;
-	public AlunoTreinoDetalhes(int codigoTreino)
+	public AlunoTreinoDetalhes(int codigoTreino, List<DiaDaSemana> datasHorarios)
 	{
 		InitializeComponent();
 		this.BindingContext = alunoTreinoViewModel = new();
+        alunoTreinoViewModel.datasLista = datasHorarios;
         this.codigoTreino = codigoTreino;
         BuscarTreino(codigoTreino);
 	}
@@ -24,9 +26,10 @@ public partial class AlunoTreinoDetalhes : ContentPage
         var codigoDia = int.Parse(btn.ClassId[1].ToString());
         var codigoHorario = int.Parse(btn.ClassId);
         var alunos = alunoTreinoViewModel.BuscarAlunosPopUp((DayOfWeek)codigoDia, codigoHorario);
-        var codigoAluno = Preferences.Get("codigoConta", 0);
-        var opcoes = VerificarPresenca(codigoAluno, alunos);
         try {
+            var codigoAluno = ContaStatic.GetCodigo();
+            var opcoes = VerificarPresenca(codigoAluno, alunos);
+
             var resultado = await DisplayActionSheet("SELECIONE UMA OPÇÃO", "FECHAR", null, opcoes);
             if (resultado == null) {
                 return;

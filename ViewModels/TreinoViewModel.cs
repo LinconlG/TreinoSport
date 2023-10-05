@@ -36,7 +36,7 @@ namespace TreinoSport.ViewModels {
             try {
                 IsBusy = true;
                 Treinos.Clear();
-                var lista = await treinoContext.GetTreinosComoAluno(Preferences.Get("codigoConta", 0));
+                var lista = await treinoContext.GetTreinosComoAluno(ContaStatic.GetCodigo());
                 ChecarTreinos(lista);
                 foreach (var treino in lista) {
                     Treinos.Add(treino);
@@ -56,7 +56,7 @@ namespace TreinoSport.ViewModels {
             try {
                 IsBusy = true;
                 Treinos.Clear();
-                var lista = await treinoContext.GetTreinosComoCT(Preferences.Get("codigoConta", 0));
+                var lista = await treinoContext.GetTreinosComoCT(ContaStatic.GetCodigo());
                 ChecarTreinos(lista);
                 foreach (var item in lista) {
                     Treinos.Add(item);
@@ -75,7 +75,9 @@ namespace TreinoSport.ViewModels {
             try {
                 IsBusy = true;
                 Treinos.Clear();
-                var lista = await treinoContext.GetTreinosComCores(Preferences.Get("codigoConta", 0), Preferences.Get("isCT", false));
+                var codigoConta = ContaStatic.GetCodigo();
+                var isCT = ContaStatic.GetIsCT();
+                var lista = await treinoContext.GetTreinosComCores(codigoConta, isCT);
                 ChecarTreinos(lista);
                 foreach (var treino in lista) {
                     AtribuirBordas(treino);

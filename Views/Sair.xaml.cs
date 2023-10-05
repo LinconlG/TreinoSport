@@ -1,3 +1,5 @@
+using TreinoSport.Models;
+
 namespace TreinoSport.Views;
 
 public partial class Sair : ContentPage {
@@ -21,14 +23,11 @@ public partial class Sair : ContentPage {
         bool resposta = await DisplayAlert("Sair", "Deseja sair da sua conta?", "Sim", "Não");
 
         if (resposta) {
-            Preferences.Remove("email");
-            Preferences.Remove("senha");
-            Preferences.Remove("codigoConta");
-            Preferences.Remove("isCT");
+            ContaStatic.Logout();
             await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
         }
         else {
-            if (Preferences.Get("isCT", false)) {
+            if (ContaStatic.GetIsCT()) {
                 await Shell.Current.GoToAsync($"//{nameof(PaginaInicialCT)}");
             }
             else {

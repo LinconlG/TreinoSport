@@ -13,6 +13,7 @@ namespace TreinoSport.ViewModels {
 
         TreinoContext treinoContext;
         public ObservableCollection<DiaDaSemanaDTO> DatasHorarios { get; set; }
+        public List<DiaDaSemana> datasLista { get; set; }
 
         public AlunoTreinoViewModel() {
             DatasHorarios = new();
@@ -21,8 +22,8 @@ namespace TreinoSport.ViewModels {
 
         public async Task<Treino> BuscarTreino(int codigoTreino) {
             DatasHorarios.Clear();
-            var treino = await treinoContext.GetDetalhesTreino(codigoTreino);
-            AddDatasHorarios(treino.DatasTreinos);
+            var treino = await treinoContext.GetDetalhesTreinoBasico(codigoTreino);
+            AddDatasHorarios(datasLista);
             return treino;
         }
 /*        private void AtribuirAlunos(DayOfWeek dia, int codigoHorario) {

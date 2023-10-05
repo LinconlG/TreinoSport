@@ -11,7 +11,7 @@ namespace TreinoSport.Models {
         public string Email { get; set; }
         public string Senha { get; set; }
         public string Descricao { get; set; }
-        public bool? IsCentroTreinamento { get; set; }
+        public bool IsCentroTreinamento { get; set; }
 
 
         public Conta() { }

@@ -78,6 +78,24 @@ namespace TreinoSport.Contexts {
                 throw new Exception($"{e.Message}");
             }
         }
+        public async Task<Treino> GetDetalhesTreinoBasico(int codigoTreino) {
+            try {
+                var endpoint = "/treino/ct/detalhes/basico";
+
+                var queryParams = new Dictionary<string, object>() {
+                    { "codigoTreino", codigoTreino}
+                };
+
+                HttpResponseMessage response = await BaseContext.HttpResquest(HttpMethod.Get, BaseContext.urlAndroidAPI, endpoint, queryParams);
+                await response.HandleResponse();
+
+                var treino = await HttpUtilities.GetBody<Treino>(response);
+                return treino;
+            }
+            catch (Exception e) {
+                throw new Exception($"{e.Message}");
+            }
+        }
 
         public async Task PatchDetalhesTreino(Treino treino) {
             try {
