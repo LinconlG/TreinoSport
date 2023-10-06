@@ -18,6 +18,7 @@ public partial class Configuracoes : ContentPage
         Appearing += (s, e) => {
             if (flagCarregado) {
                 if (codigoConta != ContaStatic.GetCodigo()) {
+                    codigoConta = ContaStatic.GetCodigo();
                     BuscarConta();
                 }
             }

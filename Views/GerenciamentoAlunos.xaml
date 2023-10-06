@@ -61,7 +61,7 @@
                                                     <CollectionView.ItemTemplate>
                                                         <DataTemplate>
                                                             <Grid HorizontalOptions="Center" Padding="5">
-                                                                <Button Clicked="ClickAulaHorario" ClassId="{Binding Codigo}" Text="{Binding HoraString}" FontSize="{StaticResource fonteTamanho2}"/>
+                                                                <Button Clicked="ClickAulaHorario" ClassId="{Binding Codigo}" Text="{Binding HoraString}" FontSize="16"/>
                                                             </Grid>
                                                         </DataTemplate>
                                                     </CollectionView.ItemTemplate>

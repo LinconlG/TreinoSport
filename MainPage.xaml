@@ -17,9 +17,7 @@
         <Color x:Key="LabelClicavel">Blue</Color>
     </ContentPage.Resources>
 
-    <VerticalStackLayout
-            Spacing="25"
-            Padding="150">
+    <StackLayout Spacing="25" Padding="100">
 
         <Grid VerticalOptions="Start" WidthRequest="{StaticResource LarguraGridLogin}">
             <VerticalStackLayout Spacing="10">
@@ -54,7 +52,7 @@
         </Grid>
 
 
-    </VerticalStackLayout>
+    </StackLayout>
 
 
 </ContentPage>
