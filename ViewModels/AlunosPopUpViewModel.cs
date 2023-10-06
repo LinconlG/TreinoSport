@@ -5,21 +5,24 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TreinoSport.Contexts;
 using TreinoSport.Models;
 
 namespace TreinoSport.ViewModels {
     public class AlunosPopUpViewModel : ObservableObject {
         public ObservableCollection<Conta> Alunos { get; set; }
-        private List<Conta> alunosLista { get; set; }
 
-        public AlunosPopUpViewModel(List<Conta> alunos) {
+        private TreinoContext treinoContext;
+
+        public AlunosPopUpViewModel() {
             Alunos = new();
-            alunosLista = alunos;
+            treinoContext = new();
         }
 
-        public void AtribuirAlunos() {
+        public async void AtribuirAlunos(int codigoTreino, int codigoDia, int codigoHorario) {
             Alunos.Clear();
-            foreach (var aluno in alunosLista) {
+            var presentes = await treinoContext.GetAlunosPresentes(codigoTreino, codigoDia, codigoHorario);
+            foreach (var aluno in presentes) {
                 Alunos.Add(aluno);
             }
         }

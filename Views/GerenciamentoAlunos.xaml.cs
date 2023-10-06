@@ -50,8 +50,7 @@ public partial class GerenciamentoAlunos : ContentPage
         try {
             var codigoDia = int.Parse(btn.ClassId[1].ToString());
             var codigoHorario = int.Parse(btn.ClassId);
-            var alunos = treinoViewModel.BuscarAlunosPopUp((DayOfWeek)codigoDia, codigoHorario);
-            await this.ShowPopupAsync(new GerenciamentoAulaHorario(alunos));
+            await this.ShowPopupAsync(new GerenciamentoAulaHorario(codigoTreino, codigoDia, codigoHorario));
         }
         catch (Exception ex) {
             this.HandlerException(ex);

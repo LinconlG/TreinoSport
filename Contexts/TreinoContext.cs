@@ -239,5 +239,26 @@ namespace TreinoSport.Contexts {
             await response.HandleResponse();
 
         }
+
+        public async Task<List<Conta>> GetAlunosPresentes(int codigoTreino, int codigoDia, int codigoHorario) {
+            try {
+                var endpoint = "/treino/presentes";
+
+                var queryParams = new Dictionary<string, object>() {
+                    { "codigoTreino", codigoTreino},
+                    { "codigoDia", codigoDia},
+                    { "codigoHorario", codigoHorario}
+                };
+
+                HttpResponseMessage response = await BaseContext.HttpResquest(HttpMethod.Get, BaseContext.urlAndroidAPI, endpoint, queryParams);
+                await response.HandleResponse();
+
+                var alunos = await HttpUtilities.GetBody<List<Conta>>(response);
+                return alunos;
+            }
+            catch (Exception e) {
+                throw new Exception($"{e.Message}");
+            }
+        }
     }
 }

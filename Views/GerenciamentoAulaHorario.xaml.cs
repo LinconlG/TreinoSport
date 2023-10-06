@@ -8,10 +8,10 @@ namespace TreinoSport.Views;
 public partial class GerenciamentoAulaHorario : Popup
 {
 	AlunosPopUpViewModel alunosPopUp;
-	public GerenciamentoAulaHorario(List<Conta> alunos)
+	public GerenciamentoAulaHorario(int codigoTreino, int codigoDia, int codigoHorario)
 	{
 		InitializeComponent();
-		this.BindingContext = alunosPopUp = new(alunos);
-		alunosPopUp.AtribuirAlunos();
+		this.BindingContext = alunosPopUp = new();
+		alunosPopUp.AtribuirAlunos(codigoTreino, codigoDia, codigoHorario);
 	}
 }

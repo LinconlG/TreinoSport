@@ -25,9 +25,9 @@ public partial class AlunoTreinoDetalhes : ContentPage
         btn.IsEnabled = false;
         var codigoDia = int.Parse(btn.ClassId[1].ToString());
         var codigoHorario = int.Parse(btn.ClassId);
-        var alunos = alunoTreinoViewModel.BuscarAlunosPopUp((DayOfWeek)codigoDia, codigoHorario);
         try {
             var codigoAluno = ContaStatic.GetCodigo();
+            var alunos = await alunoTreinoViewModel.BuscarPresentes(codigoTreino, codigoDia, codigoHorario);
             var opcoes = VerificarPresenca(codigoAluno, alunos);
 
             var resultado = await DisplayActionSheet("SELECIONE UMA OPÇÃO", "FECHAR", null, opcoes);
@@ -35,12 +35,12 @@ public partial class AlunoTreinoDetalhes : ContentPage
                 return;
             }
             if (resultado == "LISTA DE PRESENÇA") {
-                await this.ShowPopupAsync(new GerenciamentoAulaHorario(alunos));
+                await this.ShowPopupAsync(new GerenciamentoAulaHorario(codigoTreino, codigoDia, codigoHorario));
                 return;
             }
             if (resultado == "MARCAR PRESENÇA") {
-                
-                if (alunos.Count >= limitePresenca) {
+                var alunosTemp = await alunoTreinoViewModel.BuscarPresentes(codigoTreino, codigoDia, codigoHorario);
+                if (alunosTemp.Count >= limitePresenca) {
                     await DisplayAlert("Erro", "O limite de alunos presentes para este horário já foi atingido.", "OK");
                     return;
                 }

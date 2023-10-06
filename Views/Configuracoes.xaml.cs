@@ -29,8 +29,9 @@ public partial class Configuracoes : ContentPage
     }
 
 	private async void BuscarConta() {
-
-		try {    
+        _carregamento.IsRunning = true;
+        _stackPrincipal.IsVisible = false;
+        try {    
             var conta = await usuarioContext.GetContaPorCodigo(codigoConta);
             _entryNome.Text = conta.Nome;
             if (ContaStatic.GetIsCT()) {
@@ -47,6 +48,8 @@ public partial class Configuracoes : ContentPage
         catch (Exception ex) {
             this.HandlerException(ex);
         }
+        _carregamento.IsRunning = false;
+        _stackPrincipal.IsVisible = true;
 	}
 
 	private async void ClickSalvarAlterações(object sender, EventArgs e) {

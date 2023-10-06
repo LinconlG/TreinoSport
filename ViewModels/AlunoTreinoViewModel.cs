@@ -55,6 +55,9 @@ namespace TreinoSport.ViewModels {
                 }
             }
         }
+        public Task<List<Conta>> BuscarPresentes(int codigoTreino, int codigoDia, int codigoHorario) {
+            return treinoContext.GetAlunosPresentes(codigoTreino, codigoDia, codigoHorario);
+        }
         private bool TratarIntervaloDias(DayOfWeek diaTreino) {
             var ontem = DateTime.Now.AddDays(-1).DayOfWeek;
             if (diaTreino == ontem) {
