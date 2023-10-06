@@ -21,8 +21,6 @@ namespace TreinoSport.ViewModels {
         [ObservableProperty]
         private Treino treino;
         [ObservableProperty]
-        private Treino conta;
-        [ObservableProperty]
         private bool _isBusy;
 
         public TreinoViewModel() {
