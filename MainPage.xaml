@@ -15,6 +15,8 @@
         <x:Double x:Key="LarguraGridLogin">250</x:Double>
         <x:Double x:Key="AlturaGridLogin">50</x:Double>
         <Color x:Key="LabelClicavel">Blue</Color>
+        <x:String x:Key="logoPreto">treinosporticone.png</x:String>
+        <x:String x:Key="logoBranco">logobranco.png</x:String>
     </ContentPage.Resources>
 
     <StackLayout Spacing="25" Padding="100">
@@ -22,8 +24,8 @@
         <Grid VerticalOptions="Start" WidthRequest="{StaticResource LarguraGridLogin}">
             <VerticalStackLayout Spacing="10">
                 <Label Text="Bem vindo(a)" HorizontalOptions="Center" FontSize="25"/>
-                <Entry x:Name="_entryLoginEmail" FontSize="18" Placeholder="E-mail" PlaceholderColor="Gray" WidthRequest="{StaticResource LarguraGridLogin}" HeightRequest="{StaticResource AlturaGridLogin}" BackgroundColor="#EAEADA"/>
-                <Entry x:Name="_entryLoginSenha" FontSize="18" Placeholder="Senha" IsPassword="True" PlaceholderColor="Gray" WidthRequest="{StaticResource LarguraGridLogin}" HeightRequest="{StaticResource AlturaGridLogin}" BackgroundColor="#EAEADA"/>
+                <Entry x:Name="_entryLoginEmail" FontSize="18" Placeholder="E-mail" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource Black}}" PlaceholderColor="Gray" WidthRequest="{StaticResource LarguraGridLogin}" HeightRequest="{StaticResource AlturaGridLogin}" BackgroundColor="#EAEADA"/>
+                <Entry x:Name="_entryLoginSenha" FontSize="18" Placeholder="Senha" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource Black}}" IsPassword="True" PlaceholderColor="Gray" WidthRequest="{StaticResource LarguraGridLogin}" HeightRequest="{StaticResource AlturaGridLogin}" BackgroundColor="#EAEADA"/>
                 <Label x:Name="_labelavisoLogin" Text="Verifique o email e a senha." FontSize="{StaticResource FonteAviso}" TextColor="{StaticResource CorAviso}" IsVisible="false"/>
                 <Grid>
                     <HorizontalStackLayout>
@@ -44,11 +46,11 @@
         </Grid>
 
         <Grid>
-            <Button Clicked="ClickCadastroBtn" Text="Cadastrar" FontAttributes="Bold" FontSize="16" TextColor="Black" BorderColor="{StaticResource Primary}" BackgroundColor="Transparent" BorderWidth="4" HeightRequest="50" WidthRequest="150"/>
+            <Button Clicked="ClickCadastroBtn" Text="Cadastrar" FontAttributes="Bold" FontSize="16" TextColor="Blue" BorderColor="{StaticResource Primary}" BackgroundColor="Transparent" BorderWidth="4" HeightRequest="50" WidthRequest="150"/>
         </Grid>
 
         <Grid>
-            <Image HorizontalOptions="Center" Source="treinosporticone.png" HeightRequest="230" WidthRequest="250"/>
+            <Image HorizontalOptions="Center" Source="{AppThemeBinding Light={StaticResource logoPreto}, Dark={StaticResource logoBranco}}" HeightRequest="230" WidthRequest="250"/>
         </Grid>
 
 

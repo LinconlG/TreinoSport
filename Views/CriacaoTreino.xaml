@@ -70,7 +70,7 @@
                                                 <Button Clicked="ClickRmvDia" ClassId="{Binding DiaEnum}" Style="{StaticResource btnMenosRetangulo}" HorizontalOptions="End" VerticalOptions="Center"/>
                                             </Grid>
 
-                                            <Grid MinimumHeightRequest="65.45" Padding="10" BackgroundColor="{StaticResource Yellow300Accent}">
+                                            <Grid MinimumHeightRequest="65.45" Padding="10" BackgroundColor="{AppThemeBinding Light={StaticResource Yellow300Accent}, Dark={StaticResource Gray600}}">
                                                 <CollectionView ItemsSource="{Binding HorariosPicker}">
                                                     <CollectionView.ItemsLayout>
                                                         <GridItemsLayout Orientation="Vertical" Span="4" />

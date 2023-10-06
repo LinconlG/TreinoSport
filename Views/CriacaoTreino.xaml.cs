@@ -82,10 +82,13 @@ public partial class CriacaoTreino : ContentPage {
         criacaoTreinoViewModel.RemoverHorario(diaString);
     }
 
-    private void ClickRmvDia(object sender, EventArgs e) {
+    private async void ClickRmvDia(object sender, EventArgs e) {
         Button button = sender as Button;
         var diaString = button.ClassId;
-        criacaoTreinoViewModel.RemoverDiaDaSemana(diaString);
+        var resultado = await DisplayAlert("Apagar dia de treino", "Você tem certeza que deseja deletar este dia?", "Sim", "Não");
+        if (resultado) {
+            criacaoTreinoViewModel.RemoverDiaDaSemana(diaString);
+        }
     }
 
     private async void PickerModalidadeChanged(object sender, EventArgs e) {

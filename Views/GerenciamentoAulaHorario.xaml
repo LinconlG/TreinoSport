@@ -7,7 +7,7 @@
              xmlns:models="clr-namespace:TreinoSport.Models">
 
     <VerticalStackLayout Padding="10" Spacing="10" >
-        <Label FontAttributes="Bold" Text="Alunos que marcaram presença" HorizontalOptions="Center" FontSize="18"/>
+        <Label FontAttributes="Bold" Text="Alunos que marcaram presença" TextColor="Black" HorizontalOptions="Center" FontSize="18"/>
         <Grid>
             <Border Stroke="Black" StrokeThickness="2" Padding="5" WidthRequest="300" HeightRequest="300">
                 <ScrollView>

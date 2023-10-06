@@ -16,7 +16,7 @@
         <Grid BackgroundColor="LightGray" HeightRequest="100" Padding="8">
             <ScrollView>
                 <StackLayout>
-                    <Label x:Name="_labelDescricao" FontSize="17" Text="Descrição"/>
+                    <Label x:Name="_labelDescricao" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource Black}}" FontSize="17" Text="Descrição"/>
                 </StackLayout>
             </ScrollView>
         </Grid>
@@ -45,7 +45,7 @@
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout Padding="5">
-                                    <Grid BackgroundColor="{StaticResource Yellow300Accent}">
+                                    <Grid BackgroundColor="{AppThemeBinding Light={StaticResource Yellow300Accent}, Dark={StaticResource Gray900}}">
                                         <StackLayout>
 
                                             <Grid Padding="10">

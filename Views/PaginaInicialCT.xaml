@@ -15,7 +15,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Treino">
                         <StackLayout Padding="8">
-                            <Border Stroke="#C49B33" StrokeThickness="3" StrokeShape="RoundRectangle 40,0,0,40" Background="#e8e8e6" Padding="15">
+                            <Border Stroke="#C49B33" StrokeThickness="3" StrokeShape="RoundRectangle 40,0,0,40" Background="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Black}}" Padding="15">
                                 <Grid>
                                     <Button ClassId="{Binding Codigo}" BackgroundColor="Transparent" Clicked="ClickedBtnEditarTreino"/>
                                     <StackLayout Spacing="5">

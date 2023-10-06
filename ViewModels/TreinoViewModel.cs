@@ -127,7 +127,7 @@ namespace TreinoSport.ViewModels {
                     treino.Cor = new Color(15, 166, 10);
                     break;
                 }
-                treino.Cor = new Color(8, 3, 3);
+                treino.Cor = new Color(196, 196, 194);
             }
         }
 
