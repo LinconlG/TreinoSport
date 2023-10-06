@@ -47,13 +47,7 @@ public partial class MainPage : ContentPage
             await loginViewModel.Login(email, senhaCrpt);
         }
         catch (Exception ex) {
-            if (ex.IsPublicMessageCheck()) {
-                await DisplayAlert("Erro", ex.Message, "Ok");
-                _labelavisoLogin.IsVisible = true;
-            }
-            else {
-                await DisplayAlert("Erro", "Ocorreu um erro!", "Ok");
-            }
+            this.HandlerException(ex);
             Preferences.Clear();         
             return;
         }

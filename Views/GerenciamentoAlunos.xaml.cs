@@ -38,12 +38,7 @@ public partial class GerenciamentoAlunos : ContentPage
             await treinoViewModel.RemoverAluno(codigoTreino, codigoAluno);
         }
         catch (Exception ex) {
-            if (ex.IsPublicMessageCheck()) {
-                await DisplayAlert("Erro", ex.Message, "Ok");
-            }
-            else {
-                await DisplayAlert("Erro", "Ocorreu um erro!", "Ok");
-            }
+            this.HandlerException(ex);
         }
         finally {
             btn.IsEnabled = true;
@@ -59,12 +54,7 @@ public partial class GerenciamentoAlunos : ContentPage
             await this.ShowPopupAsync(new GerenciamentoAulaHorario(alunos));
         }
         catch (Exception ex) {
-            if (ex.IsPublicMessageCheck()) {
-                await DisplayAlert("Erro", ex.Message, "Ok");
-            }
-            else {
-                await DisplayAlert("Erro", "Ocorreu um erro!", "Ok");
-            }
+            this.HandlerException(ex);
         }
         finally {
             btn.IsEnabled = true;
@@ -88,13 +78,8 @@ public partial class GerenciamentoAlunos : ContentPage
             _entryAddAluno.Text = String.Empty;
         }
 		catch (Exception ex) {
-			if (ex.IsPublicMessageCheck()) {
-				await DisplayAlert("Erro",ex.Message, "Ok");
-			}
-			else {
-                await DisplayAlert("Erro", "Ocorreu um erro!", "Ok");
-            }
-		}
+            this.HandlerException(ex);
+        }
 		finally {
 			btn.IsEnabled = true;
         }

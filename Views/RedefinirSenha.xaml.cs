@@ -28,12 +28,7 @@ public partial class RedefinirSenha : ContentPage
 			_stackInserirCodigo.IsVisible = true;
 		}
         catch (Exception ex) {
-            if (ex.IsPublicMessageCheck()) {
-                await DisplayAlert("Erro", ex.Message, "Ok");
-            }
-            else {
-                await DisplayAlert("Erro", "Ocorreu um erro!", "Ok");
-            }
+            this.HandlerException(ex);
             _carregamento.IsRunning = false;
             _stackInserirEmail.IsVisible = true;
         }
@@ -53,12 +48,7 @@ public partial class RedefinirSenha : ContentPage
             _stackNovaSenha.IsVisible = true;
         }
         catch (Exception ex) {
-            if (ex.IsPublicMessageCheck()) {
-                await DisplayAlert("Erro", ex.Message, "Ok");
-            }
-            else {
-                await DisplayAlert("Erro", "Ocorreu um erro!", "Ok");
-            }
+            this.HandlerException(ex);
             _carregamento.IsRunning = false;
             _stackInserirCodigo.IsVisible = true;
         }
@@ -79,12 +69,7 @@ public partial class RedefinirSenha : ContentPage
             await Navigation.PopAsync();
         }
         catch (Exception ex) {
-            if (ex.IsPublicMessageCheck()) {
-                await DisplayAlert("Erro", ex.Message, "Ok");
-            }
-            else {
-                await DisplayAlert("Erro", "Ocorreu um erro!", "Ok");
-            }
+            this.HandlerException(ex);
             _carregamento.IsRunning = false;
             _stackNovaSenha.IsVisible = true;
         }

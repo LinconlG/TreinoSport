@@ -1,6 +1,7 @@
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Devices;
 using TreinoSport.Contexts;
+using TreinoSport.Extensions;
 using TreinoSport.Models;
 using TreinoSport.Services;
 using TreinoSport.ViewModels;
@@ -42,7 +43,7 @@ public partial class CadastroPage : ContentPage
             await Navigation.PopAsync();
         }
         catch (Exception ex) {
-            await DisplayAlert("Falha", $"{(ex.Message.Contains('@') ? MensagemPublicaError(ex.Message) : "Ocorreu um erro, tente novamente")}", "OK");
+            this.HandlerException(ex);
         }
         finally {
             btn.IsEnabled = true;

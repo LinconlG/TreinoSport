@@ -1,3 +1,4 @@
+using TreinoSport.Extensions;
 using TreinoSport.ViewModels;
 
 namespace TreinoSport.Views;
@@ -23,7 +24,7 @@ public partial class PaginaInicialCT : ContentPage
             await Navigation.PushAsync(new CriacaoTreino(true, codigoTreino));
         }
         catch (Exception ex) {
-            throw new Exception(ex.Message);
+            this.HandlerException(ex);
         }
         finally {
             btn.IsEnabled = true;

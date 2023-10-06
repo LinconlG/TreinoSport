@@ -1,3 +1,4 @@
+using TreinoSport.Extensions;
 using TreinoSport.ViewModels;
 
 namespace TreinoSport.Views;
@@ -19,7 +20,7 @@ public partial class GerenciamentoTreino : ContentPage
             await Navigation.PushAsync(new GerenciamentoAlunos(codigoTreino, datas));
         }
         catch (Exception ex) {
-            throw new Exception(ex.Message);
+            this.HandlerException(ex);
         }
     }
 

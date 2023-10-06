@@ -44,12 +44,7 @@ public partial class Configuracoes : ContentPage
             _entryEmail.Text = conta.Email;
         }
         catch (Exception ex) {
-            if (ex.IsPublicMessageCheck()) {
-                await DisplayAlert("Erro", ex.Message, "Ok");
-            }
-            else {
-                await DisplayAlert("Erro", "Ocorreu um erro!", "Ok");
-            }
+            this.HandlerException(ex);
         }
 	}
 
@@ -64,12 +59,7 @@ public partial class Configuracoes : ContentPage
 			await DisplayAlert("Sucesso", "Seus dados foram atualizados.", "OK");
 		}
         catch (Exception ex) {
-            if (ex.IsPublicMessageCheck()) {
-                await DisplayAlert("Erro", ex.Message, "Ok");
-            }
-            else {
-                await DisplayAlert("Erro", "Ocorreu um erro!", "Ok");
-            }
+            this.HandlerException(ex);
         }
     }
 }

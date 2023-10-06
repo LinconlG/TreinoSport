@@ -45,12 +45,7 @@ public partial class CriacaoTreino : ContentPage {
             await Navigation.PopAsync();
         }
         catch (Exception ex) {
-            if (TaskExtension.IsPublicMessageCheck(ex)) {
-                await DisplayAlert("Erro", ex.Message, "Ok");
-            }
-            else {
-                await DisplayAlert("Erro", "Ocorreu um erro!", "Ok");
-            }
+            this.HandlerException(ex);
         }
     }
 
@@ -74,12 +69,7 @@ public partial class CriacaoTreino : ContentPage {
             await Navigation.PopAsync();
         }
         catch (Exception ex) {
-            if (ex.IsPublicMessageCheck()) {
-                await DisplayAlert("Erro", ex.Message, "Ok");
-            }
-            else {
-                await DisplayAlert("Erro", "Ocorreu um erro!", "Ok");
-            }
+            this.HandlerException(ex);
         }
         finally {
             btn.IsEnabled = true;
@@ -152,12 +142,7 @@ public partial class CriacaoTreino : ContentPage {
             treino.Criador.Codigo = ContaStatic.GetCodigo();
         }
         catch (Exception ex) {
-            if (ex.IsPublicMessageCheck()) {
-                await DisplayAlert("Erro", ex.Message, "Ok");
-            }
-            else {
-                await DisplayAlert("Erro", "Ocorreu um erro!", "Ok");
-            }
+            this.HandlerException(ex);
         }
         treino.Modalidade = (ModalidadeTreino)_pickerModalidade.SelectedIndex;
         treino.Nome = treino.Modalidade.ToString();
@@ -178,8 +163,8 @@ public partial class CriacaoTreino : ContentPage {
             _datePickerVencimento.Date = treino.DataVencimento;
             _entryLimiteAlunos.Text = treino.LimiteAlunos.ToString();
         }
-        catch (Exception) {
-            await DisplayAlert("Erro", "Ocorreu um erro", "OK");
+        catch (Exception ex) {
+            this.HandlerException(ex);
             await Navigation.PopAsync();
         }
     }
