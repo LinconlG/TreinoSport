@@ -19,7 +19,7 @@
                     <Label x:Name="_labelNomeTreino" Text="--" TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" FontAttributes="Italic" FontSize="23" TextDecorations="Underline" HorizontalOptions="Center"/>
                     <!-- -->
                     <Label Text="Adicionar aluno" FontAttributes="Bold" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>
-                    <Entry x:Name="_entryAddAluno" BackgroundColor="#e8e8e6" Placeholder="Digite o email do aluno que deseja adicionar" PlaceholderColor="Gray" HorizontalTextAlignment="Center" FontSize="16" HorizontalOptions="Center"/>
+                    <Entry x:Name="_entryAddAluno" BackgroundColor="#e8e8e6" TextColor="Black" Placeholder="Digite o email do aluno que deseja adicionar" PlaceholderColor="Gray" HorizontalTextAlignment="Center" FontSize="16" HorizontalOptions="Center"/>
                     <Button Clicked="ClickAdicionarAluno" Text="Adicionar" WidthRequest="150"/>
                     <!-- -->
                     <Label x:Name="_labelListaAlunos" Text="Lista de alunos (X)" FontAttributes="Bold" FontSize="{StaticResource fonteTamanho1}" HorizontalOptions="Center"/>

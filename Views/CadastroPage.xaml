@@ -4,40 +4,43 @@
              x:Class="TreinoSport.Views.CadastroPage"
              Title="Cadastro">
 
-    <VerticalStackLayout>
-        <Grid x:Name="GridPrincipal" Padding="10,50,10,10" HeightRequest="800">
-            <VerticalStackLayout Spacing="10">
-                <Picker x:Name="tipoConta" Title="Selecione o tipo de conta" FontSize="18" SelectedIndexChanged="OnPickerSelectedIndexChanged">
-                    <Picker.Items>
-                        <x:String>Aluno</x:String>
-                        <x:String>Centro de treinamento</x:String>
-                    </Picker.Items>
-                </Picker>
-                <Label x:Name="avisoPickerLabel" Text="Selecione o tipo de conta" FontSize="{StaticResource FonteAviso}" TextColor="{StaticResource CorAviso}" IsVisible="false"/>
+    <ScrollView>
 
-                <Label x:Name="_labelNome" Text="Nome completo" FontSize="{StaticResource TamFonteCadastro}"/>
-                <Entry x:Name="nomeCompletoEntry" WidthRequest="{StaticResource TamWidthEntry}" FontSize="{StaticResource TamFonteCadastro}" HorizontalOptions="Start" />
-                <Label x:Name="avisoNomeLabel" Text="Este campo é obrigatório" FontSize="{StaticResource FonteAviso}" TextColor="{StaticResource CorAviso}" IsVisible="false"/>
 
-                <Label x:Name="labelDescricao" IsVisible="false" Text="Descrição(Opcional)" FontSize="{StaticResource TamFonteCadastro}"/>
-                <Editor x:Name="editorDescricao" FontSize="{StaticResource TamFonteCadastro}" IsVisible="false" Placeholder="Digite a descrição do Centro de treinamento (Modalidades, preços, etc.)" HeightRequest="100"/>
+        <VerticalStackLayout>
+            <Grid x:Name="GridPrincipal" Padding="10,50,10,10" HeightRequest="800">
+                <VerticalStackLayout Spacing="10">
+                    <Picker x:Name="tipoConta" Title="Selecione o tipo de conta" FontSize="18" SelectedIndexChanged="OnPickerSelectedIndexChanged">
+                        <Picker.Items>
+                            <x:String>Aluno</x:String>
+                            <x:String>Centro de treinamento</x:String>
+                        </Picker.Items>
+                    </Picker>
+                    <Label x:Name="avisoPickerLabel" Text="Selecione o tipo de conta" FontSize="{StaticResource FonteAviso}" TextColor="{StaticResource CorAviso}" IsVisible="false"/>
 
-                <Label Text="Email" FontSize="{StaticResource TamFonteCadastro}"/>
-                <Entry x:Name="emailEntry" WidthRequest="{StaticResource TamWidthEntry}" FontSize="{StaticResource TamFonteCadastro}" HorizontalOptions="Start"/>
-                <Label x:Name="avisoEmailLabel" Text="Digite um email válido" FontSize="{StaticResource FonteAviso}" TextColor="{StaticResource CorAviso}" IsVisible="false"/>
+                    <Label x:Name="_labelNome" Text="Nome completo" FontSize="{StaticResource TamFonteCadastro}"/>
+                    <Entry x:Name="nomeCompletoEntry" WidthRequest="{StaticResource TamWidthEntry}" FontSize="{StaticResource TamFonteCadastro}" HorizontalOptions="Start" />
+                    <Label x:Name="avisoNomeLabel" Text="Este campo é obrigatório" FontSize="{StaticResource FonteAviso}" TextColor="{StaticResource CorAviso}" IsVisible="false"/>
 
-                <Label Text="Senha" FontSize="{StaticResource TamFonteCadastro}"/>
-                <Entry x:Name="senhaEntry" WidthRequest="{StaticResource TamWidthEntry}" FontSize="{StaticResource TamFonteCadastro}" IsPassword="True" HorizontalOptions="Start"/>
-                <Label x:Name="avisoSenhaCaracteresLabel" Text="A senha deve ter no mínimo 8 caracteres" FontSize="{StaticResource FonteAviso}" TextColor="{StaticResource CorAviso}" IsVisible="false"/>
-                <Label x:Name="avisoSenhasLabel" Text="Verifique a senha e sua confirmação" FontSize="{StaticResource FonteAviso}" TextColor="{StaticResource CorAviso}" IsVisible="false"/>
-                
-                <Label Text="Confirmar senha" FontSize="{StaticResource TamFonteCadastro}"/>
-                <Entry x:Name="senhaConfirmacaoEntry" WidthRequest="{StaticResource TamWidthEntry}" FontSize="{StaticResource TamFonteCadastro}" IsPassword="True" HorizontalOptions="Start"/>
+                    <Label x:Name="labelDescricao" IsVisible="false" Text="Descrição(Opcional)" FontSize="{StaticResource TamFonteCadastro}"/>
+                    <Editor x:Name="editorDescricao" FontSize="{StaticResource TamFonteCadastro}" IsVisible="false" Placeholder="Digite a descrição do Centro de treinamento (Modalidades, preços, etc.)" HeightRequest="100"/>
 
-                <Button x:Name="CadastrarBtn" Clicked="ClickCadastrarBtn" Text="Cadastrar" WidthRequest="120" HeightRequest="50" FontSize="{StaticResource TamFonteCadastro}" TranslationY="50"/>
+                    <Label Text="Email" FontSize="{StaticResource TamFonteCadastro}"/>
+                    <Entry x:Name="emailEntry" WidthRequest="{StaticResource TamWidthEntry}" FontSize="{StaticResource TamFonteCadastro}" HorizontalOptions="Start"/>
+                    <Label x:Name="avisoEmailLabel" Text="Digite um email válido" FontSize="{StaticResource FonteAviso}" TextColor="{StaticResource CorAviso}" IsVisible="false"/>
 
-            </VerticalStackLayout>
-        </Grid>
-    </VerticalStackLayout>
+                    <Label Text="Senha" FontSize="{StaticResource TamFonteCadastro}"/>
+                    <Entry x:Name="senhaEntry" WidthRequest="{StaticResource TamWidthEntry}" FontSize="{StaticResource TamFonteCadastro}" IsPassword="True" HorizontalOptions="Start"/>
+                    <Label x:Name="avisoSenhaCaracteresLabel" Text="A senha deve ter no mínimo 8 caracteres" FontSize="{StaticResource FonteAviso}" TextColor="{StaticResource CorAviso}" IsVisible="false"/>
+                    <Label x:Name="avisoSenhasLabel" Text="Verifique a senha e sua confirmação" FontSize="{StaticResource FonteAviso}" TextColor="{StaticResource CorAviso}" IsVisible="false"/>
 
+                    <Label Text="Confirmar senha" FontSize="{StaticResource TamFonteCadastro}"/>
+                    <Entry x:Name="senhaConfirmacaoEntry" WidthRequest="{StaticResource TamWidthEntry}" FontSize="{StaticResource TamFonteCadastro}" IsPassword="True" HorizontalOptions="Start"/>
+
+                    <Button x:Name="CadastrarBtn" Clicked="ClickCadastrarBtn" Text="Cadastrar" WidthRequest="120" HeightRequest="50" FontSize="{StaticResource TamFonteCadastro}" TranslationY="50"/>
+
+                </VerticalStackLayout>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
