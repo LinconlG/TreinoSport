@@ -26,19 +26,26 @@ public partial class MainPage : ContentPage
         await Navigation.PushAsync(new RedefinirSenha());
     }
     private async void ClickLoginBtn(object sender, EventArgs e) {
-        if (CheckCampos())
-            return;
+        try {
+            if (CheckCampos())
+                return;
 
-        LoginBtn.IsEnabled = false;
+            LoginBtn.IsEnabled = false;
 
-        string email = _entryLoginEmail.Text;
-        string senhaPref = _entryLoginSenha.Text ;
+            string email = _entryLoginEmail.Text;
+            string senhaPref = _entryLoginSenha.Text;
 
-        if (_checkLembrarLogin.IsChecked) {
-            ContaStatic.SetConta(email, senhaPref);
+            if (_checkLembrarLogin.IsChecked) {
+                ContaStatic.SetConta(email, senhaPref);
+            }
+
+            await Login(email, senhaPref);
+        }
+        catch (Exception ex) {
+
+            throw new Exception(ex.Message);
         }
 
-        await Login(email, senhaPref);
     }
     private async Task Login(string email, string senha) {
 
@@ -81,6 +88,7 @@ public partial class MainPage : ContentPage
     }
 
     private bool CheckCampos() {
+        return false;
         var flag = false;
         if (String.IsNullOrWhiteSpace(_entryLoginEmail.Text) || !Criptografia.ValidarEmail(_entryLoginEmail.Text) || String.IsNullOrWhiteSpace(_entryLoginSenha.Text) || _entryLoginSenha.Text.Length < 8) {
             _labelavisoLogin.IsVisible = true;

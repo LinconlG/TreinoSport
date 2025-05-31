@@ -13,7 +13,7 @@
                         <StackLayout Padding="8">
                             <Border StrokeThickness="5" StrokeShape="RoundRectangle 0,40,40,0" Stroke="{Binding Cor}">
                                 <Grid Padding="16">
-                                    <Button ClassId="{Binding Codigo}" BackgroundColor="Transparent" Clicked="ClickGerenciarTreino"/>
+                                    <Button ClassId="{Binding Codigo}" BackgroundColor="Red" Clicked="ClickGerenciarTreino"/>
                                     <StackLayout>
                                         <Label Text="{Binding Nome}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="{StaticResource fonteTamanho1}"/>
                                         <Label Text="Selecione para gerenciar" FontAttributes="Bold" HorizontalOptions="Center" FontSize="{StaticResource fonteTamanho2}"/>

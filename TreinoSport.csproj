@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-maccatalyst;net7.0-android;net7.0-ios</TargetFrameworks>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net7.0-windows10.0.19041.0</TargetFrameworks>
+		<TargetFrameworks>$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
@@ -46,11 +46,20 @@
 	  <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-windows10.0.19041.0|AnyCPU'">
+	  <Optimize>False</Optimize>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-windows10.0.19041.0|AnyCPU'">
+	  <Optimize>False</Optimize>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<!-- App Icon -->
     <MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" />
     
 		<!-- Splash Screen -->
+    <MauiSplashScreen Include="Resources\Images\treinosporticone.png" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -108,10 +117,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Maui" Version="5.2.0" />
+    <PackageReference Include="CommunityToolkit.Maui.Core" Version="5.2.0" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.4" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Maui.Controls.Build.Tasks" Version="8.0.100" />
+    <PackageReference Include="Microsoft.Maui.Controls.Core" Version="8.0.100" />
+    <PackageReference Include="Microsoft.Maui.Controls.Xaml" Version="8.0.100" />
+    <PackageReference Include="Microsoft.Maui.Core" Version="8.0.100" />
+    <PackageReference Include="Microsoft.Maui.Essentials" Version="8.0.100" />
+    <PackageReference Include="Microsoft.Maui.Graphics" Version="8.0.100" />
+    <PackageReference Include="Microsoft.Maui.Graphics.Win2D.WinUI.Desktop" Version="8.0.100" />
+    <PackageReference Include="Microsoft.Maui.Resizetizer" Version="8.0.100" />
     <PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.2" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
     <PackageReference Include="System.ObjectModel" Version="4.3.0" />
